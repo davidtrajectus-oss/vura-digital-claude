@@ -3,97 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="VURA DIGITAL — Especialistas en digitalización de negocios locales. Web ultra-rápida, SEO local, menú QR y soporte 24/7. Resultados garantizados en 90 días.">
-<meta name="keywords" content="diseño web Salamanca, SEO local, digitalización negocios, menú QR, Google Maps, página web negocios locales">
-<meta property="og:title" content="VURA DIGITAL — Tu negocio pierde dinero cada día que no te encuentran">
-<meta property="og:description" content="Especialistas en digitalización de negocios locales. Resultados garantizados en 90 días o te devolvemos el dinero.">
+
+<!-- =====================================================
+     BLOQUE 1/3: HEAD — SEO + Schema.org LocalBusiness
+     ===================================================== -->
+
+<!-- SEO local Salamanca: keyword principal en description -->
+<meta name="description" content="Diseño web profesional en Salamanca para negocios locales y PYMEs. Agencia digital Salamanca: web ultra-rápida, SEO local, menú QR. Resultados en 30 días o devolvemos tu dinero.">
+<meta name="keywords" content="diseño web Salamanca, agencia digital Salamanca, página web negocio local Salamanca, SEO local Salamanca, digitalización PYME Salamanca, menú QR Salamanca">
+<meta name="author" content="David Rodero — VURA DIGITAL">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://vuradigital.com/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Diseño Web en Salamanca — VURA DIGITAL | Agencia Digital para Negocios Locales">
+<meta property="og:description" content="Tu negocio pierde clientes cada día que no aparece en Google. Web profesional + SEO local + menú QR. Garantía 90 días o devolución total.">
 <meta property="og:type" content="website">
-<title>VURA DIGITAL — Agencia de Digitalización de Negocios Locales</title>
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://vuradigital.com/">
+
+<!-- Schema.org: LocalBusiness Salamanca -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "VURA DIGITAL",
+  "description": "Agencia de diseño web y digitalización de negocios locales en Salamanca",
+  "url": "https://vuradigital.com",
+  "telephone": "+34657930828",
+  "email": "hola@vuradigital.com",
+  "founder": {
+    "@type": "Person",
+    "name": "David Rodero"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Salamanca",
+    "addressRegion": "Castilla y León",
+    "postalCode": "37000",
+    "addressCountry": "ES"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "40.9701",
+    "longitude": "-5.6635"
+  },
+  "priceRange": "€€",
+  "areaServed": {
+    "@type": "City",
+    "name": "Salamanca"
+  },
+  "openingHours": "Mo-Fr 09:00-19:00",
+  "sameAs": []
+}
+</script>
+
+<title>Diseño Web en Salamanca para Negocios Locales — VURA DIGITAL</title>
+
+<!-- Preconnect: reduce TTFB de fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<!-- Solo los pesos que usamos: reduce KB -->
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- =====================================================
+     BLOQUE 2/3: CSS
+     ===================================================== -->
 <style>
-/* =============================================
-   VURA DIGITAL — SISTEMA DE DISEÑO
-   Versión: 2.0 | Stack: HTML/CSS/JS puro
-   Optimizado: Core Web Vitals + Mobile First
-   ============================================= */
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* ============================================================
+   § DESIGN TOKENS — Fuente única de verdad para todos los estilos
+   ============================================================ */
 :root {
-  --dark:       #080810;
-  --dark-2:     #0f0f1a;
-  --dark-3:     #161625;
-  --dark-4:     #1e1e32;
-  --accent:     #6c5ce7;
-  --accent-h:   #7c6cf0;
-  --accent-soft:#a29bfe;
-  --gold:       #fdcb6e;
-  --gold-deep:  #e17055;
-  --text:       #e4e4f0;
-  --muted:      #7878a0;
-  --border:     rgba(108,92,231,0.18);
-  --border-s:   rgba(108,92,231,0.35);
-  --r:          10px;
-  --r-lg:       16px;
-  --r-xl:       24px;
-  --max-w:      960px;
-  --font-head:  'Syne', sans-serif;
-  --font-body:  'DM Sans', sans-serif;
-  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Paleta base */
+  --bg:          #080810;
+  --bg2:         #0f0f1a;
+  --bg3:         #161625;
+  --bg4:         #1e1e32;
+
+  /* Marca */
+  --accent:      #6c5ce7;
+  --accent-h:    #7c6cf0;   /* hover */
+  --accent-s:    #a29bfe;   /* soft */
+  --gold:        #fdcb6e;
+  --danger:      #e17055;
+  --success:     #00b894;
+  --wa:          #25d366;   /* WhatsApp */
+
+  /* Texto */
+  --text:        #e4e4f0;
+  --muted:       #7878a0;
+  --white:       #ffffff;
+
+  /* Bordes */
+  --border:      rgba(108,92,231,0.18);
+  --border-s:    rgba(108,92,231,0.38);
+
+  /* Radios */
+  --r:           10px;
+  --r-lg:        16px;
+  --r-xl:        24px;
+
+  /* Tipografía */
+  --f-head:      'Syne', sans-serif;
+  --f-body:      'DM Sans', sans-serif;
+
+  /* Transición estándar */
+  --ease:        0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout */
+  --max-w:       960px;
 }
 
-html {
-  scroll-behavior: smooth;
-}
 
+/* ============================================================
+   § BASE RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
-  background: var(--dark);
+  background: var(--bg);
   color: var(--text);
-  font-family: var(--font-body);
+  font-family: var(--f-body);
   font-size: 15px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font-family: var(--f-body); cursor: pointer; }
 
-/* ---- LAYOUT ---- */
+
+/* ============================================================
+   § LAYOUT
+   ============================================================ */
 .container {
   max-width: var(--max-w);
   margin: 0 auto;
   padding: 0 24px;
 }
+section { padding: 80px 0; }
 
-section {
-  padding: 80px 0;
-}
-
-/* ---- UTILIDADES ---- */
 .eyebrow {
-  font-family: var(--font-head);
+  display: block;
+  font-family: var(--f-head);
   font-size: 11px;
   font-weight: 700;
-  color: var(--accent-soft);
+  color: var(--accent-s);
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 14px;
 }
-
 .section-title {
-  font-family: var(--font-head);
+  font-family: var(--f-head);
   font-size: clamp(24px, 4vw, 36px);
   font-weight: 800;
-  color: #fff;
+  color: var(--white);
   letter-spacing: -0.5px;
   line-height: 1.15;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
-
 .section-sub {
   font-size: 16px;
   color: var(--muted);
@@ -102,34 +172,57 @@ section {
   margin-bottom: 48px;
 }
 
-/* ---- BOTONES ---- */
+
+/* ============================================================
+   § BOTONES — micro-interacciones CRO
+   ============================================================ */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-body);
+  font-family: var(--f-body);
   font-size: 15px;
   font-weight: 500;
   padding: 14px 28px;
   border-radius: var(--r);
   border: none;
   cursor: pointer;
-  transition: all var(--transition);
+  transition: transform var(--ease), box-shadow var(--ease), background var(--ease), border-color var(--ease);
   text-decoration: none;
   white-space: nowrap;
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Efecto shimmer compartido */
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -110%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.13), transparent);
+  transition: none;
+}
+.btn:hover::after {
+  left: 160%;
+  transition: left 0.55s ease;
+}
+
+/* CTA primario — máximo contraste */
 .btn-primary {
   background: var(--accent);
   color: #fff;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.25);
 }
 .btn-primary:hover {
   background: var(--accent-h);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(108,92,231,0.35);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 28px rgba(108,92,231,0.45);
 }
-.btn-primary:active { transform: translateY(0); }
+.btn-primary:active { transform: translateY(0) scale(1); box-shadow: 0 2px 0 rgba(0,0,0,0.25); }
 
+/* Ghost */
 .btn-ghost {
   background: transparent;
   color: var(--text);
@@ -137,13 +230,15 @@ section {
 }
 .btn-ghost:hover {
   border-color: var(--accent);
-  color: #fff;
-  background: rgba(108,92,231,0.06);
+  color: var(--white);
+  background: rgba(108,92,231,0.07);
+  transform: translateY(-1px);
 }
 
+/* Outline plan */
 .btn-outline {
   background: transparent;
-  color: var(--accent-soft);
+  color: var(--accent-s);
   border: 1px solid var(--border-s);
   width: 100%;
   justify-content: center;
@@ -151,147 +246,149 @@ section {
 .btn-outline:hover {
   background: rgba(108,92,231,0.08);
   border-color: var(--accent);
-  color: #fff;
+  color: var(--white);
+  transform: translateY(-1px);
 }
 
-.btn-plan-featured {
+/* Plan featured */
+.btn-featured {
   background: var(--accent);
   color: #fff;
   width: 100%;
   justify-content: center;
   border: 1px solid var(--accent);
 }
-.btn-plan-featured:hover {
+.btn-featured:hover {
   background: var(--accent-h);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(108,92,231,0.3);
+  box-shadow: 0 8px 22px rgba(108,92,231,0.38);
 }
 
-/* ========================================
-   NAVEGACIÓN
-   ======================================== */
+/* WhatsApp */
+.btn-wa {
+  background: var(--wa);
+  color: #fff;
+  border: none;
+}
+.btn-wa:hover {
+  background: #1fbf5a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(37,211,102,0.38);
+}
+
+
+/* ============================================================
+   § ANIMACIONES DE ENTRADA
+   ============================================================ */
+.fi {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fi.v  { opacity: 1; transform: translateY(0); }
+.fi.d1 { transition-delay: 0.1s; }
+.fi.d2 { transition-delay: 0.2s; }
+.fi.d3 { transition-delay: 0.3s; }
+.fi.d4 { transition-delay: 0.4s; }
+
+
+/* ============================================================
+   § NAVEGACIÓN
+   ============================================================ */
 nav {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 200;
   background: rgba(8,8,16,0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--border);
 }
-
 .nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 16px 0;
 }
-
 .nav-logo {
-  font-family: var(--font-head);
+  font-family: var(--f-head);
   font-size: 18px;
   font-weight: 800;
-  color: #fff;
+  color: var(--white);
   letter-spacing: -0.5px;
   text-decoration: none;
 }
-.nav-logo span { color: var(--accent-soft); }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-
+.nav-logo span { color: var(--accent-s); }
+.nav-links { display: flex; align-items: center; gap: 28px; }
 .nav-links a {
   color: var(--muted);
   text-decoration: none;
   font-size: 14px;
-  transition: color var(--transition);
+  transition: color var(--ease);
 }
-.nav-links a:hover { color: #fff; }
+.nav-links a:hover { color: var(--white); }
+.nav-cta { font-size: 13px; padding: 10px 20px; }
 
-.nav-cta {
-  font-size: 13px;
-  padding: 10px 20px;
-}
 
-/* ========================================
-   HERO
-   ======================================== */
+/* ============================================================
+   § HERO — keyword SEO local en H1
+   ============================================================ */
 .hero {
   padding: 90px 0 72px;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
-
 .hero::before {
   content: '';
   position: absolute;
-  top: -160px;
-  left: 50%;
+  top: -180px; left: 50%;
   transform: translateX(-50%);
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(108,92,231,0.12) 0%, transparent 70%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(108,92,231,0.11) 0%, transparent 68%);
   pointer-events: none;
 }
-
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   background: rgba(108,92,231,0.1);
   border: 1px solid var(--border-s);
-  color: var(--accent-soft);
+  color: var(--accent-s);
   font-size: 12px;
   font-weight: 500;
   padding: 7px 18px;
   border-radius: 40px;
   margin-bottom: 32px;
-  font-family: var(--font-body);
-  letter-spacing: 0.2px;
 }
-
-.hero-badge-dot {
-  width: 6px;
-  height: 6px;
+.hero-dot {
+  width: 6px; height: 6px;
   border-radius: 50%;
   background: var(--accent);
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulse-dot 2s ease-in-out infinite;
 }
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.8); }
+@keyframes pulse-dot {
+  0%,100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:0.35; transform:scale(0.75); }
 }
-
 .hero h1 {
-  font-family: var(--font-head);
-  font-size: clamp(32px, 6vw, 60px);
+  font-family: var(--f-head);
+  font-size: clamp(32px, 6vw, 58px);
   font-weight: 800;
-  color: #fff;
+  color: var(--white);
   letter-spacing: -1.5px;
   line-height: 1.08;
   margin-bottom: 24px;
 }
-
-.hero h1 em {
-  font-style: normal;
-  color: var(--accent-soft);
-}
-
+.hero h1 em { font-style: normal; color: var(--accent-s); }
 .hero-sub {
-  font-size: clamp(15px, 2vw, 18px);
+  font-size: clamp(15px, 2vw, 17px);
   color: var(--muted);
   max-width: 580px;
   margin: 0 auto 40px;
   line-height: 1.7;
 }
-
 .hero-sub strong { color: var(--text); font-weight: 400; }
-
 .hero-actions {
   display: flex;
   gap: 12px;
@@ -299,82 +396,64 @@ nav {
   flex-wrap: wrap;
   margin-bottom: 64px;
 }
-
+/* CTA hero: shimmer permanente para máximo contraste */
+.btn-hero {
+  font-size: 16px;
+  padding: 16px 34px;
+  letter-spacing: 0.2px;
+}
 .hero-metrics {
   display: flex;
   justify-content: center;
-  gap: 0;
-  border-top: 1px solid var(--border);
-  border-radius: var(--r-lg);
   overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
 }
-
 .hero-metric {
   flex: 1;
-  padding: 24px 20px;
+  padding: 22px 16px;
   text-align: center;
   border-right: 1px solid var(--border);
-  background: var(--dark-2);
+  background: var(--bg2);
   max-width: 220px;
 }
 .hero-metric:last-child { border-right: none; }
-
 .metric-num {
-  font-family: var(--font-head);
-  font-size: 26px;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1;
-  margin-bottom: 4px;
+  font-family: var(--f-head);
+  font-size: 24px; font-weight: 800;
+  color: var(--white);
+  line-height: 1; margin-bottom: 4px;
 }
+.metric-label { font-size: 12px; color: var(--muted); line-height: 1.4; }
 
-.metric-label {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.4;
-}
 
-/* ========================================
-   CALCULADORA
-   ======================================== */
-.calc-section {
-  padding: 64px 0;
-  border-top: 1px solid var(--border);
-}
-
+/* ============================================================
+   § CALCULADORA — con barra dramática + CTA WhatsApp dinámico
+   ============================================================ */
+.calc-section { padding: 64px 0; border-top: 1px solid var(--border); }
 .calc-box {
-  background: var(--dark-2);
+  background: var(--bg2);
   border: 1px solid var(--border-s);
   border-radius: var(--r-xl);
   padding: 48px;
   position: relative;
   overflow: hidden;
 }
-
 .calc-box::before {
   content: '';
   position: absolute;
   top: 0; right: 0;
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(108,92,231,0.08) 0%, transparent 70%);
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(108,92,231,0.07) 0%, transparent 70%);
   pointer-events: none;
 }
-
 .calc-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
-  align-items: center;
+  align-items: start;
 }
-
-.calc-inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.input-group { position: relative; }
-
+.calc-inputs { display: flex; flex-direction: column; gap: 26px; }
 .input-group label {
   display: flex;
   justify-content: space-between;
@@ -382,694 +461,495 @@ nav {
   font-size: 13px;
   color: var(--muted);
   margin-bottom: 10px;
-  font-weight: 400;
 }
-
 .input-group label strong {
-  color: #fff;
-  font-weight: 600;
-  font-family: var(--font-head);
+  color: var(--white);
+  font-weight: 700;
+  font-family: var(--f-head);
   font-size: 14px;
 }
-
 input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 4px;
-  background: var(--dark-4);
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 4px;
+  background: var(--bg4);
   border-radius: 4px;
-  outline: none;
-  cursor: pointer;
+  outline: none; cursor: pointer;
 }
-
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 18px; height: 18px;
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
-  border: 3px solid var(--dark);
+  border: 3px solid var(--bg);
   box-shadow: 0 0 0 2px var(--accent);
-  transition: transform var(--transition);
+  transition: transform var(--ease);
 }
-
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-}
-
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
 input[type="range"]::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
+  width: 18px; height: 18px;
   border-radius: 50%;
   background: var(--accent);
-  cursor: pointer;
-  border: 3px solid var(--dark);
+  border: 3px solid var(--bg);
 }
 
+/* Panel resultado */
 .calc-result {
-  background: var(--dark-3);
+  background: var(--bg3);
   border: 1px solid var(--border-s);
   border-radius: var(--r-lg);
-  padding: 36px 32px;
-  text-align: center;
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  text-align: center;
 }
-
 .result-label {
-  font-size: 12px;
-  color: var(--muted);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  font-weight: 500;
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 1px; text-transform: uppercase;
+  font-weight: 600; margin-bottom: 14px;
 }
-
 .result-amount {
-  font-family: var(--font-head);
-  font-size: 56px;
-  font-weight: 800;
+  font-family: var(--f-head);
+  font-size: 54px; font-weight: 800;
   color: var(--gold);
-  line-height: 1;
-  margin-bottom: 8px;
-  transition: all var(--transition);
+  line-height: 1; margin-bottom: 4px;
+  transition: color 0.35s ease;
 }
-
+.result-amount.high { color: var(--danger); }
 .result-period {
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 28px;
+  font-size: 13px; color: var(--muted);
+  margin-bottom: 20px;
+}
+.result-period strong { color: var(--text); font-weight: 500; }
+
+/* Barra de pérdida visual */
+.loss-bar-wrap { width: 100%; margin-bottom: 22px; }
+.loss-bar-labels {
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: var(--muted);
+  margin-bottom: 6px;
+}
+.loss-bar-track {
+  width: 100%; height: 8px;
+  background: var(--bg4);
+  border-radius: 8px; overflow: hidden;
+}
+.loss-bar-fill {
+  height: 100%; border-radius: 8px;
+  background: linear-gradient(90deg, var(--danger), var(--gold));
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  width: 0%;
+}
+.loss-bar-note {
+  font-size: 11px; color: var(--muted);
+  margin-top: 6px; text-align: left;
 }
 
-.result-period strong {
-  color: var(--text);
-  font-weight: 500;
-}
+/* CTA WhatsApp dinámico — aparece al interactuar */
+.calc-cta-static { width: 100%; justify-content: center; margin-bottom: 10px; }
 
-.result-cta-btn {
+.calc-cta-wa {
   width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+  font-size: 13px;
+  padding: 12px 16px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+.calc-cta-wa.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
-.result-note {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 12px;
-}
+.result-note { font-size: 11px; color: var(--muted); margin-top: 10px; }
 
-/* ========================================
-   FUNDADOR
-   ======================================== */
-.founder-section {
+
+/* ============================================================
+   § TESTIMONIOS — sección nueva
+   ============================================================ */
+.testimonials-section {
   border-top: 1px solid var(--border);
   padding: 72px 0;
 }
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.testimonial-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  transition: border-color var(--ease), transform var(--ease);
+}
+.testimonial-card:hover {
+  border-color: var(--border-s);
+  transform: translateY(-3px);
+}
+.testimonial-metric {
+  font-family: var(--f-head);
+  font-size: 38px; font-weight: 800;
+  color: var(--accent-s);
+  line-height: 1; margin-bottom: 4px;
+}
+.testimonial-kpi {
+  font-size: 11px; font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 18px;
+}
+.testimonial-quote {
+  font-size: 13px; color: var(--text);
+  line-height: 1.65; font-style: italic;
+  margin-bottom: 20px; opacity: 0.9;
+}
+.testimonial-divider { height: 1px; background: var(--border); margin-bottom: 14px; }
+.testimonial-author { display: flex; align-items: center; gap: 10px; }
+.testimonial-avatar {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: rgba(108,92,231,0.15);
+  color: var(--accent-s);
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--f-head);
+  flex-shrink: 0;
+}
+.testimonial-name { font-size: 13px; color: var(--white); font-weight: 500; line-height: 1.2; }
+.testimonial-company { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
+
+/* ============================================================
+   § FUNDADOR
+   ============================================================ */
 .founder-grid {
   display: grid;
   grid-template-columns: 140px 1fr;
-  gap: 48px;
-  align-items: start;
+  gap: 48px; align-items: start;
 }
-
-.founder-img-wrap {
-  position: relative;
-}
-
-.founder-img-wrap img,
-.founder-img-wrap .founder-initials {
-  width: 140px;
-  height: 140px;
+.founder-img-wrap { position: relative; }
+.founder-img-wrap img, .founder-initials {
+  width: 140px; height: 140px;
   border-radius: var(--r-lg);
-  object-fit: cover;
-  display: block;
+  object-fit: cover; display: block;
   border: 2px solid var(--border-s);
 }
-
 .founder-initials {
-  background: var(--dark-3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-head);
-  font-size: 36px;
-  font-weight: 800;
-  color: var(--accent-soft);
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--f-head);
+  font-size: 36px; font-weight: 800;
+  color: var(--accent-s);
 }
-
-.founder-badge {
+.founder-badge-tag {
   position: absolute;
-  bottom: -10px;
-  right: -10px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 5px 10px;
-  border-radius: 20px;
-  letter-spacing: 0.5px;
+  bottom: -10px; right: -10px;
+  background: var(--accent); color: #fff;
+  font-size: 10px; font-weight: 700;
+  padding: 5px 10px; border-radius: 20px;
   text-transform: uppercase;
-  font-family: var(--font-head);
-  border: 2px solid var(--dark);
+  font-family: var(--f-head);
+  letter-spacing: 0.5px;
+  border: 2px solid var(--bg);
 }
-
 .founder-name {
-  font-family: var(--font-head);
-  font-size: 28px;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 4px;
+  font-family: var(--f-head);
+  font-size: 28px; font-weight: 800;
+  color: var(--white); margin-bottom: 4px;
 }
-
-.founder-title {
-  font-size: 13px;
-  color: var(--accent-soft);
-  margin-bottom: 18px;
-  font-weight: 500;
-}
-
-.founder-bio {
-  font-size: 15px;
-  color: var(--muted);
-  line-height: 1.75;
-  max-width: 540px;
-  margin-bottom: 24px;
-}
-
+.founder-title { font-size: 13px; color: var(--accent-s); margin-bottom: 18px; font-weight: 500; }
+.founder-bio { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 540px; margin-bottom: 24px; }
 .founder-bio strong { color: var(--text); font-weight: 400; }
+.founder-stats { display: flex; gap: 32px; }
+.f-stat-num { font-family: var(--f-head); font-size: 22px; font-weight: 800; color: var(--white); }
+.f-stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-.founder-stats {
-  display: flex;
-  gap: 32px;
-}
 
-.f-stat-num {
-  font-family: var(--font-head);
-  font-size: 22px;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1;
-}
-.f-stat-label {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 3px;
-}
-
-/* ========================================
-   CASOS DE ÉXITO
-   ======================================== */
-.cases-section {
-  border-top: 1px solid var(--border);
-  padding: 72px 0;
-}
-
+/* ============================================================
+   § CASOS DE ÉXITO
+   ============================================================ */
 .cases-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
-
 .case-card {
-  background: var(--dark-2);
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   padding: 28px;
-  transition: border-color var(--transition), transform var(--transition);
-  cursor: default;
+  transition: border-color var(--ease), transform var(--ease);
 }
-
-.case-card:hover {
-  border-color: var(--border-s);
-  transform: translateY(-3px);
-}
-
+.case-card:hover { border-color: var(--border-s); transform: translateY(-3px); }
 .case-metric {
-  font-family: var(--font-head);
-  font-size: 40px;
-  font-weight: 800;
-  color: var(--accent-soft);
-  line-height: 1;
-  margin-bottom: 4px;
+  font-family: var(--f-head);
+  font-size: 40px; font-weight: 800;
+  color: var(--accent-s); line-height: 1; margin-bottom: 4px;
 }
-
 .case-period {
-  font-size: 11px;
-  color: var(--muted);
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
+  font-size: 11px; color: var(--muted);
+  font-weight: 500; letter-spacing: 0.3px;
+  margin-bottom: 18px; text-transform: uppercase;
 }
-
-.case-quote {
-  font-size: 13px;
-  color: var(--text);
-  line-height: 1.65;
-  font-style: italic;
-  margin-bottom: 20px;
-  opacity: 0.85;
-}
-
-.case-divider {
-  height: 1px;
-  background: var(--border);
-  margin-bottom: 16px;
-}
-
-.case-author {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
+.case-quote { font-size: 13px; color: var(--text); line-height: 1.65; font-style: italic; margin-bottom: 18px; opacity: 0.85; }
+.case-divider { height: 1px; background: var(--border); margin-bottom: 14px; }
+.case-author { display: flex; align-items: center; gap: 10px; }
 .case-initials {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  background: rgba(108,92,231,0.15);
-  color: var(--accent-soft);
-  font-size: 11px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-head);
-  flex-shrink: 0;
+  width: 34px; height: 34px; border-radius: 8px;
+  background: rgba(108,92,231,0.15); color: var(--accent-s);
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--f-head); flex-shrink: 0;
 }
+.case-name { font-size: 13px; color: var(--white); font-weight: 500; line-height: 1.2; }
+.case-biz { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-.case-name {
-  font-size: 13px;
-  color: #fff;
-  font-weight: 500;
-  line-height: 1.2;
-}
 
-.case-biz {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 2px;
-}
-
-/* ========================================
-   SISTEMA VURA
-   ======================================== */
-.system-section {
-  border-top: 1px solid var(--border);
-  padding: 72px 0;
-}
-
+/* ============================================================
+   § SISTEMA VURA
+   ============================================================ */
 .system-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
-
 .sys-card {
-  background: var(--dark-2);
+  background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 24px;
-  transition: border-color var(--transition), background var(--transition);
+  border-radius: var(--r-lg); padding: 24px;
+  transition: border-color var(--ease), background var(--ease), transform var(--ease);
 }
-
-.sys-card:hover {
-  border-color: var(--border-s);
-  background: var(--dark-3);
-}
-
+.sys-card:hover { border-color: var(--border-s); background: var(--bg3); transform: translateY(-2px); }
 .sys-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--r);
-  background: rgba(108,92,231,0.12);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  margin-bottom: 18px;
+  width: 44px; height: 44px; border-radius: var(--r);
+  background: rgba(108,92,231,0.12); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; margin-bottom: 18px;
 }
+.sys-title { font-family: var(--f-head); font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.sys-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+.sys-result { font-size: 12px; color: var(--accent-s); font-weight: 700; font-family: var(--f-head); }
 
-.sys-title {
-  font-family: var(--font-head);
-  font-size: 15px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 8px;
-}
 
-.sys-desc {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.6;
-  margin-bottom: 14px;
-}
-
-.sys-result {
-  font-size: 12px;
-  color: var(--accent-soft);
-  font-weight: 600;
-  font-family: var(--font-head);
-  letter-spacing: 0.3px;
-}
-
-/* ========================================
-   PRECIOS
-   ======================================== */
-.pricing-section {
-  border-top: 1px solid var(--border);
-  padding: 72px 0;
-}
-
+/* ============================================================
+   § PRECIOS
+   ============================================================ */
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  align-items: start;
+  gap: 16px; align-items: start;
 }
-
 .price-card {
-  background: var(--dark-2);
+  background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: var(--r-xl);
-  padding: 32px;
-  transition: border-color var(--transition);
+  border-radius: var(--r-xl); padding: 32px;
+  transition: border-color var(--ease);
   position: relative;
 }
-
 .price-card:hover { border-color: var(--border-s); }
-
 .price-card.featured {
   border-color: var(--accent);
-  background: linear-gradient(135deg, rgba(108,92,231,0.07), var(--dark-2));
+  background: linear-gradient(135deg, rgba(108,92,231,0.07), var(--bg2));
 }
-
 .price-badge {
   display: inline-block;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  background: var(--accent);
-  color: #fff;
-  padding: 4px 12px;
-  border-radius: 20px;
-  margin-bottom: 18px;
-  font-family: var(--font-head);
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  background: var(--accent); color: #fff;
+  padding: 4px 12px; border-radius: 20px;
+  margin-bottom: 16px; font-family: var(--f-head);
 }
-
-.price-name {
-  font-family: var(--font-head);
-  font-size: 18px;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 6px;
-}
-
-.price-desc {
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 24px;
-  line-height: 1.5;
-}
-
-.price-divider {
-  height: 1px;
-  background: var(--border);
-  margin-bottom: 20px;
-}
-
-.price-amount {
-  font-family: var(--font-head);
-  font-size: 38px;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1;
-}
-
-.price-amount sup {
-  font-size: 18px;
-  font-weight: 600;
-  vertical-align: super;
-  margin-right: 2px;
-}
-
-.price-amount sub {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--muted);
-  vertical-align: baseline;
-}
-
-.price-monthly {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 6px;
-  margin-bottom: 24px;
-}
-
-.price-guarantee {
-  font-size: 11px;
-  color: var(--accent-soft);
-  font-weight: 600;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.price-features {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 28px;
-}
-
-.price-features li {
-  font-size: 13px;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  line-height: 1.4;
-}
-
+.price-name { font-family: var(--f-head); font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 6px; }
+.price-desc { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+.price-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+.price-amount { font-family: var(--f-head); font-size: 38px; font-weight: 800; color: var(--white); line-height: 1; }
+.price-amount sup { font-size: 18px; vertical-align: super; margin-right: 2px; }
+.price-amount sub { font-size: 14px; font-weight: 400; color: var(--muted); vertical-align: baseline; }
+.price-monthly { font-size: 12px; color: var(--muted); margin-top: 6px; margin-bottom: 20px; }
+.price-roi { font-size: 11px; color: var(--success); font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; gap: 5px; }
+.price-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.price-features li { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 10px; line-height: 1.4; }
 .price-features li.on { color: var(--text); }
-
 .price-features li::before {
-  content: '';
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--dark-4);
-  border: 1px solid var(--border);
-  flex-shrink: 0;
+  content: ''; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--bg4); border: 1px solid var(--border); flex-shrink: 0;
 }
-
 .price-features li.on::before {
-  background: rgba(108,92,231,0.2);
-  border-color: var(--accent);
-  content: '✓';
-  font-size: 9px;
-  color: var(--accent-soft);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
+  background: rgba(108,92,231,0.2); border-color: var(--accent);
+  content: '✓'; font-size: 9px; color: var(--accent-s);
+  display: flex; align-items: center; justify-content: center; font-weight: 700;
 }
 
-/* ========================================
-   GARANTÍA
-   ======================================== */
-.guarantee-section {
-  border-top: 1px solid var(--border);
-  padding: 56px 0;
-}
 
-.guarantee-box {
-  background: var(--dark-2);
-  border: 1px solid var(--border-s);
-  border-radius: var(--r-xl);
-  padding: 48px;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 40px;
-  align-items: center;
-}
-
-.guarantee-icon-wrap {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: rgba(108,92,231,0.1);
-  border: 2px solid var(--border-s);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  flex-shrink: 0;
-}
-
-.guarantee-title {
-  font-family: var(--font-head);
-  font-size: 24px;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.guarantee-text {
-  font-size: 15px;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-.guarantee-text strong { color: var(--text); font-weight: 400; }
-
-/* ========================================
-   CTA FINAL
-   ======================================== */
-.final-section {
-  border-top: 1px solid var(--border);
-  padding: 80px 0;
-}
-
-.final-box {
-  background: linear-gradient(135deg, rgba(108,92,231,0.1), rgba(162,155,254,0.04));
-  border: 1px solid var(--border-s);
-  border-radius: var(--r-xl);
-  padding: 64px 48px;
-  text-align: center;
-}
-
-.final-box h2 {
-  font-family: var(--font-head);
-  font-size: clamp(24px, 4vw, 40px);
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -0.5px;
-  line-height: 1.15;
-  margin-bottom: 16px;
-}
-
-.final-box p {
-  font-size: 17px;
-  color: var(--muted);
-  margin-bottom: 40px;
-  max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.65;
-}
-
-.final-actions {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.final-note {
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.final-note a {
-  color: var(--accent-soft);
-  text-decoration: none;
-}
-
-/* ========================================
-   FOOTER
-   ======================================== */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 40px 0;
-}
-
-.footer-inner {
+/* ============================================================
+   § FAQ ACORDEÓN — nuevo
+   ============================================================ */
+.faq-section { border-top: 1px solid var(--border); padding: 72px 0; }
+.faq-list { max-width: 680px; display: flex; flex-direction: column; gap: 0; margin-top: 40px; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item:first-child { border-top: 1px solid var(--border); }
+.faq-q {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
+  padding: 20px 4px;
+  font-size: 15px; font-weight: 500;
+  color: var(--white);
+  cursor: pointer; gap: 20px;
+  transition: color var(--ease);
+  background: none; border: none;
+  width: 100%; text-align: left;
 }
+.faq-q:hover { color: var(--accent-s); }
+.faq-icon {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(108,92,231,0.12);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-s);
+  font-size: 18px; font-weight: 300;
+  flex-shrink: 0;
+  transition: transform var(--ease), background var(--ease);
+  line-height: 1;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(108,92,231,0.25); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.38s ease;
+}
+.faq-item.open .faq-a { max-height: 220px; }
+.faq-a-inner { font-size: 14px; color: var(--muted); line-height: 1.75; padding: 0 4px 20px; }
+.faq-a-inner strong { color: var(--text); font-weight: 400; }
 
-.footer-logo {
-  font-family: var(--font-head);
-  font-size: 16px;
-  font-weight: 800;
-  color: #fff;
+
+/* ============================================================
+   § GARANTÍA
+   ============================================================ */
+.guarantee-box {
+  background: var(--bg2); border: 1px solid var(--border-s);
+  border-radius: var(--r-xl); padding: 48px;
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 40px; align-items: center;
+}
+.guarantee-icon-wrap {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: rgba(108,92,231,0.1); border: 2px solid var(--border-s);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; flex-shrink: 0;
+}
+.guarantee-title { font-family: var(--f-head); font-size: 24px; font-weight: 800; color: var(--white); margin-bottom: 10px; }
+.guarantee-text { font-size: 15px; color: var(--muted); line-height: 1.7; }
+.guarantee-text strong { color: var(--text); font-weight: 400; }
+
+
+/* ============================================================
+   § CTA FINAL
+   ============================================================ */
+.final-box {
+  background: linear-gradient(135deg, rgba(108,92,231,0.1), rgba(162,155,254,0.04));
+  border: 1px solid var(--border-s);
+  border-radius: var(--r-xl); padding: 64px 48px;
+  text-align: center;
+}
+.final-box h2 {
+  font-family: var(--f-head);
+  font-size: clamp(24px, 4vw, 40px); font-weight: 800;
+  color: var(--white); letter-spacing: -0.5px;
+  line-height: 1.15; margin-bottom: 16px;
+}
+.final-box p {
+  font-size: 17px; color: var(--muted);
+  margin-bottom: 40px;
+  max-width: 520px; margin-left: auto; margin-right: auto;
+  line-height: 1.65;
+}
+.final-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+.final-note { font-size: 13px; color: var(--muted); }
+.final-note a { color: var(--accent-s); text-decoration: none; }
+
+
+/* ============================================================
+   § FAB WHATSAPP — micro-animación pulso
+   ============================================================ */
+.fab-wa {
+  display: none; /* visible via media query */
+  position: fixed;
+  bottom: 24px; right: 24px;
+  z-index: 300;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: var(--wa);
+  box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+  align-items: center; justify-content: center;
   text-decoration: none;
+  cursor: pointer;
+  animation: fab-pulse 2.5s ease-in-out infinite;
 }
-.footer-logo span { color: var(--accent-soft); }
-
-.footer-tagline {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 4px;
+@keyframes fab-pulse {
+  0%,100%{ box-shadow: 0 4px 20px rgba(37,211,102,0.45); transform: scale(1); }
+  50%{ box-shadow: 0 6px 30px rgba(37,211,102,0.65); transform: scale(1.05); }
 }
+.fab-wa:hover { animation: none; transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+.fab-wa svg { width: 28px; height: 28px; fill: #fff; }
 
-.footer-links {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
+.fab-tooltip {
+  display: none;
+  position: fixed;
+  bottom: 32px; right: 94px;
+  z-index: 299;
+  background: var(--bg2); border: 1px solid var(--border-s);
+  color: var(--text); font-size: 13px; font-weight: 500;
+  padding: 8px 14px; border-radius: var(--r);
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  pointer-events: none;
 }
-
-.footer-links a {
-  font-size: 13px;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color var(--transition);
-}
-.footer-links a:hover { color: #fff; }
-
-.footer-copy {
-  font-size: 12px;
-  color: var(--muted);
-  text-align: right;
-}
-
-/* ========================================
-   ANIMACIONES DE ENTRADA
-   ======================================== */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+.fab-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -6px; top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right: none;
+  border-left-color: var(--border-s);
 }
 
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
-.fade-in-delay-1 { transition-delay: 0.1s; }
-.fade-in-delay-2 { transition-delay: 0.2s; }
-.fade-in-delay-3 { transition-delay: 0.3s; }
-.fade-in-delay-4 { transition-delay: 0.4s; }
+/* ============================================================
+   § FOOTER
+   ============================================================ */
+footer { border-top: 1px solid var(--border); padding: 40px 0; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.footer-logo { font-family: var(--f-head); font-size: 16px; font-weight: 800; color: var(--white); text-decoration: none; }
+.footer-logo span { color: var(--accent-s); }
+.footer-tagline { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color var(--ease); }
+.footer-links a:hover { color: var(--white); }
+.footer-copy { font-size: 12px; color: var(--muted); text-align: right; }
 
-/* ========================================
-   RESPONSIVE MOBILE
-   ======================================== */
+
+/* ============================================================
+   § RESPONSIVE
+   ============================================================ */
 @media (max-width: 768px) {
-  .nav-links a { display: none; }
-  .hero { padding: 60px 0 48px; }
-  .hero h1 { font-size: 36px; letter-spacing: -1px; }
+  .nav-links a:not(.nav-cta) { display: none; }
+  .hero { padding: 56px 0 44px; }
   .hero-metrics { flex-wrap: wrap; }
   .hero-metric { min-width: 140px; border-right: none; border-bottom: 1px solid var(--border); }
   .hero-metric:last-child { border-bottom: none; }
   .calc-box { padding: 28px 20px; }
   .calc-grid { grid-template-columns: 1fr; gap: 32px; }
   .founder-grid { grid-template-columns: 1fr; gap: 24px; }
-  .founder-img-wrap img, .founder-img-wrap .founder-initials { width: 90px; height: 90px; }
+  .founder-img-wrap img, .founder-initials { width: 90px; height: 90px; }
   .cases-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
   .system-grid { grid-template-columns: repeat(2, 1fr); }
   .pricing-grid { grid-template-columns: 1fr; }
   .guarantee-box { grid-template-columns: 1fr; text-align: center; }
@@ -1077,75 +957,87 @@ footer {
   .footer-inner { flex-direction: column; align-items: flex-start; }
   .footer-copy { text-align: left; }
   section { padding: 56px 0; }
+  .fab-wa { display: flex; }
 }
-
 @media (max-width: 480px) {
   .system-grid { grid-template-columns: 1fr; }
-  .hero-actions { flex-direction: column; align-items: center; }
-  .final-actions { flex-direction: column; align-items: center; }
+  .hero-actions, .final-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn, .final-actions .btn { justify-content: center; }
+  .faq-list { margin-top: 24px; }
 }
+@media print {
+  nav { position: static; }
+  .fab-wa, .fab-tooltip { display: none !important; }
+}
+
 </style>
 </head>
+
+<!-- =====================================================
+     BLOQUE 3/3: HTML + JAVASCRIPT
+     ===================================================== -->
 <body>
 
-<!-- ======================== NAVEGACIÓN ======================== -->
+<!-- NAV -->
 <nav>
   <div class="container">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">VURA <span>DIGITAL</span></a>
-      <div class="nav-links">
-        <a href="#casos">Casos de éxito</a>
-        <a href="#sistema">Cómo funciona</a>
-        <a href="#precios">Precios</a>
-        <a href="#contacto" class="btn btn-primary nav-cta">Auditoría gratuita →</a>
+      <a href="#inicio" class="nav-logo" aria-label="VURA DIGITAL — inicio">VURA <span>DIGITAL</span></a>
+      <div class="nav-links" role="navigation" aria-label="Menú principal">
+        <a href="#casos" aria-label="Ver casos de éxito">Casos de éxito</a>
+        <a href="#sistema" aria-label="Cómo funciona el sistema VURA">Cómo funciona</a>
+        <a href="#precios" aria-label="Ver precios">Precios</a>
+        <a href="#contacto" class="btn btn-primary nav-cta" aria-label="Solicitar auditoría gratuita">Auditoría gratuita →</a>
       </div>
     </div>
   </div>
 </nav>
 
-<!-- ======================== HERO ======================== -->
-<section class="hero" id="inicio">
+
+<!-- HERO — H1 con keyword SEO local explícita -->
+<section class="hero" id="inicio" aria-labelledby="hero-h1">
   <div class="container">
 
-    <div class="hero-badge fade-in">
-      <div class="hero-badge-dot"></div>
-      Especialistas en digitalización de negocios locales · Salamanca
+    <div class="hero-badge fi" role="note">
+      <div class="hero-dot" aria-hidden="true"></div>
+      Agencia de diseño web en Salamanca para negocios locales
     </div>
 
-    <h1 class="fade-in fade-in-delay-1">
-      Tu negocio pierde dinero<br>
-      cada día que <em>no te encuentran</em>
+    <!-- H1: keyword "Diseño Web Salamanca" + beneficio tangible -->
+    <h1 id="hero-h1" class="fi d1">
+      Diseño Web en Salamanca que<br>
+      <em>convierte visitas en clientes</em>
     </h1>
 
-    <p class="hero-sub fade-in fade-in-delay-2">
+    <p class="hero-sub fi d2">
       Mientras lees esto, clientes potenciales buscan en Google lo que tú ofreces
       — y <strong>eligen a tu competencia</strong> porque tienen mejor presencia digital.
       Eso tiene solución. En menos de 30 días.
     </p>
 
-    <div class="hero-actions fade-in fade-in-delay-3">
-      <a href="#calculadora" class="btn btn-primary">
+    <div class="hero-actions fi d3">
+      <a href="#calculadora" class="btn btn-primary btn-hero" aria-label="Calcular cuánto dinero pierdo sin presencia digital">
         Calcular cuánto estoy perdiendo →
       </a>
-      <a href="#casos" class="btn btn-ghost">
+      <a href="#casos" class="btn btn-ghost" aria-label="Ver resultados reales de clientes">
         Ver resultados reales
       </a>
     </div>
 
-    <div class="hero-metrics fade-in fade-in-delay-4">
-      <div class="hero-metric">
+    <div class="hero-metrics fi d4" role="list" aria-label="Métricas clave de VURA DIGITAL">
+      <div class="hero-metric" role="listitem">
         <div class="metric-num">+500</div>
         <div class="metric-label">Negocios transformados</div>
       </div>
-      <div class="hero-metric">
+      <div class="hero-metric" role="listitem">
         <div class="metric-num">30 días</div>
         <div class="metric-label">Primeros resultados</div>
       </div>
-      <div class="hero-metric">
+      <div class="hero-metric" role="listitem">
         <div class="metric-num">100%</div>
         <div class="metric-label">Garantía de devolución</div>
       </div>
-      <div class="hero-metric">
+      <div class="hero-metric" role="listitem">
         <div class="metric-num">1.2 seg</div>
         <div class="metric-label">Velocidad de carga</div>
       </div>
@@ -1154,104 +1046,204 @@ footer {
   </div>
 </section>
 
-<!-- ======================== CALCULADORA ======================== -->
-<div class="calc-section" id="calculadora">
-  <div class="container">
 
-    <div class="calc-box fade-in">
-      <div class="eyebrow">Diagnóstico de rentabilidad</div>
-      <div class="section-title">¿Cuánto dinero pierdes cada mes?</div>
-      <p class="section-sub">Ajusta los valores de tu negocio y descubre el impacto real de no tener una presencia digital profesional.</p>
+<!-- CALCULADORA DE RENTABILIDAD — con barra dramática + CTA WhatsApp dinámico -->
+<div class="calc-section" id="calculadora" role="region" aria-label="Calculadora de rentabilidad digital">
+  <div class="container">
+    <div class="calc-box fi">
+      <span class="eyebrow">Diagnóstico de rentabilidad</span>
+      <h2 class="section-title">¿Cuánto dinero pierdes cada mes?</h2>
+      <p class="section-sub">Ajusta los valores de tu negocio y descubre el impacto real de no tener presencia digital profesional en Salamanca.</p>
 
       <div class="calc-grid">
-        <div class="calc-inputs">
+
+        <!-- Inputs -->
+        <div class="calc-inputs" role="group" aria-label="Parámetros de tu negocio">
 
           <div class="input-group">
-            <label>
-              Clientes potenciales que pasan por tu zona al día
-              <strong id="vis-val">80</strong>
+            <label for="visitors">
+              Clientes potenciales por zona al día
+              <strong id="vis-val" aria-live="polite">80</strong>
             </label>
-            <input type="range" id="visitors" min="10" max="500" value="80" step="5" oninput="updateCalc()">
+            <input type="range" id="visitors" min="10" max="500" value="80" step="5"
+              aria-label="Clientes potenciales por zona al día" oninput="updateCalc()">
           </div>
 
           <div class="input-group">
-            <label>
+            <label for="ticket">
               Ticket medio por cliente
-              <strong id="ticket-val">35 €</strong>
+              <strong id="ticket-val" aria-live="polite">35 €</strong>
             </label>
-            <input type="range" id="ticket" min="5" max="300" value="35" step="5" oninput="updateCalc()">
+            <input type="range" id="ticket" min="5" max="300" value="35" step="5"
+              aria-label="Ticket medio en euros" oninput="updateCalc()">
           </div>
 
           <div class="input-group">
-            <label>
-              % que buscan online antes de decidir
-              <strong id="online-val">65%</strong>
+            <label for="online">
+              % que busca online antes de decidir
+              <strong id="online-val" aria-live="polite">65%</strong>
             </label>
-            <input type="range" id="online" min="20" max="95" value="65" step="1" oninput="updateCalc()">
+            <input type="range" id="online" min="20" max="95" value="65" step="1"
+              aria-label="Porcentaje que busca online antes de decidir" oninput="updateCalc()">
           </div>
 
           <div class="input-group">
-            <label>
+            <label for="lost">
               % de esos que elige a tu competencia
-              <strong id="lost-val">40%</strong>
+              <strong id="lost-val" aria-live="polite">40%</strong>
             </label>
-            <input type="range" id="lost" min="10" max="80" value="40" step="1" oninput="updateCalc()">
+            <input type="range" id="lost" min="10" max="80" value="40" step="1"
+              aria-label="Porcentaje de clientes que va a la competencia" oninput="updateCalc()">
           </div>
 
         </div>
 
-        <div class="calc-result">
+        <!-- Panel resultado -->
+        <div class="calc-result" role="region" aria-live="polite" aria-label="Resultado del diagnóstico">
+
           <div class="result-label">Ingresos que pierdes al mes</div>
           <div class="result-amount" id="lost-amount">2.184 €</div>
-          <div class="result-period">
-            al mes · <strong id="lost-year">26.208 €</strong> al año
+          <div class="result-period">al mes · <strong id="lost-year">26.208 €</strong> al año</div>
+
+          <!-- Barra de pérdida visual -->
+          <div class="loss-bar-wrap" aria-hidden="true">
+            <div class="loss-bar-labels">
+              <span>Tu negocio</span>
+              <span id="bar-pct-label">Tu competencia recibe el 26%</span>
+            </div>
+            <div class="loss-bar-track">
+              <div class="loss-bar-fill" id="loss-bar"></div>
+            </div>
+            <div class="loss-bar-note" id="bar-note">
+              De cada 100 clientes potenciales, tu competencia capta ~26
+            </div>
           </div>
-          <a href="#contacto" class="btn btn-primary result-cta-btn">
-            Quiero recuperar este dinero →
+
+          <!-- CTA estático -->
+          <a href="#contacto" class="btn btn-primary calc-cta-static"
+            aria-label="Ir a contacto para recuperar clientes perdidos">
+            Recuperar este dinero →
           </a>
+
+          <!-- CTA WhatsApp dinámico — aparece tras interacción -->
+          <a id="calc-wa-btn" href="#" target="_blank" rel="noopener"
+            class="btn btn-wa calc-cta-wa"
+            aria-label="Solicitar auditoría por WhatsApp con mis datos calculados">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="#fff" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Solicitar auditoría con estos datos
+          </a>
+
           <div class="result-note">Auditoría gratuita · Sin compromiso · Respuesta &lt;5 min</div>
+
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- ======================== FUNDADOR ======================== -->
-<section id="about">
+
+<!-- TESTIMONIOS — nueva sección, después de la calculadora -->
+<section class="testimonials-section" id="testimonios" aria-labelledby="testimonios-title">
   <div class="container">
-    <div class="founder-grid fade-in">
+
+    <div class="fi">
+      <span class="eyebrow">Social proof · Salamanca</span>
+      <h2 class="section-title" id="testimonios-title">Lo que logran negocios como el tuyo</h2>
+      <p class="section-sub">Resultados documentados. Negocios reales en Salamanca. Sin proyecciones ni estimaciones.</p>
+    </div>
+
+    <div class="testimonials-grid" role="list">
+
+      <article class="testimonial-card fi d1" role="listitem">
+        <div class="testimonial-metric" aria-label="+40% en reservas online">+40%</div>
+        <div class="testimonial-kpi">Reservas online · 30 días</div>
+        <blockquote class="testimonial-quote">
+          "Aparecer en Google Maps cambió todo. En un mes teníamos la agenda llena. Ahora los clientes nos encuentran solos, sin hacer nada extra."
+        </blockquote>
+        <div class="testimonial-divider" aria-hidden="true"></div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" aria-hidden="true">ML</div>
+          <div>
+            <div class="testimonial-name">María L.</div>
+            <div class="testimonial-company">Hotel Rural Las Vaguadas, Salamanca</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card fi d2" role="listitem">
+        <div class="testimonial-metric" aria-label="+280% en pedidos por WhatsApp">+280%</div>
+        <div class="testimonial-kpi">Pedidos WhatsApp · 90 días</div>
+        <blockquote class="testimonial-quote">
+          "Los pedidos se triplicaron en tres meses. La web carga en un segundo y eso marca la diferencia. La mejor inversión que hice para mi negocio."
+        </blockquote>
+        <div class="testimonial-divider" aria-hidden="true"></div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" aria-hidden="true">CM</div>
+          <div>
+            <div class="testimonial-name">Carlos M.</div>
+            <div class="testimonial-company">Restaurante La Tasca, Salamanca</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card fi d3" role="listitem">
+        <div class="testimonial-metric" aria-label="+150% en ventas online">+150%</div>
+        <div class="testimonial-kpi">Ventas online · 60 días</div>
+        <blockquote class="testimonial-quote">
+          "No entendía nada de tecnología. David lo hizo simple. Ahora vendo online sin complicaciones y los clientes llegan solos desde Google."
+        </blockquote>
+        <div class="testimonial-divider" aria-hidden="true"></div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" aria-hidden="true">JP</div>
+          <div>
+            <div class="testimonial-name">Juan P.</div>
+            <div class="testimonial-company">Artesanía del Centro, Salamanca</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- FUNDADOR -->
+<section id="about" style="border-top:1px solid var(--border)" aria-labelledby="founder-name">
+  <div class="container">
+    <div class="founder-grid fi">
 
       <div class="founder-img-wrap">
         <img
           src="https://vuradigita-9wyvoseg.manus.space/manus-storage/david-rodero_e1faa4f5.webp"
-          alt="David Rodero, fundador de VURA DIGITAL"
-          width="140" height="140"
-          onerror="this.outerHTML='<div class=\'founder-initials\'>DR</div>'"
+          alt="David Rodero, fundador de VURA DIGITAL — agencia de diseño web en Salamanca"
+          width="140" height="140" loading="lazy"
+          onerror="this.outerHTML='<div class=\'founder-initials\' aria-label=\'DR\'>DR</div>'"
         >
-        <div class="founder-badge">Fundador</div>
+        <div class="founder-badge-tag">Fundador</div>
       </div>
 
       <div>
-        <div class="eyebrow">Quién está detrás</div>
-        <div class="founder-name">David Rodero</div>
-        <div class="founder-title">Especialista en Digitalización de Negocios Locales · 5 años de experiencia</div>
+        <span class="eyebrow">Quién está detrás</span>
+        <h2 class="founder-name" id="founder-name">David Rodero</h2>
+        <div class="founder-title">Especialista en Diseño Web y Digitalización · Salamanca · 5 años</div>
         <p class="founder-bio">
           No soy un diseñador web. Soy un especialista en convertir
           <strong>visibilidad digital en ingresos reales</strong> para negocios como el tuyo.
-          Llevo 5 años trabajando exclusivamente con PYMEs y negocios locales en Salamanca,
-          y he aprendido exactamente qué funciona aquí — y qué no.
+          Llevo 5 años trabajando exclusivamente con PYMEs y negocios locales en Salamanca —
+          conozco el mercado, las búsquedas locales y qué funciona aquí.
         </p>
-        <div class="founder-stats">
-          <div>
+        <div class="founder-stats" role="list" aria-label="Estadísticas de David Rodero">
+          <div role="listitem">
             <div class="f-stat-num">500+</div>
-            <div class="f-stat-label">Negocios transformados</div>
+            <div class="f-stat-label">Negocios ayudados</div>
           </div>
-          <div>
+          <div role="listitem">
             <div class="f-stat-num">5 años</div>
             <div class="f-stat-label">Especialización local</div>
           </div>
-          <div>
+          <div role="listitem">
             <div class="f-stat-num">90 días</div>
             <div class="f-stat-label">Garantía de resultados</div>
           </div>
@@ -1262,126 +1254,119 @@ footer {
   </div>
 </section>
 
-<!-- ======================== CASOS DE ÉXITO ======================== -->
-<section id="casos" style="border-top:1px solid var(--border)">
+
+<!-- CASOS DE ÉXITO -->
+<section id="casos" style="border-top:1px solid var(--border)" aria-labelledby="casos-title">
   <div class="container">
-
-    <div class="fade-in">
-      <div class="eyebrow">Resultados reales</div>
-      <div class="section-title">Lo que logran negocios como el tuyo</div>
-      <p class="section-sub">No proyecciones. No estimaciones. Resultados documentados de negocios en Salamanca.</p>
+    <div class="fi">
+      <span class="eyebrow">Resultados reales</span>
+      <h2 class="section-title" id="casos-title">Negocios de Salamanca que ya lo lograron</h2>
+      <p class="section-sub">No proyecciones. Resultados documentados, medibles y verificables.</p>
     </div>
+    <div class="cases-grid" role="list">
 
-    <div class="cases-grid">
-      <div class="case-card fade-in fade-in-delay-1">
+      <article class="case-card fi d1" role="listitem">
         <div class="case-metric">+280%</div>
         <div class="case-period">Pedidos WhatsApp · 90 días</div>
         <p class="case-quote">"Los pedidos se duplicaron en 3 semanas. La web es tan rápida que los clientes no se van. La mejor inversión que he hecho."</p>
-        <div class="case-divider"></div>
+        <div class="case-divider" aria-hidden="true"></div>
         <div class="case-author">
-          <div class="case-initials">CM</div>
+          <div class="case-initials" aria-hidden="true">CM</div>
           <div>
             <div class="case-name">Carlos M.</div>
             <div class="case-biz">Restaurante La Tasca, Salamanca</div>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="case-card fade-in fade-in-delay-2">
+      <article class="case-card fi d2" role="listitem">
         <div class="case-metric">+40%</div>
         <div class="case-period">Reservas online · 30 días</div>
         <p class="case-quote">"Aparecer en Google Maps fue un cambio total. Las reservas aumentaron 40% en el primer mes. Vura sabe exactamente lo que hace."</p>
-        <div class="case-divider"></div>
+        <div class="case-divider" aria-hidden="true"></div>
         <div class="case-author">
-          <div class="case-initials">ML</div>
+          <div class="case-initials" aria-hidden="true">ML</div>
           <div>
             <div class="case-name">María L.</div>
             <div class="case-biz">Hotel Rural, Salamanca</div>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="case-card fade-in fade-in-delay-3">
+      <article class="case-card fi d3" role="listitem">
         <div class="case-metric">+150%</div>
         <div class="case-period">Ventas online · 60 días</div>
         <p class="case-quote">"No entendía de tecnología. Vura lo hizo todo fácil. Mi tienda ahora vende online sin complicaciones. Recomendado al 100%."</p>
-        <div class="case-divider"></div>
+        <div class="case-divider" aria-hidden="true"></div>
         <div class="case-author">
-          <div class="case-initials">JP</div>
+          <div class="case-initials" aria-hidden="true">JP</div>
           <div>
             <div class="case-name">Juan P.</div>
             <div class="case-biz">Tienda Centro, Salamanca</div>
           </div>
         </div>
-      </div>
-    </div>
+      </article>
 
+    </div>
   </div>
 </section>
 
-<!-- ======================== SISTEMA ======================== -->
-<section id="sistema" style="border-top:1px solid var(--border)">
-  <div class="container">
 
-    <div class="fade-in">
-      <div class="eyebrow">El sistema VURA</div>
-      <div class="section-title">Cuatro pilares. Un resultado: más clientes</div>
+<!-- SISTEMA VURA -->
+<section id="sistema" style="border-top:1px solid var(--border)" aria-labelledby="sistema-title">
+  <div class="container">
+    <div class="fi">
+      <span class="eyebrow">El sistema VURA</span>
+      <h2 class="section-title" id="sistema-title">Cuatro pilares. Un resultado: más clientes</h2>
       <p class="section-sub">No vendemos páginas web. Construimos el sistema digital que hace que tu negocio sea el primero que encuentran — y el que eligen.</p>
     </div>
-
     <div class="system-grid">
-      <div class="sys-card fade-in fade-in-delay-1">
-        <div class="sys-icon">⚡</div>
-        <div class="sys-title">Web ultra-rápida</div>
-        <p class="sys-desc">Carga en 1.2 segundos. El 53% de usuarios abandona si tarda más de 3 seg. Tus clientes se quedan.</p>
+      <div class="sys-card fi d1">
+        <div class="sys-icon" aria-hidden="true">⚡</div>
+        <h3 class="sys-title">Web ultra-rápida</h3>
+        <p class="sys-desc">Carga en 1.2 segundos. El 53% abandona si tarda más de 3 seg. Tus clientes se quedan.</p>
         <div class="sys-result">→ Más tiempo en tu web</div>
       </div>
-
-      <div class="sys-card fade-in fade-in-delay-2">
-        <div class="sys-icon">📍</div>
-        <div class="sys-title">SEO local agresivo</div>
-        <p class="sys-desc">Dominas Google Maps en tu zona. Cuando alguien busca lo que tú ofreces, apareces tú primero.</p>
+      <div class="sys-card fi d2">
+        <div class="sys-icon" aria-hidden="true">📍</div>
+        <h3 class="sys-title">SEO local agresivo</h3>
+        <p class="sys-desc">Dominas Google Maps en Salamanca. Cuando alguien busca lo que ofreces, apareces tú primero.</p>
         <div class="sys-result">→ +85% más llamadas</div>
       </div>
-
-      <div class="sys-card fade-in fade-in-delay-3">
-        <div class="sys-icon">📱</div>
-        <div class="sys-title">Menú QR digital</div>
+      <div class="sys-card fi d3">
+        <div class="sys-icon" aria-hidden="true">📱</div>
+        <h3 class="sys-title">Menú QR digital</h3>
         <p class="sys-desc">Actualizable en tiempo real desde el móvil. Sin impresión, sin errores, sin costes recurrentes.</p>
         <div class="sys-result">→ Cero fricción de compra</div>
       </div>
-
-      <div class="sys-card fade-in fade-in-delay-4">
-        <div class="sys-icon">🛡️</div>
-        <div class="sys-title">Soporte 24/7</div>
-        <p class="sys-desc">Respuesta en minutos. Tu web siempre funciona. Tú solo te enfocas en atender a tus clientes.</p>
+      <div class="sys-card fi d4">
+        <div class="sys-icon" aria-hidden="true">🛡️</div>
+        <h3 class="sys-title">Soporte 24/7</h3>
+        <p class="sys-desc">Respuesta en minutos. Tu web siempre funciona. Tú solo te enfocas en tus clientes.</p>
         <div class="sys-result">→ 0 preocupaciones técnicas</div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ======================== PRECIOS ======================== -->
-<section id="precios" style="border-top:1px solid var(--border)">
-  <div class="container">
 
-    <div class="fade-in">
-      <div class="eyebrow">Inversión</div>
-      <div class="section-title">Un sistema que se paga solo</div>
+<!-- PRECIOS -->
+<section id="precios" style="border-top:1px solid var(--border)" aria-labelledby="precios-title">
+  <div class="container">
+    <div class="fi">
+      <span class="eyebrow">Inversión</span>
+      <h2 class="section-title" id="precios-title">Un sistema que se paga solo</h2>
       <p class="section-sub">Si tu calculadora muestra que pierdes más de 500 €/mes, cualquier plan se amortiza en el primer mes.</p>
     </div>
-
     <div class="pricing-grid">
 
-      <!-- BÁSICO -->
-      <div class="price-card fade-in fade-in-delay-1">
-        <div class="price-name">Presencia Básica</div>
-        <p class="price-desc">Para comenzar a existir digitalmente y dejar de ser invisible</p>
+      <div class="price-card fi d1">
+        <h3 class="price-name">Presencia Básica</h3>
+        <p class="price-desc">Para comenzar a existir digitalmente y dejar de ser invisible en Salamanca</p>
         <div class="price-divider"></div>
         <div class="price-amount"><sup>€</sup>150<sub> setup</sub></div>
         <div class="price-monthly">+ 15 €/mes</div>
-        <ul class="price-features">
+        <ul class="price-features" aria-label="Incluye">
           <li class="on">Web responsive</li>
           <li class="on">Google My Business optimizado</li>
           <li class="on">Email de contacto profesional</li>
@@ -1389,19 +1374,18 @@ footer {
           <li>Integración WhatsApp</li>
           <li>SEO local agresivo</li>
         </ul>
-        <a href="#contacto" class="btn btn-outline">Comenzar →</a>
+        <a href="#contacto" class="btn btn-outline" aria-label="Contratar plan Presencia Básica">Comenzar →</a>
       </div>
 
-      <!-- CRECIMIENTO (destacado) -->
-      <div class="price-card featured fade-in fade-in-delay-2">
+      <div class="price-card featured fi d2">
         <div class="price-badge">Más elegido</div>
-        <div class="price-name">Crecimiento Local</div>
+        <h3 class="price-name">Crecimiento Local</h3>
         <p class="price-desc">El sistema completo para negocios que quieren resultados reales y medibles</p>
         <div class="price-divider"></div>
         <div class="price-amount"><sup>€</sup>250<sub> setup</sub></div>
         <div class="price-monthly">+ 30 €/mes</div>
-        <div class="price-guarantee">✓ ROI garantizado en 30 días</div>
-        <ul class="price-features">
+        <div class="price-roi">✓ ROI garantizado en 30 días</div>
+        <ul class="price-features" aria-label="Incluye">
           <li class="on">Web premium + menú QR digital</li>
           <li class="on">Integración WhatsApp directa</li>
           <li class="on">SEO local agresivo</li>
@@ -1409,17 +1393,16 @@ footer {
           <li class="on">Análisis SEO gratuito (val. 300 €)</li>
           <li class="on">Garantía de 90 días</li>
         </ul>
-        <a href="#contacto" class="btn btn-plan-featured">Activar ahora →</a>
+        <a href="#contacto" class="btn btn-featured" aria-label="Contratar plan Crecimiento Local — el más elegido">Activar ahora →</a>
       </div>
 
-      <!-- TOTAL -->
-      <div class="price-card fade-in fade-in-delay-3">
-        <div class="price-name">Transformación Total</div>
-        <p class="price-desc">Para negocios con ambición de escalar y dominar su mercado local</p>
+      <div class="price-card fi d3">
+        <h3 class="price-name">Transformación Total</h3>
+        <p class="price-desc">Para negocios con ambición de dominar su sector en Salamanca</p>
         <div class="price-divider"></div>
         <div class="price-amount"><sup>€</sup>500+<sub> setup</sub></div>
         <div class="price-monthly">+ 60 €/mes · plan personalizado</div>
-        <ul class="price-features">
+        <ul class="price-features" aria-label="Incluye">
           <li class="on">Todo en Crecimiento Local</li>
           <li class="on">Sistema de reservas integrado</li>
           <li class="on">Dashboard de analíticas avanzadas</li>
@@ -1427,24 +1410,113 @@ footer {
           <li class="on">Estrategia de crecimiento a medida</li>
           <li class="on">Gestor de cuenta dedicado</li>
         </ul>
-        <a href="#contacto" class="btn btn-outline">Consultar proyecto →</a>
+        <a href="#contacto" class="btn btn-outline" aria-label="Consultar plan Transformación Total">Consultar proyecto →</a>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ======================== GARANTÍA ======================== -->
-<section class="guarantee-section">
+
+<!-- FAQ ACORDEÓN — mata objeciones antes del cierre -->
+<section class="faq-section" id="faq" aria-labelledby="faq-title">
   <div class="container">
-    <div class="guarantee-box fade-in">
-      <div class="guarantee-icon-wrap">🛡️</div>
+    <div class="fi">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2 class="section-title" id="faq-title">Respuestas directas, sin rodeos</h2>
+      <p class="section-sub">Las preguntas que todos hacen antes de decidir. Aquí están.</p>
+    </div>
+
+    <div class="faq-list fi" role="list">
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+          ¿Cuánto tiempo tarda en estar lista mi web?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">
+            En <strong>5 a 7 días hábiles</strong> tu web está online y operativa. Empezamos con una llamada de 20 minutos para entender tu negocio, recopilamos la información necesaria, y entregamos. Sin burocracia ni esperas innecesarias.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+          ¿Hay permanencia? ¿Puedo cancelar en cualquier momento?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">
+            No hay permanencia. La cuota mensual <strong>se cancela con 30 días de antelación</strong>, sin penalización. Además, si en 90 días no ves resultados medibles, devolvemos el 100% del setup — sin preguntas.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+          ¿Necesito saber de tecnología para gestionar mi web?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">
+            Cero conocimientos necesarios. Nos encargamos de <strong>todo el aspecto técnico</strong>: mantenimiento, actualizaciones, seguridad y soporte. Si necesitas cambiar una foto o un texto, lo hago en menos de 24 horas. Tú enfócate en tu negocio.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+          ¿Qué diferencia a VURA DIGITAL de otras agencias web?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">
+            Trabajo <strong>exclusivamente con negocios locales en Salamanca</strong>. Conozco el mercado, los comportamientos de búsqueda locales y qué estrategias funcionan aquí. No somos una agencia genérica. Nos especializamos en que <em>tu negocio específico</em> aparezca cuando tus clientes buscan — y que conviertan.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+          ¿La garantía de 90 días es real?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">
+            Completamente real y por escrito. Si en 90 días no puedo demostrarte mejoras medibles —más llamadas, más visitas, mejor posición en Google Maps— te <strong>devolvemos el 100% del setup</strong>. En 5 años de trabajo, nadie ha tenido que pedirla.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+          ¿Cómo empiezo?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" role="region">
+          <div class="faq-a-inner">
+            Llama al <strong>+34 657 930 828</strong> o escríbeme por WhatsApp. Agendamos una auditoría gratuita de 20 minutos: analizo tu negocio, tu competencia local y te doy un plan de acción concreto. Sin compromiso. Si tiene sentido trabajar juntos, seguimos. Si no, igual te llevas el diagnóstico gratis.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- GARANTÍA -->
+<section style="border-top:1px solid var(--border); padding:56px 0" aria-labelledby="guarantee-title">
+  <div class="container">
+    <div class="guarantee-box fi">
+      <div class="guarantee-icon-wrap" aria-hidden="true">🛡️</div>
       <div>
-        <div class="guarantee-title">Garantía total de 90 días — riesgo cero</div>
+        <h2 class="guarantee-title" id="guarantee-title">Garantía total de 90 días — riesgo cero</h2>
         <p class="guarantee-text">
           Si en 90 días no ves <strong>resultados medibles y documentados</strong> en tu negocio,
           te devolvemos el 100% de tu inversión. Sin preguntas, sin letra pequeña, sin excusas.
-          Tenemos esta garantía porque sabemos que el sistema funciona —
+          Esta garantía existe porque sabemos que el sistema funciona —
           y queremos que tú también lo compruebes sin ningún riesgo.
         </p>
       </div>
@@ -1452,102 +1524,213 @@ footer {
   </div>
 </section>
 
-<!-- ======================== CTA FINAL ======================== -->
-<section class="final-section" id="contacto">
+
+<!-- CTA FINAL -->
+<section style="border-top:1px solid var(--border); padding:80px 0" id="contacto" aria-labelledby="cta-title">
   <div class="container">
-    <div class="final-box fade-in">
-      <h2>¿Cuándo quieres empezar<br>a recuperar ese dinero?</h2>
+    <div class="final-box fi">
+      <h2 id="cta-title">¿Cuándo quieres empezar<br>a recuperar ese dinero?</h2>
       <p>
         Una auditoría gratuita de 20 minutos con David.
-        Sin compromiso. Con un plan de acción concreto para tu negocio específico.
+        Sin compromiso. Con un plan de acción concreto para tu negocio en Salamanca.
       </p>
       <div class="final-actions">
-        <a href="tel:+34657930828" class="btn btn-primary">
+        <a href="tel:+34657930828" class="btn btn-primary" aria-label="Llamar a VURA DIGITAL para agendar auditoría gratuita">
           Agendar auditoría gratuita →
         </a>
-        <a href="https://wa.me/34657930828?text=Hola%20David%2C%20quiero%20saber%20cu%C3%A1nto%20dinero%20est%C3%A1%20perdiendo%20mi%20negocio." class="btn btn-ghost" target="_blank" rel="noopener">
-          WhatsApp directo
+        <a
+          href="https://wa.me/34657930828?text=Hola%20David%2C%20acabo%20de%20calcular%20cu%C3%A1nto%20dinero%20pierde%20mi%20negocio%20sin%20presencia%20digital%20y%20quiero%20mi%20auditor%C3%ADa%20gratuita."
+          class="btn btn-wa" target="_blank" rel="noopener"
+          aria-label="Contactar con VURA DIGITAL por WhatsApp">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="#fff" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          WhatsApp ahora
         </a>
       </div>
       <div class="final-note">
         Respuesta en menos de 5 minutos ·
-        <a href="tel:+34657930828">+34 657 930 828</a> ·
-        <a href="mailto:hola@vuradigital.com">hola@vuradigital.com</a>
+        <a href="tel:+34657930828" aria-label="Llamar al número de VURA DIGITAL">+34 657 930 828</a> ·
+        <a href="mailto:hola@vuradigital.com" aria-label="Enviar email a VURA DIGITAL">hola@vuradigital.com</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======================== FOOTER ======================== -->
-<footer>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
   <div class="container">
     <div class="footer-inner">
       <div>
-        <a href="#" class="footer-logo">VURA <span>DIGITAL</span></a>
-        <div class="footer-tagline">Construyendo el futuro del comercio local en Salamanca</div>
+        <a href="#inicio" class="footer-logo" aria-label="Ir al inicio de VURA DIGITAL">VURA <span>DIGITAL</span></a>
+        <div class="footer-tagline">Agencia de diseño web en Salamanca para negocios locales</div>
       </div>
-      <div class="footer-links">
-        <a href="#">Servicios</a>
-        <a href="#">Casos de éxito</a>
-        <a href="#">Precios</a>
-        <a href="#">Política de privacidad</a>
-        <a href="#">Aviso legal</a>
+      <div class="footer-links" role="navigation" aria-label="Navegación del pie de página">
+        <a href="#sistema">Servicios</a>
+        <a href="#casos">Casos de éxito</a>
+        <a href="#precios">Precios</a>
+        <a href="#faq">FAQ</a>
+        <a href="#" aria-label="Política de privacidad de VURA DIGITAL">Privacidad</a>
+        <a href="#" aria-label="Aviso legal de VURA DIGITAL">Aviso legal</a>
       </div>
       <div class="footer-copy">
         © 2026 VURA DIGITAL<br>
-        Todos los derechos reservados
+        Salamanca, España
       </div>
     </div>
   </div>
 </footer>
 
-<!-- ======================== JAVASCRIPT ======================== -->
+
+<!-- FAB WHATSAPP — visible en móvil vía CSS -->
+<div class="fab-tooltip" id="fab-tooltip" aria-hidden="true">¡Escríbeme ahora!</div>
+<a
+  href="https://wa.me/34657930828?text=Hola%20David%2C%20quiero%20saber%20cu%C3%A1nto%20dinero%20est%C3%A1%20perdiendo%20mi%20negocio%20sin%20presencia%20digital."
+  class="fab-wa" id="fab-wa"
+  target="_blank" rel="noopener"
+  aria-label="Contactar con VURA DIGITAL por WhatsApp — diseño web Salamanca"
+  title="WhatsApp VURA DIGITAL">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+
+<!-- =====================================================
+     JAVASCRIPT MODULAR
+     ===================================================== -->
 <script>
-/* ---- CALCULADORA ---- */
+/* =============================================
+   MÓDULO 1: CALCULADORA + CTA WhatsApp dinámico
+   ============================================= */
+var _calc = {
+  monthly:  0,
+  yearly:   0,
+  touched:  false   /* detecta si el usuario interactuó */
+};
+
 function updateCalc() {
   var v = parseInt(document.getElementById('visitors').value, 10);
   var t = parseInt(document.getElementById('ticket').value, 10);
   var o = parseInt(document.getElementById('online').value, 10);
   var l = parseInt(document.getElementById('lost').value, 10);
 
+  /* Labels */
   document.getElementById('vis-val').textContent    = v;
   document.getElementById('ticket-val').textContent = t + ' €';
   document.getElementById('online-val').textContent = o + '%';
   document.getElementById('lost-val').textContent   = l + '%';
 
-  var monthly = Math.round(v * t * (o / 100) * (l / 100) * 30);
-  var yearly  = monthly * 12;
+  /* Cálculo */
+  _calc.monthly = Math.round(v * t * (o / 100) * (l / 100) * 30);
+  _calc.yearly  = _calc.monthly * 12;
 
-  document.getElementById('lost-amount').textContent = monthly.toLocaleString('es-ES') + ' €';
-  document.getElementById('lost-year').textContent   = yearly.toLocaleString('es-ES') + ' €';
+  /* Resultado */
+  var amountEl = document.getElementById('lost-amount');
+  amountEl.textContent = _calc.monthly.toLocaleString('es-ES') + ' €';
+  amountEl.classList.toggle('high', _calc.monthly > 1500);
+
+  document.getElementById('lost-year').textContent = _calc.yearly.toLocaleString('es-ES') + ' €';
+
+  /* Barra de pérdida dramática */
+  var pct = Math.min(Math.round(o * l / 100), 95);
+  document.getElementById('loss-bar').style.width        = pct + '%';
+  document.getElementById('bar-pct-label').textContent   = 'Tu competencia recibe el ' + pct + '%';
+  document.getElementById('bar-note').textContent        =
+    'De cada 100 clientes potenciales, tu competencia capta ~' + pct;
+
+  /* CTA WhatsApp dinámico: aparece tras primera interacción */
+  if (!_calc.touched) {
+    _calc.touched = true;
+    document.getElementById('calc-wa-btn').classList.add('show');
+  }
+
+  /* Genera URL wa.me pre-rellenada con los datos del cálculo */
+  var msg =
+    'Hola David, he calculado con la herramienta de VURA DIGITAL que mi negocio pierde ' +
+    _calc.monthly.toLocaleString('es-ES') + ' € al mes (' +
+    _calc.yearly.toLocaleString('es-ES') + ' €/año) por no tener presencia digital profesional.' +
+    ' Quiero mi auditoría gratuita.';
+
+  document.getElementById('calc-wa-btn').href =
+    'https://wa.me/34657930828?text=' + encodeURIComponent(msg);
 }
 
-/* ---- FADE-IN AL HACER SCROLL ---- */
+/* =============================================
+   MÓDULO 2: FAQ ACCORDION
+   ============================================= */
+function toggleFaq(btn) {
+  var item   = btn.closest('.faq-item');
+  var isOpen = item.classList.contains('open');
+
+  /* Cierra todos */
+  document.querySelectorAll('.faq-item.open').forEach(function(el) {
+    el.classList.remove('open');
+    el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+  });
+
+  /* Abre el pulsado si estaba cerrado */
+  if (!isOpen) {
+    item.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+
+/* =============================================
+   MÓDULO 3: SCROLL FADE-IN
+   ============================================= */
 function onScroll() {
-  var els = document.querySelectorAll('.fade-in:not(.visible)');
-  var wh  = window.innerHeight;
-  els.forEach(function(el) {
-    var rect = el.getBoundingClientRect();
-    if (rect.top < wh - 60) {
-      el.classList.add('visible');
-    }
+  var wh = window.innerHeight;
+  document.querySelectorAll('.fi:not(.v)').forEach(function(el) {
+    if (el.getBoundingClientRect().top < wh - 56) el.classList.add('v');
   });
 }
 
-/* ---- SMOOTH ANCHOR SCROLL ---- */
-document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-  a.addEventListener('click', function(e) {
-    var target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
+/* =============================================
+   MÓDULO 4: FAB TOOLTIP (móvil)
+   ============================================= */
+function initFab() {
+  var fab     = document.getElementById('fab-wa');
+  var tooltip = document.getElementById('fab-tooltip');
 
-/* ---- INIT ---- */
+  /* Tooltip auto tras 3 s en móvil */
+  if (window.matchMedia('(max-width: 768px)').matches) {
+    setTimeout(function() {
+      tooltip.style.display = 'block';
+      setTimeout(function() { tooltip.style.display = 'none'; }, 3500);
+    }, 3000);
+  }
+
+  fab.addEventListener('mouseenter', function() { tooltip.style.display = 'block'; });
+  fab.addEventListener('mouseleave', function() { tooltip.style.display = 'none'; });
+  fab.addEventListener('focus',      function() { tooltip.style.display = 'block'; });
+  fab.addEventListener('blur',       function() { tooltip.style.display = 'none'; });
+}
+
+/* =============================================
+   MÓDULO 5: SMOOTH ANCHOR SCROLL
+   ============================================= */
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var id     = this.getAttribute('href');
+      var target = id === '#' ? null : document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+}
+
+/* =============================================
+   INIT
+   ============================================= */
 updateCalc();
 onScroll();
+initFab();
+initSmoothScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 </script>
 
