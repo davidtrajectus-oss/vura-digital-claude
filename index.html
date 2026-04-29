@@ -10,6 +10,8 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://vuradigital.com/">
 
+<link rel="icon" href="logo favicon.png" type="image/png">
+
 <meta property="og:title" content="Diseño Web para Negocios Locales — VURA DIGITAL">
 <meta property="og:description" content="Tu negocio pierde clientes cada día que no aparece en Google. Web profesional + SEO local. Garantía de 90 días o devolución total.">
 <meta property="og:type" content="website">
@@ -146,8 +148,9 @@ section { padding: 80px 0; }
    ============================================================ */
 nav { position: sticky; top: 0; z-index: 200; background: rgba(8,8,16,0.92); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
-.nav-logo { font-family: var(--f-head); font-size: 18px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; text-decoration: none; }
+.nav-logo { font-family: var(--f-head); font-size: 18px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; text-decoration: none; display: flex; align-items: center; gap: 10px; }
 .nav-logo span { color: var(--accent-s); }
+.nav-logo img { height: 28px; width: auto; object-fit: contain; }
 .nav-links { display: flex; align-items: center; gap: 28px; }
 .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color var(--ease); }
 .nav-links a:hover { color: var(--white); }
@@ -331,8 +334,9 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
    ============================================================ */
 footer { border-top: 1px solid var(--border); padding: 40px 0; }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-.footer-logo { font-family: var(--f-head); font-size: 16px; font-weight: 800; color: var(--white); text-decoration: none; }
+.footer-logo { font-family: var(--f-head); font-size: 16px; font-weight: 800; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
 .footer-logo span { color: var(--accent-s); }
+.footer-logo img { height: 24px; width: auto; object-fit: contain; }
 .footer-tagline { font-size: 12px; color: var(--muted); margin-top: 4px; }
 .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
 .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color var(--ease); cursor: pointer; }
@@ -408,7 +412,10 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
 <nav>
   <div class="container">
     <div class="nav-inner">
-      <a href="#inicio" class="nav-logo" aria-label="VURA DIGITAL — inicio">VURA <span>DIGITAL</span></a>
+      <a href="#inicio" class="nav-logo" aria-label="VURA DIGITAL — inicio" style="display: flex; align-items: center; gap: 10px;">
+        <img src="logo favicon.png" alt="Logo VURA" style="height: 32px; width: auto;">
+        <div>VURA <span>DIGITAL</span></div>
+      </a>
       <div class="nav-links" role="navigation" aria-label="Menú principal">
         <a href="#casos" aria-label="Ver casos de éxito">Casos de éxito</a>
         <a href="#sistema" aria-label="Cómo funciona el sistema VURA">Cómo funciona</a>
@@ -997,7 +1004,10 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
   <div class="container">
     <div class="footer-inner">
       <div>
-        <a href="#inicio" class="footer-logo" aria-label="Ir al inicio de VURA DIGITAL">VURA <span>DIGITAL</span></a>
+        <a href="#inicio" class="footer-logo" aria-label="Ir al inicio de VURA DIGITAL" style="display: flex; align-items: center; gap: 10px;">
+          <img src="logo favicon.png" alt="Logo VURA" style="height: 24px; width: auto;">
+          <div>VURA <span>DIGITAL</span></div>
+        </a>
         <div class="footer-tagline">Agencia de diseño web corporativo en España</div>
       </div>
       <div class="footer-links" role="navigation" aria-label="Navegación del pie de página">
@@ -1305,3 +1315,4 @@ window.addEventListener('scroll', onScroll, { passive: true });
 
 </body>
 </html>
+no quiero un cuadrado quiero que quede el icono que me ha hecho que parece que son dos V encajadas quiero que se vea sin el fondo pero no solo el interior de las v sino tabien el exterior como si fuera una app
