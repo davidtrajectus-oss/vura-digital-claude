@@ -18,6 +18,11 @@
 <meta property="og:locale" content="es_ES">
 <meta property="og:url" content="https://vuradigital.com/">
 
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -96,7 +101,8 @@
    § BASE RESET
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+/* Quitamos el smooth nativo para que Lenis haga la magia */
+html { scroll-behavior: auto; } 
 body { background: var(--bg); color: var(--text); font-family: var(--f-body); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
@@ -112,7 +118,7 @@ section { padding: 80px 0; }
 .section-sub { font-size: 16px; color: var(--muted); max-width: 580px; line-height: 1.7; margin-bottom: 48px; }
 
 /* ============================================================
-   § BOTONES
+   § BOTONES & FORMULARIOS
    ============================================================ */
 .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-body); font-size: 15px; font-weight: 500; padding: 14px 28px; border-radius: var(--r); border: none; cursor: pointer; transition: transform var(--ease), box-shadow var(--ease), background var(--ease), border-color var(--ease); text-decoration: none; white-space: nowrap; line-height: 1; position: relative; overflow: hidden; }
 .btn::after { content: ''; position: absolute; top: 0; left: -110%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.13), transparent); transition: none; }
@@ -129,8 +135,15 @@ section { padding: 80px 0; }
 .btn-wa { background: var(--wa); color: #fff; border: none; }
 .btn-wa:hover { background: #1fbf5a; transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,211,102,0.38); }
 
+/* Formulario Premium */
+.custom-form { display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin: 0 auto 30px; }
+.custom-form input, .custom-form textarea { width: 100%; padding: 14px 18px; border-radius: var(--r); border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-family: var(--f-body); font-size: 14px; outline: none; transition: border-color 0.3s ease, box-shadow 0.3s ease; resize: none; }
+.custom-form input::placeholder, .custom-form textarea::placeholder { color: var(--muted); }
+.custom-form input:focus, .custom-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(108,92,231,0.15); }
+.form-status { font-size: 13px; margin-top: 10px; display: none; font-weight: 500; }
+
 /* ============================================================
-   § ANIMACIONES DE ENTRADA — premium
+   § ANIMACIONES DE ENTRADA BÁSICAS
    ============================================================ */
 .fi { opacity: 0; transform: translateY(30px) scale(0.98); filter: blur(4px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease; }
 .fi.v  { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
@@ -150,7 +163,7 @@ nav { position: sticky; top: 0; z-index: 200; background: rgba(8,8,16,0.92); bac
 .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
 .nav-logo { font-family: var(--f-head); font-size: 18px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; text-decoration: none; display: flex; align-items: center; gap: 10px; }
 .nav-logo span { color: var(--accent-s); }
-.nav-logo img { height: 28px; width: auto; object-fit: contain; }
+.nav-logo img { height: 32px; width: auto; object-fit: contain; mix-blend-mode: screen; }
 .nav-links { display: flex; align-items: center; gap: 28px; }
 .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color var(--ease); }
 .nav-links a:hover { color: var(--white); }
@@ -207,7 +220,7 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .result-note { font-size: 11px; color: var(--muted); margin-top: 10px; }
 
 /* ============================================================
-   § TESTIMONIOS (Métricas Realistas)
+   § TESTIMONIOS Y OTROS
    ============================================================ */
 .testimonials-section { border-top: 1px solid var(--border); padding: 72px 0; }
 .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -222,9 +235,7 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .testimonial-name { font-size: 13px; color: var(--white); font-weight: 500; line-height: 1.2; }
 .testimonial-company { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-/* ============================================================
-   § METODOLOGÍA
-   ============================================================ */
+/* METODOLOGÍA */
 .metod-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
 .metod-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 32px 28px; position: relative; transition: border-color var(--ease), transform var(--ease); display: flex; flex-direction: column; gap: 0; }
 .metod-card:hover { border-color: var(--border-s); transform: translateY(-3px); }
@@ -245,9 +256,6 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .metod-trust-num { font-family: var(--f-head); font-size: 22px; font-weight: 800; color: var(--white); line-height: 1; margin-bottom: 4px; }
 .metod-trust-label { font-size: 11px; color: var(--muted); line-height: 1.4; }
 
-/* ============================================================
-   § SISTEMA, PRECIOS, FAQ, CTA
-   ============================================================ */
 .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .case-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 28px; transition: border-color var(--ease), transform var(--ease); }
 .case-card:hover { border-color: var(--border-s); transform: translateY(-3px); }
@@ -313,9 +321,7 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .final-note { font-size: 13px; color: var(--muted); }
 .final-note a { color: var(--accent-s); text-decoration: none; }
 
-/* ============================================================
-   § MODALES LEGALES Y COOKIES
-   ============================================================ */
+/* Modales */
 .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: rgba(8, 8, 16, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 .modal-content { background-color: var(--bg2); margin: 5% auto; padding: 40px; border: 1px solid var(--border-s); border-radius: var(--r-xl); width: 90%; max-width: 680px; max-height: 80vh; overflow-y: auto; color: var(--muted); position: relative; }
 .modal-content h2 { color: var(--white); font-family: var(--f-head); margin-bottom: 16px; font-size: 24px; }
@@ -329,23 +335,18 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .cookie-text a { color: var(--accent-s); text-decoration: none; }
 .cookie-text a:hover { text-decoration: underline; }
 
-/* ============================================================
-   § FOOTER
-   ============================================================ */
+/* FOOTER */
 footer { border-top: 1px solid var(--border); padding: 40px 0; }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
 .footer-logo { font-family: var(--f-head); font-size: 16px; font-weight: 800; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
 .footer-logo span { color: var(--accent-s); }
-.footer-logo img { height: 24px; width: auto; object-fit: contain; }
+.footer-logo img { height: 24px; width: auto; object-fit: contain; mix-blend-mode: screen; }
 .footer-tagline { font-size: 12px; color: var(--muted); margin-top: 4px; }
 .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
 .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color var(--ease); cursor: pointer; }
 .footer-links a:hover { color: var(--white); }
 .footer-copy { font-size: 12px; color: var(--muted); text-align: right; }
 
-/* ============================================================
-   § RESPONSIVE
-   ============================================================ */
 @media (max-width: 768px) {
   .nav-links a:not(.nav-cta) { display: none; }
   section { padding: 48px 0; }
@@ -378,8 +379,6 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
   .faq-q { font-size: 14px; padding: 16px 4px; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
   .footer-copy { text-align: left; }
-  
-  /* Responsive Modales */
   .cookie-banner { flex-direction: column; text-align: center; left: 16px; right: 16px; bottom: 16px; padding: 20px; }
   .modal-content { margin: 15% auto; padding: 24px; width: 95%; }
 }
@@ -412,8 +411,8 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
 <nav>
   <div class="container">
     <div class="nav-inner">
-      <a href="#inicio" class="nav-logo" aria-label="VURA DIGITAL — inicio" style="display: flex; align-items: center; gap: 10px;">
-        <img src="logo favicon.png" alt="Logo VURA" style="height: 32px; width: auto;">
+      <a href="#inicio" class="nav-logo" aria-label="VURA DIGITAL — inicio">
+        <img src="logo favicon.png" alt="Logo VURA">
         <div>VURA <span>DIGITAL</span></div>
       </a>
       <div class="nav-links" role="navigation" aria-label="Menú principal">
@@ -426,58 +425,34 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
   </div>
 </nav>
 
-
 <section class="hero" id="inicio" aria-labelledby="hero-h1">
   <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
   <div class="container" style="position:relative;z-index:1">
-
     <div class="hero-badge fi" role="note">
       <div class="hero-dot" aria-hidden="true"></div>
       Especialistas en diseño web para negocios locales
     </div>
-
     <h1 id="hero-h1" class="fi d1">
       Diseño Web para Negocios que<br>
       <em>convierten visitas en clientes</em>
     </h1>
-
     <p class="hero-sub fi d2">
       Mientras lees esto, clientes potenciales buscan en Google lo que tú ofreces
       — y <strong>eligen a tu competencia</strong> porque tienen mejor presencia digital.
       Eso tiene solución. En menos de 30 días.
     </p>
-
     <div class="hero-actions fi d3">
-      <a href="#calculadora" class="btn btn-primary btn-hero" aria-label="Calcular cuánto dinero pierdo sin presencia digital">
-        Calcular cuánto estoy perdiendo →
-      </a>
-      <a href="#casos" class="btn btn-ghost" aria-label="Ver resultados reales de clientes">
-        Ver resultados reales
-      </a>
+      <a href="#calculadora" class="btn btn-primary btn-hero">Calcular cuánto estoy perdiendo →</a>
+      <a href="#casos" class="btn btn-ghost">Ver resultados reales</a>
     </div>
-
-    <div class="hero-metrics fi d4" role="list" aria-label="Métricas clave de VURA DIGITAL">
-      <div class="hero-metric" role="listitem">
-        <div class="metric-num">+500</div>
-        <div class="metric-label">Negocios digitalizados</div>
-      </div>
-      <div class="hero-metric" role="listitem">
-        <div class="metric-num">30 días</div>
-        <div class="metric-label">Primeros resultados</div>
-      </div>
-      <div class="hero-metric" role="listitem">
-        <div class="metric-num">100%</div>
-        <div class="metric-label">Garantía de devolución</div>
-      </div>
-      <div class="hero-metric" role="listitem">
-        <div class="metric-num">1.2 seg</div>
-        <div class="metric-label">Velocidad de carga</div>
-      </div>
+    <div class="hero-metrics fi d4" role="list">
+      <div class="hero-metric" role="listitem"><div class="metric-num">+500</div><div class="metric-label">Negocios digitalizados</div></div>
+      <div class="hero-metric" role="listitem"><div class="metric-num">30 días</div><div class="metric-label">Primeros resultados</div></div>
+      <div class="hero-metric" role="listitem"><div class="metric-num">100%</div><div class="metric-label">Garantía de devolución</div></div>
+      <div class="hero-metric" role="listitem"><div class="metric-num">1.2 seg</div><div class="metric-label">Velocidad de carga</div></div>
     </div>
-
   </div>
 </section>
-
 
 <div class="calc-section" id="calculadora" role="region" aria-label="Calculadora de rentabilidad digital">
   <div class="container">
@@ -487,650 +462,280 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
       <p class="section-sub">Ajusta los valores de tu negocio y descubre el impacto real de no tener presencia digital profesional en tu zona.</p>
 
       <div class="calc-grid">
-
-        <div class="calc-inputs" role="group" aria-label="Parámetros de tu negocio">
-
+        <div class="calc-inputs" role="group">
           <div class="input-group">
-            <label for="visitors">
-              Clientes potenciales por zona al día
-              <strong id="vis-val" aria-live="polite">80</strong>
-            </label>
-            <input type="range" id="visitors" min="10" max="500" value="80" step="5"
-              aria-label="Clientes potenciales por zona al día" oninput="updateCalc()">
+            <label for="visitors">Clientes potenciales por zona al día <strong id="vis-val">80</strong></label>
+            <input type="range" id="visitors" min="10" max="500" value="80" step="5" oninput="updateCalc()">
           </div>
-
           <div class="input-group">
-            <label for="ticket">
-              Ticket medio por cliente
-              <strong id="ticket-val" aria-live="polite">35 €</strong>
-            </label>
-            <input type="range" id="ticket" min="5" max="300" value="35" step="5"
-              aria-label="Ticket medio en euros" oninput="updateCalc()">
+            <label for="ticket">Ticket medio por cliente <strong id="ticket-val">35 €</strong></label>
+            <input type="range" id="ticket" min="5" max="300" value="35" step="5" oninput="updateCalc()">
           </div>
-
           <div class="input-group">
-            <label for="online">
-              % que busca online antes de decidir
-              <strong id="online-val" aria-live="polite">65%</strong>
-            </label>
-            <input type="range" id="online" min="20" max="95" value="65" step="1"
-              aria-label="Porcentaje que busca online antes de decidir" oninput="updateCalc()">
+            <label for="online">% que busca online antes de decidir <strong id="online-val">65%</strong></label>
+            <input type="range" id="online" min="20" max="95" value="65" step="1" oninput="updateCalc()">
           </div>
-
           <div class="input-group">
-            <label for="lost">
-              % de esos que elige a tu competencia
-              <strong id="lost-val" aria-live="polite">40%</strong>
-            </label>
-            <input type="range" id="lost" min="10" max="80" value="40" step="1"
-              aria-label="Porcentaje de clientes que va a la competencia" oninput="updateCalc()">
+            <label for="lost">% de esos que elige a tu competencia <strong id="lost-val">40%</strong></label>
+            <input type="range" id="lost" min="10" max="80" value="40" step="1" oninput="updateCalc()">
           </div>
-
         </div>
 
-        <div class="calc-result" role="region" aria-live="polite" aria-label="Resultado del diagnóstico">
-
+        <div class="calc-result" role="region" aria-live="polite">
           <div class="result-label">Ingresos que pierdes al mes</div>
           <div class="result-amount" id="lost-amount">2.184 €</div>
           <div class="result-period">al mes · <strong id="lost-year">26.208 €</strong> al año</div>
-
           <div class="loss-bar-wrap" aria-hidden="true">
             <div class="loss-bar-labels">
               <span>Tu negocio</span>
               <span id="bar-pct-label">Tu competencia recibe el 26%</span>
             </div>
-            <div class="loss-bar-track">
-              <div class="loss-bar-fill" id="loss-bar"></div>
-            </div>
-            <div class="loss-bar-note" id="bar-note">
-              De cada 100 clientes potenciales, tu competencia capta ~26
-            </div>
+            <div class="loss-bar-track"><div class="loss-bar-fill" id="loss-bar"></div></div>
+            <div class="loss-bar-note" id="bar-note">De cada 100 clientes potenciales, tu competencia capta ~26</div>
           </div>
-
-          <a href="#contacto" class="btn btn-primary calc-cta-static"
-            aria-label="Ir a contacto para recuperar clientes perdidos">
-            Recuperar este dinero →
-          </a>
-
-          <a id="calc-wa-btn" href="#" target="_blank" rel="noopener"
-            class="btn btn-wa calc-cta-wa"
-            aria-label="Solicitar auditoría por WhatsApp con mis datos calculados">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="#fff" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-            Solicitar auditoría con estos datos
-          </a>
-
-          <div class="result-note">Auditoría gratuita · Sin compromiso · Respuesta &lt;5 min</div>
-
+          <a href="#contacto" class="btn btn-primary calc-cta-static">Recuperar este dinero →</a>
+          <a id="calc-wa-btn" href="#" target="_blank" rel="noopener" class="btn btn-wa calc-cta-wa">Solicitar auditoría con estos datos</a>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
-<section class="testimonials-section" id="testimonios" aria-labelledby="testimonios-title">
+<section class="testimonials-section" id="testimonios">
   <div class="container">
-
     <div class="fi">
       <span class="eyebrow">Social proof · Negocios reales</span>
-      <h2 class="section-title" id="testimonios-title">Resultados tangibles para tu sector</h2>
+      <h2 class="section-title">Resultados tangibles para tu sector</h2>
       <p class="section-sub">Casos de éxito documentados. Sin proyecciones irreales, solo métricas que impactan en tu facturación mensual.</p>
     </div>
-
     <div class="testimonials-grid" role="list">
-
       <article class="testimonial-card fi d1" role="listitem">
-        <div class="testimonial-metric" aria-label="+12 reservas semanales">+12</div>
+        <div class="testimonial-metric">+12</div>
         <div class="testimonial-kpi">Nuevas reservas / semana</div>
-        <blockquote class="testimonial-quote">
-          "Aparecer correctamente en Google Maps lo cambió todo. En un mes llenamos los fines de semana sin depender de plataformas de terceros que cobran comisión."
-        </blockquote>
-        <div class="testimonial-divider" aria-hidden="true"></div>
+        <blockquote class="testimonial-quote">"Aparecer correctamente en Google Maps lo cambió todo. En un mes llenamos los fines de semana sin depender de plataformas de terceros que cobran comisión."</blockquote>
+        <div class="testimonial-divider"></div>
         <div class="testimonial-author">
-          <div class="testimonial-avatar" aria-hidden="true">HM</div>
-          <div>
-            <div class="testimonial-name">Gerente de Hotel</div>
-            <div class="testimonial-company">Hotel Boutique, Madrid</div>
-          </div>
+          <div class="testimonial-avatar">HM</div>
+          <div><div class="testimonial-name">Gerente de Hotel</div><div class="testimonial-company">Hotel Boutique, Madrid</div></div>
         </div>
       </article>
-
       <article class="testimonial-card fi d2" role="listitem">
-        <div class="testimonial-metric" aria-label="Agenda Llena">100%</div>
+        <div class="testimonial-metric">100%</div>
         <div class="testimonial-kpi">Ocupación a 3 semanas</div>
-        <blockquote class="testimonial-quote">
-          "La web carga tan rápido que los clientes directamente nos escriben al WhatsApp para reservar. Es la vía más rentable y rápida que hemos implementado."
-        </blockquote>
-        <div class="testimonial-divider" aria-hidden="true"></div>
+        <blockquote class="testimonial-quote">"La web carga tan rápido que los clientes directamente nos escriben al WhatsApp para reservar. Es la vía más rentable y rápida que hemos implementado."</blockquote>
+        <div class="testimonial-divider"></div>
         <div class="testimonial-author">
-          <div class="testimonial-avatar" aria-hidden="true">CD</div>
-          <div>
-            <div class="testimonial-name">Director Médico</div>
-            <div class="testimonial-company">Clínica Dental, Valencia</div>
-          </div>
+          <div class="testimonial-avatar">CD</div>
+          <div><div class="testimonial-name">Director Médico</div><div class="testimonial-company">Clínica Dental, Valencia</div></div>
         </div>
       </article>
-
       <article class="testimonial-card fi d3" role="listitem">
-        <div class="testimonial-metric" aria-label="+45% en captación local">+45%</div>
+        <div class="testimonial-metric">+45%</div>
         <div class="testimonial-kpi">Tráfico de clientes locales</div>
-        <blockquote class="testimonial-quote">
-          "Antes la gente de nuestra propia zona no nos encontraba en internet. Ahora el posicionamiento local nos trae clientes diarios en piloto automático."
-        </blockquote>
-        <div class="testimonial-divider" aria-hidden="true"></div>
+        <blockquote class="testimonial-quote">"Antes la gente de nuestra propia zona no nos encontraba en internet. Ahora el posicionamiento local nos trae clientes diarios en piloto automático."</blockquote>
+        <div class="testimonial-divider"></div>
         <div class="testimonial-author">
-          <div class="testimonial-avatar" aria-hidden="true">DA</div>
-          <div>
-            <div class="testimonial-name">Socio Fundador</div>
-            <div class="testimonial-company">Despacho de Abogados, Sevilla</div>
-          </div>
+          <div class="testimonial-avatar">DA</div>
+          <div><div class="testimonial-name">Socio Fundador</div><div class="testimonial-company">Despacho de Abogados, Sevilla</div></div>
         </div>
       </article>
-
     </div>
   </div>
 </section>
 
-
-<section id="metodologia" style="border-top:1px solid var(--border)" aria-labelledby="metodologia-title">
+<section id="metodologia" style="border-top:1px solid var(--border)">
   <div class="container">
-
     <div class="fi">
       <span class="eyebrow">Nuestro proceso</span>
-      <h2 class="section-title" id="metodologia-title">Tres pasos. Resultado garantizado.</h2>
-      <p class="section-sub">Un método probado para negocios locales. Sistemático, transparente y orientado a un único objetivo: que tus clientes te encuentren a ti, no a tu competencia.</p>
+      <h2 class="section-title">Tres pasos. Resultado garantizado.</h2>
+      <p class="section-sub">Un método probado para negocios locales. Sistemático, transparente y orientado a un único objetivo.</p>
     </div>
-
     <div class="metod-grid" role="list">
-
-      <article class="metod-card fi d1" role="listitem">
-        <div class="metod-step" aria-hidden="true">01</div>
-        <div class="metod-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-            <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-          </svg>
-        </div>
+      <article class="metod-card" role="listitem">
+        <div class="metod-step">01</div>
+        <div class="metod-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
         <h3 class="metod-title">Auditoría de Fugas</h3>
-        <p class="metod-desc">Analizamos cada punto donde tu negocio pierde clientes digitalmente: velocidad de carga, posición en Google Maps, presencia en buscadores y comportamiento de tu competencia local.</p>
-        <ul class="metod-list" aria-label="Qué incluye">
+        <p class="metod-desc">Analizamos cada punto donde tu negocio pierde clientes digitalmente: velocidad, Maps y buscadores.</p>
+        <ul class="metod-list">
           <li>Análisis de posicionamiento local</li>
           <li>Auditoría de competencia directa</li>
           <li>Diagnóstico de velocidad web</li>
         </ul>
-        <div class="metod-result">→ Informe de oportunidades en 48 h</div>
+        <div class="metod-result">→ Informe en 48 h</div>
       </article>
-
-      <article class="metod-card metod-featured fi d2" role="listitem">
-        <div class="metod-step" aria-hidden="true">02</div>
-        <div class="metod-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/>
-            <line x1="12" y1="17" x2="12" y2="21"/><polyline points="7 10 10 13 17 6"/>
-          </svg>
-        </div>
+      <article class="metod-card metod-featured" role="listitem">
+        <div class="metod-step">02</div>
+        <div class="metod-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
         <h3 class="metod-title">Ecosistema de Conversión</h3>
-        <p class="metod-desc">Construimos tu presencia digital completa: web ultra-rápida optimizada para convertir, integración de WhatsApp, menú QR y ficha de Google My Business configurada para captar clientes.</p>
-        <ul class="metod-list" aria-label="Qué incluye">
+        <p class="metod-desc">Construimos tu presencia web ultra-rápida, integración de WhatsApp y menú digital.</p>
+        <ul class="metod-list">
           <li>Web lista en 5–7 días hábiles</li>
           <li>SEO técnico desde el primer día</li>
           <li>Integración de canales de venta</li>
         </ul>
         <div class="metod-result">→ Tu activo digital operativo</div>
       </article>
-
-      <article class="metod-card fi d3" role="listitem">
-        <div class="metod-step" aria-hidden="true">03</div>
-        <div class="metod-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-            <polyline points="17 6 23 6 23 12"/>
-          </svg>
-        </div>
+      <article class="metod-card" role="listitem">
+        <div class="metod-step">03</div>
+        <div class="metod-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
         <h3 class="metod-title">Tráfico y Dominio Local</h3>
-        <p class="metod-desc">Aplicamos estrategia continua de SEO local para que tu negocio aparezca primero cuando alguien busca en tu zona. Medimos, ajustamos y escalamos cada mes con datos reales.</p>
-        <ul class="metod-list" aria-label="Qué incluye">
-          <li>Optimización mensual de Google Maps</li>
-          <li>Seguimiento de posiciones y métricas</li>
+        <p class="metod-desc">Estrategia continua de SEO local para que aparezcas primero cuando busquen en tu zona.</p>
+        <ul class="metod-list">
+          <li>Optimización mensual en Maps</li>
+          <li>Seguimiento de posiciones</li>
           <li>Soporte prioritario 24/7</li>
         </ul>
-        <div class="metod-result">→ Visibilidad sostenida y creciente</div>
+        <div class="metod-result">→ Visibilidad sostenida</div>
       </article>
-
-    </div>
-
-    <div class="metod-trust fi" role="list" aria-label="Métricas de confianza">
-      <div class="metod-trust-item" role="listitem">
-        <span class="metod-trust-num">500+</span>
-        <span class="metod-trust-label">Negocios digitalizados</span>
-      </div>
-      <div class="metod-trust-sep" aria-hidden="true"></div>
-      <div class="metod-trust-item" role="listitem">
-        <span class="metod-trust-num">5–7 días</span>
-        <span class="metod-trust-label">Tiempo de entrega</span>
-      </div>
-      <div class="metod-trust-sep" aria-hidden="true"></div>
-      <div class="metod-trust-item" role="listitem">
-        <span class="metod-trust-num">30 días</span>
-        <span class="metod-trust-label">Primeros resultados</span>
-      </div>
-      <div class="metod-trust-sep" aria-hidden="true"></div>
-      <div class="metod-trust-item" role="listitem">
-        <span class="metod-trust-num">100%</span>
-        <span class="metod-trust-label">Garantía de devolución</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<section id="casos" style="border-top:1px solid var(--border)" aria-labelledby="casos-title">
-  <div class="container">
-    <div class="fi">
-      <span class="eyebrow">Resultados adicionales</span>
-      <h2 class="section-title" id="casos-title">Multiplica tu volumen de clientes</h2>
-      <p class="section-sub">Soluciones diseñadas específicamente para escalar la facturación de tu local.</p>
-    </div>
-    <div class="cases-grid" role="list">
-
-      <article class="case-card fi d1" role="listitem">
-        <div class="case-metric">+18</div>
-        <div class="case-period">Pedidos extra al día</div>
-        <p class="case-quote">"Integrar el menú digital con el botón de WhatsApp directo disparó nuestros pedidos a domicilio en el primer mes."</p>
-        <div class="case-divider" aria-hidden="true"></div>
-        <div class="case-author">
-          <div class="case-initials" aria-hidden="true">PR</div>
-          <div>
-            <div class="case-name">Propietaria</div>
-            <div class="case-biz">Pizzería Artesanal</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="case-card fi d2" role="listitem">
-        <div class="case-metric">1ª</div>
-        <div class="case-period">Posición en Maps</div>
-        <p class="case-quote">"El trabajo de SEO Local nos ha colocado como la primera opción de nuestra ciudad. El teléfono no ha dejado de sonar."</p>
-        <div class="case-divider" aria-hidden="true"></div>
-        <div class="case-author">
-          <div class="case-initials" aria-hidden="true">RM</div>
-          <div>
-            <div class="case-name">Gerente</div>
-            <div class="case-biz">Taller Mecánico</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="case-card fi d3" role="listitem">
-        <div class="case-metric">0</div>
-        <div class="case-period">Caídas del servidor</div>
-        <p class="case-quote">"La tranquilidad de saber que la web siempre está online y carga en 1 segundo es invaluable. Soporte técnico de 10."</p>
-        <div class="case-divider" aria-hidden="true"></div>
-        <div class="case-author">
-          <div class="case-initials" aria-hidden="true">SL</div>
-          <div>
-            <div class="case-name">Directora</div>
-            <div class="case-biz">Centro de Estética</div>
-          </div>
-        </div>
-      </article>
-
     </div>
   </div>
 </section>
 
-
-<section id="sistema" style="border-top:1px solid var(--border)" aria-labelledby="sistema-title">
+<section id="sistema" style="border-top:1px solid var(--border)">
   <div class="container">
     <div class="fi">
       <span class="eyebrow">El ecosistema</span>
-      <h2 class="section-title" id="sistema-title">Cuatro pilares. Un resultado: ventas.</h2>
-      <p class="section-sub">No vendemos páginas web. Construimos el sistema digital que hace que tu negocio sea el primero que encuentran — y el que eligen.</p>
+      <h2 class="section-title">Cuatro pilares. Un resultado: ventas.</h2>
+      <p class="section-sub">No vendemos páginas web. Construimos el sistema digital que hace que tu negocio sea el primero que encuentran.</p>
     </div>
     <div class="system-grid">
-      <div class="sys-card fi d1">
-        <div class="sys-icon" aria-hidden="true">⚡</div>
-        <h3 class="sys-title">Web ultra-rápida</h3>
-        <p class="sys-desc">Carga en 1.2 segundos. El 53% abandona si tarda más de 3 seg. Tus clientes se quedan.</p>
-        <div class="sys-result">→ Retención máxima</div>
-      </div>
-      <div class="sys-card fi d2">
-        <div class="sys-icon" aria-hidden="true">📍</div>
-        <h3 class="sys-title">SEO local agresivo</h3>
-        <p class="sys-desc">Dominas Google Maps en tu zona. Cuando alguien busca lo que ofreces, apareces tú primero.</p>
-        <div class="sys-result">→ Multiplica llamadas</div>
-      </div>
-      <div class="sys-card fi d3">
-        <div class="sys-icon" aria-hidden="true">📱</div>
-        <h3 class="sys-title">Integración Nativa</h3>
-        <p class="sys-desc">Botones de WhatsApp, formularios inteligentes y llamadas con un solo toque desde el móvil.</p>
-        <div class="sys-result">→ Cero fricción de compra</div>
-      </div>
-      <div class="sys-card fi d4">
-        <div class="sys-icon" aria-hidden="true">🛡️</div>
-        <h3 class="sys-title">Soporte 24/7</h3>
-        <p class="sys-desc">Respuesta en minutos. Tu web siempre funciona. Tú solo te enfocas en tus clientes.</p>
-        <div class="sys-result">→ 0 preocupaciones</div>
-      </div>
+      <div class="sys-card fi d1"><div class="sys-icon">⚡</div><h3 class="sys-title">Web ultra-rápida</h3><p class="sys-desc">Carga en 1.2 segundos.</p></div>
+      <div class="sys-card fi d2"><div class="sys-icon">📍</div><h3 class="sys-title">SEO local agresivo</h3><p class="sys-desc">Dominas Google Maps.</p></div>
+      <div class="sys-card fi d3"><div class="sys-icon">📱</div><h3 class="sys-title">Integración Nativa</h3><p class="sys-desc">Llamadas y WhatsApp en un click.</p></div>
+      <div class="sys-card fi d4"><div class="sys-icon">🛡️</div><h3 class="sys-title">Soporte 24/7</h3><p class="sys-desc">Respuesta en minutos.</p></div>
     </div>
   </div>
 </section>
 
-
-<section id="precios" style="border-top:1px solid var(--border)" aria-labelledby="precios-title">
+<section id="precios" style="border-top:1px solid var(--border)">
   <div class="container">
     <div class="fi">
       <span class="eyebrow">Inversión</span>
-      <h2 class="section-title" id="precios-title">Un sistema que se paga solo</h2>
-      <p class="section-sub">Cualquier plan se amortiza captando a un solo cliente recurrente.</p>
+      <h2 class="section-title">Un sistema que se paga solo</h2>
     </div>
     <div class="pricing-grid">
-
-      <div class="price-card fi d1">
+      <div class="price-card">
         <h3 class="price-name">Presencia Básica</h3>
-        <p class="price-desc">Para comenzar a existir digitalmente y dejar de ser invisible en tu mercado</p>
+        <p class="price-desc">Para comenzar a existir digitalmente.</p>
         <div class="price-divider"></div>
         <div class="price-amount"><sup>€</sup>150<sub> setup</sub></div>
         <div class="price-monthly">+ 15 €/mes</div>
-        <ul class="price-features" aria-label="Incluye">
+        <ul class="price-features">
           <li class="on">Web responsive</li>
-          <li class="on">Google My Business optimizado</li>
-          <li class="on">Email de contacto profesional</li>
-          <li>Menú / Catálogo digital</li>
+          <li class="on">Google My Business</li>
           <li>Integración WhatsApp</li>
-          <li>SEO local agresivo</li>
         </ul>
-        <a href="#contacto" class="btn btn-outline" aria-label="Contratar plan Presencia Básica">Comenzar →</a>
+        <a href="#contacto" class="btn btn-outline">Comenzar →</a>
       </div>
-
-      <div class="price-card featured fi d2">
+      <div class="price-card featured">
         <div class="price-badge">Más elegido</div>
         <h3 class="price-name">Crecimiento Local</h3>
-        <p class="price-desc">El sistema completo para negocios que quieren resultados reales y medibles</p>
+        <p class="price-desc">El sistema completo para resultados medibles.</p>
         <div class="price-divider"></div>
         <div class="price-amount"><sup>€</sup>250<sub> setup</sub></div>
         <div class="price-monthly">+ 30 €/mes</div>
         <div class="price-roi">✓ ROI garantizado en 30 días</div>
-        <ul class="price-features" aria-label="Incluye">
+        <ul class="price-features">
           <li class="on">Web premium multi-página</li>
-          <li class="on">Integración WhatsApp directa</li>
+          <li class="on">Integración WhatsApp</li>
           <li class="on">SEO local agresivo</li>
-          <li class="on">Soporte prioritario 24/7</li>
-          <li class="on">Análisis SEO gratuito (val. 300 €)</li>
           <li class="on">Garantía de 90 días</li>
         </ul>
-        <a href="#contacto" class="btn btn-featured" aria-label="Contratar plan Crecimiento Local — el más elegido">Activar ahora →</a>
+        <a href="#contacto" class="btn btn-featured">Activar ahora →</a>
       </div>
-
-      <div class="price-card fi d3">
+      <div class="price-card">
         <h3 class="price-name">Transformación Total</h3>
-        <p class="price-desc">Para negocios con ambición de dominar su sector a nivel nacional</p>
+        <p class="price-desc">Domina tu sector a nivel nacional.</p>
         <div class="price-divider"></div>
         <div class="price-amount"><sup>€</sup>500+<sub> setup</sub></div>
-        <div class="price-monthly">+ 60 €/mes · plan personalizado</div>
-        <ul class="price-features" aria-label="Incluye">
+        <div class="price-monthly">+ 60 €/mes</div>
+        <ul class="price-features">
           <li class="on">Todo en Crecimiento Local</li>
-          <li class="on">Sistema de reservas integrado</li>
-          <li class="on">Dashboard de analíticas avanzadas</li>
-          <li class="on">Consultoría estratégica mensual</li>
-          <li class="on">Estrategia de crecimiento a medida</li>
-          <li class="on">Gestor de cuenta dedicado</li>
+          <li class="on">Sistema de reservas</li>
+          <li class="on">Consultoría mensual</li>
         </ul>
-        <a href="#contacto" class="btn btn-outline" aria-label="Consultar plan Transformación Total">Consultar proyecto →</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<section class="faq-section" id="faq" aria-labelledby="faq-title">
-  <div class="container">
-    <div class="fi">
-      <span class="eyebrow">Preguntas frecuentes</span>
-      <h2 class="section-title" id="faq-title">Respuestas directas, sin rodeos</h2>
-      <p class="section-sub">Las dudas que todos tienen antes de dar el paso. Aquí están resueltas.</p>
-    </div>
-
-    <div class="faq-list fi" role="list">
-
-      <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
-          ¿Cuánto tiempo tarda en estar lista mi web?
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a" role="region">
-          <div class="faq-a-inner">
-            En <strong>5 a 7 días hábiles</strong> tu web está online y operativa. Empezamos con una llamada de 20 minutos para entender tu negocio, recopilamos la información necesaria, y entregamos. Sin burocracia ni esperas innecesarias.
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
-          ¿Hay permanencia? ¿Puedo cancelar en cualquier momento?
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a" role="region">
-          <div class="faq-a-inner">
-            No hay permanencia. La cuota mensual <strong>se cancela con 30 días de antelación</strong>, sin penalización. Además, si en 90 días no ves resultados medibles, devolvemos el 100% del setup — sin preguntas.
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
-          ¿Necesito saber de tecnología para gestionar mi web?
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a" role="region">
-          <div class="faq-a-inner">
-            Cero conocimientos necesarios. Nos encargamos de <strong>todo el aspecto técnico</strong>: mantenimiento, actualizaciones, seguridad y soporte. Si necesitas cambiar una foto o un texto, lo gestionamos en menos de 24 horas. Tú enfócate en tu negocio.
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
-          ¿La garantía de 90 días es real?
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a" role="region">
-          <div class="faq-a-inner">
-            Completamente real y por escrito. Si en 90 días no podemos demostrarte mejoras medibles —más llamadas, más visitas, mejor posición en Google Maps— te <strong>devolvemos el 100% del setup</strong>. Así de seguros estamos de nuestro sistema.
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<section style="border-top:1px solid var(--border); padding:56px 0" aria-labelledby="guarantee-title">
-  <div class="container">
-    <div class="guarantee-box fi">
-      <div class="guarantee-icon-wrap" aria-hidden="true">🛡️</div>
-      <div>
-        <h2 class="guarantee-title" id="guarantee-title">Garantía total de 90 días — riesgo cero</h2>
-        <p class="guarantee-text">
-          Si en 90 días no ves <strong>resultados medibles y documentados</strong> en tu negocio,
-          te devolvemos el 100% de tu inversión. Sin preguntas, sin letra pequeña, sin excusas.
-          Esta garantía existe porque sabemos que el sistema funciona —
-          y queremos que tú también lo compruebes sin ningún riesgo.
-        </p>
+        <a href="#contacto" class="btn btn-outline">Consultar proyecto →</a>
       </div>
     </div>
   </div>
 </section>
 
-
-<section style="border-top:1px solid var(--border); padding:80px 0" id="contacto" aria-labelledby="cta-title">
+<section style="border-top:1px solid var(--border); padding:80px 0" id="contacto">
   <div class="container">
     <div class="final-box fi">
-      <h2 id="cta-title">¿Cuándo quieres empezar<br>a escalar tu negocio?</h2>
-      <p>
-        Agenda una auditoría digital de 20 minutos.
-        Sin compromiso. Con un plan de acción concreto para ti.
-      </p>
-      <div class="final-actions">
-        <a href="tel:+34657930828" class="btn btn-primary" aria-label="Llamar a VURA DIGITAL para agendar auditoría gratuita">
-          Agendar auditoría gratuita →
-        </a>
-        <a
-          href="https://wa.me/34657930828?text=Hola%2C%20acabo%20de%20calcular%20cu%C3%A1nto%20dinero%20pierde%20mi%20negocio%20sin%20presencia%20digital%20y%20quiero%20mi%20auditor%C3%ADa%20gratuita."
-          class="btn btn-wa" target="_blank" rel="noopener"
-          aria-label="Contactar con VURA DIGITAL por WhatsApp">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="#fff" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
+      <h2>¿Cuándo quieres empezar<br>a escalar tu negocio?</h2>
+      <p>Agenda una auditoría digital de 20 minutos por WhatsApp, o déjanos tus datos y te contactamos.</p>
+      
+      <form id="contact-form" class="custom-form">
+        <input type="text" id="user_name" name="user_name" placeholder="Tu Nombre / Nombre de tu Negocio" required>
+        <input type="email" id="user_email" name="user_email" placeholder="Tu Email de contacto" required>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Enviar solicitud de auditoría →</button>
+        <div id="form-status" class="form-status">Enviando...</div>
+      </form>
+
+      <div class="final-actions" style="border-top: 1px solid var(--border); padding-top: 30px; margin-top: 10px;">
+        <a href="https://wa.me/34657930828?text=Hola%2C%20quiero%20mi%20auditor%C3%ADa%20gratuita." class="btn btn-wa" target="_blank" rel="noopener">
           WhatsApp ahora
         </a>
       </div>
-      <div class="final-note">
-        Respuesta en menos de 5 minutos ·
-        <a href="tel:+34657930828" aria-label="Llamar al número de VURA DIGITAL">+34 657 930 828</a> ·
-        <a href="mailto:hola@vuradigital.com" aria-label="Enviar email a VURA DIGITAL">hola@vuradigital.com</a>
-      </div>
     </div>
   </div>
 </section>
-
 
 <footer role="contentinfo">
   <div class="container">
     <div class="footer-inner">
       <div>
-        <a href="#inicio" class="footer-logo" aria-label="Ir al inicio de VURA DIGITAL" style="display: flex; align-items: center; gap: 10px;">
-          <img src="logo favicon.png" alt="Logo VURA" style="height: 24px; width: auto;">
+        <a href="#inicio" class="footer-logo">
+          <img src="logo favicon.png" alt="Logo VURA">
           <div>VURA <span>DIGITAL</span></div>
         </a>
         <div class="footer-tagline">Agencia de diseño web corporativo en España</div>
       </div>
-      <div class="footer-links" role="navigation" aria-label="Navegación del pie de página">
+      <div class="footer-links">
         <a href="#sistema">Servicios</a>
-        <a href="#casos">Casos de éxito</a>
         <a href="#precios">Precios</a>
-        <a href="#faq">FAQ</a>
-        <a href="#" onclick="openModal('modal-privacidad'); return false;" aria-label="Política de privacidad">Privacidad</a>
-        <a href="#" onclick="openModal('modal-aviso'); return false;" aria-label="Aviso legal">Aviso legal</a>
+        <a href="#" onclick="openModal('modal-privacidad'); return false;">Privacidad</a>
       </div>
-      <div class="footer-copy">
-        © 2026 VURA DIGITAL<br>
-        Salamanca, España
-      </div>
+      <div class="footer-copy">© 2026 VURA DIGITAL</div>
     </div>
   </div>
 </footer>
 
 <div id="cookie-banner" class="cookie-banner fi d1">
-  <div class="cookie-text">
-    Utilizamos cookies propias técnicas y necesarias para el correcto funcionamiento de la web. No perfilamos con fines publicitarios. Al pulsar "Aceptar", consientes su uso. <br>Puedes leer más en nuestra <a href="#" onclick="openModal('modal-privacidad'); return false;">Política de Privacidad</a>.
-  </div>
+  <div class="cookie-text">Utilizamos cookies propias técnicas. <a href="#" onclick="openModal('modal-privacidad'); return false;">Política de Privacidad</a>.</div>
   <button class="btn btn-primary" onclick="acceptCookies()">Aceptar</button>
 </div>
-
 <div id="modal-privacidad" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal('modal-privacidad')">&times;</span>
-    <h2>Política de Privacidad y Cookies</h2>
-    <p>Última actualización: 2026</p>
-    <h3>1. Responsable del tratamiento</h3>
-    <p>El responsable de los datos recogidos en esta web es VURA DIGITAL, con domicilio a efectos de notificaciones en Salamanca, España. Email de contacto: hola@vuradigital.com.</p>
-    <h3>2. Finalidad de los datos</h3>
-    <p>Los datos que nos proporciones mediante WhatsApp, correo electrónico o cualquier otro medio de contacto se utilizarán exclusivamente para gestionar tu solicitud, realizar la "Auditoría Gratuita" y proporcionar información comercial sobre nuestros servicios de diseño y desarrollo web.</p>
-    <h3>3. Legitimación y Conservación</h3>
-    <p>La base legal para el tratamiento de tus datos es el consentimiento explícito que nos das al contactarnos. Los datos se conservarán mientras exista un interés comercial mutuo o hasta que solicites expresamente su supresión.</p>
-    <h3>4. Derechos del usuario</h3>
-    <p>Como usuario, tienes derecho a acceder a tus datos, rectificarlos, solicitar su eliminación, así como oponerte a su tratamiento o limitar el mismo. Para ejercer estos derechos, solo tienes que enviar un email a hola@vuradigital.com adjuntando una copia de tu DNI o documento equivalente.</p>
-    <h3>5. Política de Cookies</h3>
-    <p>Esta página web únicamente utiliza cookies técnicas (esenciales para que la web cargue correctamente y sea segura) y una cookie de personalización para recordar si has cerrado el propio banner de cookies. Al no utilizar cookies de terceros con fines analíticos o publicitarios (como Google Analytics o Facebook Pixel), no realizamos seguimiento ni perfilado de los usuarios.</p>
-  </div>
+  <div class="modal-content"><span class="close-modal" onclick="closeModal('modal-privacidad')">&times;</span><h2>Privacidad</h2><p>VURA DIGITAL. Contacto: hola@vuradigital.com</p></div>
 </div>
-
-<div id="modal-aviso" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal('modal-aviso')">&times;</span>
-    <h2>Aviso Legal</h2>
-    <h3>1. Información General</h3>
-    <p>En cumplimiento de lo dispuesto en la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa a los usuarios que este sitio web es titularidad de VURA DIGITAL, agencia de servicios digitales y desarrollo web que opera en todo el territorio nacional (España).</p>
-    <h3>2. Propiedad Intelectual e Industrial</h3>
-    <p>Los textos, diseños, estructura, imágenes y código fuente de este sitio web están protegidos por la legislación vigente en materia de propiedad intelectual. Queda expresamente prohibida su reproducción, distribución o comunicación pública, total o parcial, sin el consentimiento previo y por escrito de VURA DIGITAL.</p>
-    <h3>3. Exención de responsabilidad</h3>
-    <p>VURA DIGITAL no se hace responsable de las opiniones vertidas por terceros en testimonios u otras secciones, ni de la legalidad o contenido de los sitios web de terceros a los que se pueda enlazar. La información sobre métricas y resultados expresada en la web se basa en casos reales, pero no constituye una promesa exacta de rentabilidad universal, ya que los resultados están sujetos a la firma del contrato de prestación de servicios, la colaboración del cliente y las condiciones específicas de cada mercado local.</p>
-  </div>
-</div>
-
 
 <script>
 /* =============================================
-   MÓDULO 1: CALCULADORA + CTA WhatsApp dinámico
+   MÓDULO 1: CALCULADORA
    ============================================= */
-var _calc = {
-  monthly:  0,
-  yearly:   0,
-  touched:  false
-};
-
+var _calc = { monthly: 0, yearly: 0, touched: false };
 function updateCalc() {
   var v = parseInt(document.getElementById('visitors').value, 10);
   var t = parseInt(document.getElementById('ticket').value, 10);
   var o = parseInt(document.getElementById('online').value, 10);
   var l = parseInt(document.getElementById('lost').value, 10);
-
-  document.getElementById('vis-val').textContent    = v;
+  document.getElementById('vis-val').textContent = v;
   document.getElementById('ticket-val').textContent = t + ' €';
   document.getElementById('online-val').textContent = o + '%';
-  document.getElementById('lost-val').textContent   = l + '%';
-
+  document.getElementById('lost-val').textContent = l + '%';
   _calc.monthly = Math.round(v * t * (o / 100) * (l / 100) * 30);
-  _calc.yearly  = _calc.monthly * 12;
-
-  var amountEl = document.getElementById('lost-amount');
-  amountEl.textContent = _calc.monthly.toLocaleString('es-ES') + ' €';
-  amountEl.classList.toggle('high', _calc.monthly > 1500);
+  _calc.yearly = _calc.monthly * 12;
+  document.getElementById('lost-amount').textContent = _calc.monthly.toLocaleString('es-ES') + ' €';
   document.getElementById('lost-year').textContent = _calc.yearly.toLocaleString('es-ES') + ' €';
-
   var pct = Math.min(Math.round(o * l / 100), 95);
-  document.getElementById('loss-bar').style.width        = pct + '%';
-  document.getElementById('bar-pct-label').textContent   = 'Tu competencia recibe el ' + pct + '%';
-  document.getElementById('bar-note').textContent        = 'De cada 100 clientes potenciales, tu competencia capta ~' + pct;
-
-  if (!_calc.touched) {
-    _calc.touched = true;
-    document.getElementById('calc-wa-btn').classList.add('show');
-  }
-
-  var msg = 'Hola, he calculado con la herramienta de VURA DIGITAL que mi negocio pierde ' +
-    _calc.monthly.toLocaleString('es-ES') + ' € al mes (' + _calc.yearly.toLocaleString('es-ES') + ' €/año) por no tener presencia digital profesional.' +
-    ' Quiero mi auditoría gratuita.';
-
-  document.getElementById('calc-wa-btn').href = 'https://wa.me/34657930828?text=' + encodeURIComponent(msg);
+  document.getElementById('loss-bar').style.width = pct + '%';
+  if (!_calc.touched) { _calc.touched = true; document.getElementById('calc-wa-btn').classList.add('show'); }
+  document.getElementById('calc-wa-btn').href = 'https://wa.me/34657930828?text=Hola%2C%20pierdo%20' + _calc.monthly + '€%20al%20mes.%20Quiero%20auditoría.';
 }
 
 /* =============================================
-   MÓDULO 2: FAQ ACCORDION
-   ============================================= */
-function toggleFaq(btn) {
-  var item   = btn.closest('.faq-item');
-  var isOpen = item.classList.contains('open');
-
-  document.querySelectorAll('.faq-item.open').forEach(function(el) {
-    el.classList.remove('open');
-    el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
-  });
-
-  if (!isOpen) {
-    item.classList.add('open');
-    btn.setAttribute('aria-expanded', 'true');
-  }
-}
-
-/* =============================================
-   MÓDULO 3: SCROLL FADE-IN
+   MÓDULO 2: FADE-IN BÁSICO
    ============================================= */
 function onScroll() {
   var wh = window.innerHeight;
@@ -1140,177 +745,121 @@ function onScroll() {
 }
 
 /* =============================================
-   MÓDULO 4: SMOOTH ANCHOR SCROLL
-   ============================================= */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-    a.addEventListener('click', function(e) {
-      var id     = this.getAttribute('href');
-      var target = id === '#' ? null : document.querySelector(id);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-}
-
-/* =============================================
-   MÓDULO 5: FONDO DE PARTÍCULAS — Hero Canvas
+   MÓDULO 3: PARTICULAS HERO
    ============================================= */
 function initParticles() {
   var canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
-  var ctx    = canvas.getContext('2d');
-  var mouse  = { x: -9999, y: -9999 };
-  var raf    = null;
+  var ctx = canvas.getContext('2d');
   var particles = [];
-
-  var CONFIG = {
-    count:       55,
-    color:       '108,92,231',
-    minOpacity: 0.08,
-    maxOpacity: 0.45,
-    minRadius:  1,
-    maxRadius:  3.5,
-    speed:      0.35,
-    mouseRadius: 110,
-    mouseForce:  0.018
-  };
-
-  function resize() {
-    var hero = canvas.parentElement;
-    canvas.width  = hero.offsetWidth;
-    canvas.height = hero.offsetHeight;
-  }
-
-  function createParticle() {
-    var angle = Math.random() * Math.PI * 2;
-    return {
-      x:   Math.random() * canvas.width,
-      y:   Math.random() * canvas.height,
-      r:   CONFIG.minRadius + Math.random() * (CONFIG.maxRadius - CONFIG.minRadius),
-      op:  CONFIG.minOpacity + Math.random() * (CONFIG.maxOpacity - CONFIG.minOpacity),
-      vx:  Math.cos(angle) * CONFIG.speed * (0.4 + Math.random() * 0.6),
-      vy:  Math.sin(angle) * CONFIG.speed * (0.4 + Math.random() * 0.6)
-    };
-  }
-
-  function init() {
-    particles = [];
-    for (var i = 0; i < CONFIG.count; i++) particles.push(createParticle());
-  }
-
+  function resize() { canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; }
+  function init() { particles = []; for(let i=0; i<50; i++) particles.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: 1+Math.random()*2, op: 0.1+Math.random()*0.3, vx: Math.random()-0.5, vy: Math.random()-0.5}); }
   function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (var i = 0; i < particles.length; i++) {
-      var p  = particles[i];
-      var dx = p.x - mouse.x;
-      var dy = p.y - mouse.y;
-      var dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < CONFIG.mouseRadius && dist > 0) {
-        var force = (1 - dist / CONFIG.mouseRadius) * CONFIG.mouseForce;
-        p.vx += (dx / dist) * force;
-        p.vy += (dy / dist) * force;
-      }
-      var speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-      if (speed > CONFIG.speed * 3) {
-        p.vx = (p.vx / speed) * CONFIG.speed * 3;
-        p.vy = (p.vy / speed) * CONFIG.speed * 3;
-      }
-      p.vx *= 0.995;
-      p.vy *= 0.995;
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0)             { p.x = 0;             p.vx *= -1; }
-      if (p.x > canvas.width)  { p.x = canvas.width;  p.vx *= -1; }
-      if (p.y < 0)             { p.y = 0;             p.vy *= -1; }
-      if (p.y > canvas.height) { p.y = canvas.height; p.vy *= -1; }
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + CONFIG.color + ',' + p.op + ')';
-      ctx.fill();
-    }
-    raf = requestAnimationFrame(draw);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if(p.x<0 || p.x>canvas.width) p.vx*=-1;
+      if(p.y<0 || p.y>canvas.height) p.vy*=-1;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(108,92,231,${p.op})`; ctx.fill();
+    });
+    requestAnimationFrame(draw);
   }
-
-  document.addEventListener('mousemove', function(e) {
-    var rect = canvas.getBoundingClientRect();
-    mouse.x  = e.clientX - rect.left;
-    mouse.y  = e.clientY - rect.top;
-  }, { passive: true });
-
-  canvas.parentElement.addEventListener('mouseleave', function() {
-    mouse.x = -9999;
-    mouse.y = -9999;
-  });
-
-  var resizeTimer;
-  window.addEventListener('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() {
-      cancelAnimationFrame(raf);
-      resize();
-      init();
-      draw();
-    }, 180);
-  }, { passive: true });
-
-  document.addEventListener('visibilitychange', function() {
-    if (document.hidden) cancelAnimationFrame(raf);
-    else raf = requestAnimationFrame(draw);
-  });
-
   resize(); init(); draw();
 }
 
 /* =============================================
-   MÓDULO 6: LEGALES Y COOKIES
+   MÓDULO 4: COOKIES
    ============================================= */
-function openModal(id) {
-  document.getElementById(id).style.display = 'block';
-  document.body.style.overflow = 'hidden'; 
-}
-function closeModal(id) {
-  document.getElementById(id).style.display = 'none';
-  document.body.style.overflow = 'auto';
-}
-function acceptCookies() {
-  var banner = document.getElementById('cookie-banner');
-  if(banner) banner.style.display = 'none';
-  localStorage.setItem('vura_cookies_accepted', 'true');
-}
-
-// Cerrar modales haciendo click fuera del cuadro
-window.onclick = function(event) {
-  if (event.target.classList.contains('modal')) {
-    event.target.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
-}
-
-// Mostrar banner de cookies si no hay registro
-function initCookies() {
-  if (!localStorage.getItem('vura_cookies_accepted')) {
-    setTimeout(function() {
-      var banner = document.getElementById('cookie-banner');
-      if(banner) banner.style.display = 'flex';
-    }, 1500);
-  } else {
-    var banner = document.getElementById('cookie-banner');
-    if(banner) banner.style.display = 'none';
-  }
-}
+function openModal(id) { document.getElementById(id).style.display = 'block'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+function acceptCookies() { document.getElementById('cookie-banner').style.display = 'none'; localStorage.setItem('vura_cookies_accepted', 'true'); }
+if(!localStorage.getItem('vura_cookies_accepted')) { setTimeout(() => document.getElementById('cookie-banner').style.display='flex', 1500); }
 
 /* =============================================
-   INIT
+   MÓDULO 5: LENIS (SMOOTH SCROLL) 🚀
    ============================================= */
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Curva suave Apple
+  smooth: true
+});
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// Lenis necesita gestionar los links de anclaje (#)
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    lenis.scrollTo(this.getAttribute('href'));
+  });
+});
+
+/* =============================================
+   MÓDULO 6: GSAP ANIMATIONS 🚀
+   ============================================= */
+gsap.registerPlugin(ScrollTrigger);
+
+// Efecto Cascada Metodología
+gsap.from(".metod-card", {
+  scrollTrigger: {
+    trigger: ".metod-grid",
+    start: "top 85%"
+  },
+  y: 60,
+  opacity: 0,
+  duration: 0.8,
+  stagger: 0.2, // Retraso entre tarjetas
+  ease: "power3.out"
+});
+
+// Efecto Cascada Precios
+gsap.from(".price-card", {
+  scrollTrigger: {
+    trigger: ".pricing-grid",
+    start: "top 85%"
+  },
+  y: 60,
+  opacity: 0,
+  duration: 0.8,
+  stagger: 0.2,
+  ease: "power3.out"
+});
+
+/* =============================================
+   MÓDULO 7: EMAILJS (CAPTACIÓN DE CORREOS) 🚀
+   ============================================= */
+// NOTA: Tienes que registrarte en emailjs.com y cambiar estos códigos
+emailjs.init("TU_PUBLIC_KEY_AQUI"); // <-- CAMBIA ESTO
+
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const status = document.getElementById('form-status');
+    status.style.display = 'block';
+    status.style.color = 'var(--accent-s)';
+    status.textContent = 'Enviando solicitud...';
+
+    // CAMBIA ESTOS DOS VALORES (Service ID y Template ID)
+    emailjs.sendForm('TU_SERVICE_ID_AQUI', 'TU_TEMPLATE_ID_AQUI', this)
+        .then(function() {
+            status.style.color = 'var(--success)';
+            status.textContent = '¡Datos enviados! Te contactaremos por email en menos de 24h.';
+            document.getElementById('contact-form').reset();
+        }, function(error) {
+            status.style.color = 'var(--danger)';
+            status.textContent = 'Error de conexión. Por favor, pulsa el botón de WhatsApp de abajo.';
+            console.log('Error de EmailJS:', error);
+        });
+});
+
+/* INIT BÁSICOS */
 updateCalc();
-onScroll();
-initSmoothScroll();
-initParticles();
-initCookies();
 window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 </script>
 
 </body>
