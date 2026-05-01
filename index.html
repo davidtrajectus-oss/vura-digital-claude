@@ -830,9 +830,8 @@ gsap.from(".price-card", {
 });
 
 /* =============================================
-   MÓDULO 7: EMAILJS (CAPTACIÓN DE CORREOS) 🚀
+   MÓDULO 7: CAPTACIÓN DE LEADS (EMAILJS + SHEETDB) 🚀
    ============================================= */
-// Tu Public Key de la cuenta de EmailJS
 emailjs.init("n-SpRg6RMLARzrEfn"); 
 
 document.getElementById('contact-form').addEventListener('submit', function(event) {
@@ -841,13 +840,41 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     const status = document.getElementById('form-status');
     status.style.display = 'block';
     status.style.color = 'var(--accent-s)';
-    status.textContent = 'Enviando solicitud...';
+    status.textContent = 'Procesando solicitud...';
 
-    // Service ID y Template ID conectados a tu Gmail
+    // 1. Recoger los datos exactos que el usuario ha escrito
+    const nameValue = document.getElementById('user_name').value;
+    const emailValue = document.getElementById('user_email').value;
+    const dateValue = new Date().toLocaleDateString('es-ES');
+
+    // 2. Guardar silenciosamente en el CRM (Google Sheets vía SheetDB)
+    fetch('https://sheetdb.io/api/v1/jtupg6j7hh3vy', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            data: [
+                {
+                    'nombre': nameValue,
+                    'email': emailValue,
+                    'fecha': dateValue,
+                    'estado': 'Nuevo'
+                }
+            ]
+        })
+    })
+    .then((response) => response.json())
+    .then((data) => console.log('Lead guardado en el Excel/CRM:', data))
+    .catch((error) => console.error('Error al guardar en SheetDB:', error));
+
+    // 3. Enviar el correo de notificación a tu bandeja (EmailJS)
     emailjs.sendForm('service_tchmeeg', 'template_giu9vml', this)
         .then(function() {
             status.style.color = 'var(--success)';
             status.textContent = '¡Datos enviados! Te contactaremos por email en menos de 24h.';
+            // Limpiamos las casillas del formulario
             document.getElementById('contact-form').reset();
         }, function(error) {
             status.style.color = 'var(--danger)';
