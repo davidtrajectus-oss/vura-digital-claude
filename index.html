@@ -832,8 +832,8 @@ gsap.from(".price-card", {
 /* =============================================
    MÓDULO 7: EMAILJS (CAPTACIÓN DE CORREOS) 🚀
    ============================================= */
-// NOTA: Tienes que registrarte en emailjs.com y cambiar estos códigos
-emailjs.init("TU_PUBLIC_KEY_AQUI"); // <-- CAMBIA ESTO
+// Tu Public Key de la cuenta de EmailJS
+emailjs.init("n-SpRg6RMLARzrEfn"); 
 
 document.getElementById('contact-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -843,8 +843,8 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     status.style.color = 'var(--accent-s)';
     status.textContent = 'Enviando solicitud...';
 
-    // CAMBIA ESTOS DOS VALORES (Service ID y Template ID)
-    emailjs.sendForm('TU_SERVICE_ID_AQUI', 'TU_TEMPLATE_ID_AQUI', this)
+    // Service ID y Template ID conectados a tu Gmail
+    emailjs.sendForm('service_tchmeeg', 'template_giu9vml', this)
         .then(function() {
             status.style.color = 'var(--success)';
             status.textContent = '¡Datos enviados! Te contactaremos por email en menos de 24h.';
