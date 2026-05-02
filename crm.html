@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VURA CRM — Pipeline de Leads</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-base:        #080810;
+      --bg-surface:     #0f0f1a;
+      --bg-card:        #161625;
+      --bg-card-hover:  #1e1e30;
+      --border:         #2a2a40;
+      --border-subtle:  #1e1e30;
+      --accent:         #6c5ce7;
+      --accent-light:   #a29bfe;
+      --accent-glow:    rgba(108, 92, 231, 0.25);
+      --gold:           #fdcb6e;
+      --text-primary:   #e4e4f0;
+      --text-muted:     #7878a0;
+      --text-faint:     #4a4a6a;
+      --green:          #00cec9;
+      --red:            #e17055;
+      --radius:         12px;
+      --radius-sm:      8px;
+      --shadow-card:    0 4px 24px rgba(0,0,0,0.4);
+      --shadow-glow:    0 0 0 1px var(--accent), 0 0 20px var(--accent-glow);
+      --transition:     180ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ─── TOPBAR ─────────────────────────────────────────── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      height: 60px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topbar-logo {
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    .topbar-name {
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      color: var(--text-primary);
+    }
+
+    .topbar-name span {
+      color: var(--accent-light);
+    }
+
+    .topbar-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .topbar-badge {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+    }
+
+    .topbar-user {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+      color: #fff;
+      cursor: default;
+    }
+
+    .refresh-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-size: 12px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .refresh-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent-light);
+    }
+
+    .refresh-btn svg { flex-shrink: 0; }
+
+    /* ─── BOARD WRAPPER ──────────────────────────────────── */
+    .board-wrapper {
+      padding: 28px 28px 40px;
+      min-height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .board-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .board-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .board-title span { color: var(--accent-light); }
+
+    .board-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .stat-chip {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+
+    .stat-chip.nuevos  { border-color: rgba(162,155,254,0.3); color: var(--accent-light); }
+    .stat-chip.contactados { border-color: rgba(0,206,201,0.3); color: var(--green); }
+    .stat-chip.cerrados { border-color: rgba(253,203,110,0.3); color: var(--gold); }
+
+    /* ─── KANBAN BOARD ───────────────────────────────────── */
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* ─── COLUMN ─────────────────────────────────────────── */
+    .column {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      overflow: hidden;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow var(--transition);
+    }
+
+    .column.drag-over {
+      box-shadow: var(--shadow-glow);
+      border-color: var(--accent);
+    }
+
+    .column-header {
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .col-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+    }
+
+    .col-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .col-nuevos    .col-dot { background: var(--accent-light); box-shadow: 0 0 6px var(--accent); }
+    .col-contactados .col-dot { background: var(--green); box-shadow: 0 0 6px var(--green); }
+    .col-cerrados  .col-dot { background: var(--gold); box-shadow: 0 0 6px var(--gold); }
+
+    .col-count {
+      min-width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .col-nuevos    .col-count { color: var(--accent-light); border-color: rgba(162,155,254,0.3); }
+    .col-contactados .col-count { color: var(--green); border-color: rgba(0,206,201,0.3); }
+    .col-cerrados  .col-count { color: var(--gold); border-color: rgba(253,203,110,0.3); }
+
+    .column-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    /* ─── CARD ───────────────────────────────────────────── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      cursor: grab;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), opacity var(--transition);
+      position: relative;
+      user-select: none;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+      border-color: var(--border);
+      background: var(--bg-card-hover);
+    }
+
+    .card:active { cursor: grabbing; }
+
+    .card.dragging {
+      opacity: 0.35;
+      transform: scale(0.97);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .card-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), #9b89ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .card-info { flex: 1; min-width: 0; }
+
+    .card-name {
+      font-weight: 600;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-email {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 1px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .card-date {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--text-faint);
+    }
+
+    .card-date svg { flex-shrink: 0; }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .contact-btn:hover { transform: scale(1.04); }
+
+    .btn-wa {
+      background: rgba(37, 211, 102, 0.12);
+      color: #25d366;
+      border: 1px solid rgba(37, 211, 102, 0.2);
+    }
+
+    .btn-wa:hover { background: rgba(37, 211, 102, 0.22); }
+
+    .card-service {
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .service-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(108, 92, 231, 0.12);
+      border: 1px solid rgba(108, 92, 231, 0.2);
+      color: var(--accent-light);
+      font-size: 10.5px;
+      font-weight: 500;
+    }
+
+    /* ─── DRAG PLACEHOLDER ───────────────────────────────── */
+    .drag-placeholder {
+      border: 2px dashed var(--accent);
+      border-radius: var(--radius-sm);
+      height: 80px;
+      background: var(--accent-glow);
+      opacity: 0.6;
+      pointer-events: none;
+      animation: pulse-placeholder 1.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-placeholder {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 0.7; }
+    }
+
+    /* ─── EMPTY STATE ────────────────────────────────────── */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+      color: var(--text-faint);
+      gap: 10px;
+      font-size: 12.5px;
+      text-align: center;
+      border: 2px dashed var(--border-subtle);
+      border-radius: var(--radius-sm);
+    }
+
+    .empty-state svg { opacity: 0.4; }
+
+    /* ─── LOADING SKELETON ───────────────────────────────── */
+    .skeleton {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skeleton::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+      animation: shimmer 1.4s infinite;
+    }
+
+    @keyframes shimmer {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .skel-line {
+      height: 10px;
+      border-radius: 4px;
+      background: var(--border);
+      margin-bottom: 8px;
+    }
+
+    .skel-line.w60 { width: 60%; }
+    .skel-line.w80 { width: 80%; }
+    .skel-line.w40 { width: 40%; }
+
+    /* ─── TOAST ──────────────────────────────────────────── */
+    #toast-container {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      animation: toast-in 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      min-width: 220px;
+      pointer-events: auto;
+    }
+
+    .toast.out {
+      animation: toast-out 0.2s ease-in forwards;
+    }
+
+    .toast-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .toast.loading .toast-dot {
+      background: var(--accent);
+      animation: spin-dot 0.8s linear infinite;
+    }
+
+    .toast.success .toast-dot { background: var(--green); }
+    .toast.error   .toast-dot { background: var(--red); }
+
+    @keyframes spin-dot {
+      0%   { box-shadow: 0 0 0 0 var(--accent); opacity: 1; }
+      70%  { box-shadow: 0 0 0 6px transparent; opacity: 0; }
+      100% { box-shadow: 0 0 0 0 transparent; opacity: 0; }
+    }
+
+    @keyframes toast-in {
+      from { opacity: 0; transform: translateX(20px) scale(0.94); }
+      to   { opacity: 1; transform: translateX(0) scale(1); }
+    }
+
+    @keyframes toast-out {
+      from { opacity: 1; transform: translateX(0); }
+      to   { opacity: 0; transform: translateX(16px); }
+    }
+
+    /* ─── SCROLLBAR ──────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .board { grid-template-columns: 1fr; }
+      .stats-row { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <div class="topbar-logo">V</div>
+      <div>
+        <div class="topbar-name">VURA <span>CRM</span></div>
+      </div>
+    </div>
+    <div class="topbar-meta">
+      <span class="topbar-badge" id="last-sync">Sincronizando…</span>
+      <button class="refresh-btn" onclick="loadLeads()">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M23 4v6h-6M1 20v-6h6"/>
+          <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+        </svg>
+        Actualizar
+      </button>
+      <div class="topbar-user" title="Rubén — Director de Expansión">R</div>
+    </div>
+  </header>
+
+  <!-- BOARD -->
+  <div class="board-wrapper">
+    <div class="board-header">
+      <div>
+        <h1 class="board-title">Pipeline de <span>Leads</span></h1>
+        <p class="board-subtitle">Arrastra las tarjetas para actualizar el estado del lead</p>
+      </div>
+      <div class="stats-row">
+        <div class="stat-chip nuevos"       id="stat-nuevos">Nuevos: –</div>
+        <div class="stat-chip contactados"  id="stat-contactados">Contactados: –</div>
+        <div class="stat-chip cerrados"     id="stat-cerrados">Cerrados: –</div>
+      </div>
+    </div>
+
+    <div class="board">
+      <!-- NUEVOS -->
+      <div class="column col-nuevos" id="col-Nuevos" data-status="Nuevos">
+        <div class="column-header">
+          <div class="col-label">
+            <div class="col-dot"></div>
+            Nuevos
+          </div>
+          <div class="col-count" id="count-Nuevos">0</div>
+        </div>
+        <div class="column-body" id="body-Nuevos"></div>
+      </div>
+
+      <!-- CONTACTADOS -->
+      <div class="column col-contactados" id="col-Contactados" data-status="Contactados">
+        <div class="column-header">
+          <div class="col-label">
+            <div class="col-dot"></div>
+            Contactados
+          </div>
+          <div class="col-count" id="count-Contactados">0</div>
+        </div>
+        <div class="column-body" id="body-Contactados"></div>
+      </div>
+
+      <!-- CERRADOS -->
+      <div class="column col-cerrados" id="col-Cerrados" data-status="Cerrados">
+        <div class="column-header">
+          <div class="col-label">
+            <div class="col-dot"></div>
+            Cerrados
+          </div>
+          <div class="col-count" id="count-Cerrados">0</div>
+        </div>
+        <div class="column-body" id="body-Cerrados"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toast-container"></div>
+
+  <script>
+    const API = 'https://sheetdb.io/api/v1/jtupg6j7hh3vy';
+    const COLUMNS = ['Nuevos', 'Contactados', 'Cerrados'];
+
+    // ─── TOAST ──────────────────────────────────────────────
+    function toast(msg, type = 'loading', duration = 3000) {
+      const c = document.getElementById('toast-container');
+      const el = document.createElement('div');
+      el.className = `toast ${type}`;
+      el.innerHTML = `<div class="toast-dot"></div><span>${msg}</span>`;
+      c.appendChild(el);
+      if (duration > 0) {
+        setTimeout(() => {
+          el.classList.add('out');
+          el.addEventListener('animationend', () => el.remove(), { once: true });
+        }, duration);
+      }
+      return el;
+    }
+
+    function dismissToast(el) {
+      if (!el || !el.isConnected) return;
+      el.classList.add('out');
+      el.addEventListener('animationend', () => el.remove(), { once: true });
+    }
+
+    // ─── AVATAR INITIALS ─────────────────────────────────────
+    function initials(name = '') {
+      return name.trim().split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase() || '?';
+    }
+
+    // ─── FORMAT DATE ─────────────────────────────────────────
+    function fmtDate(raw = '') {
+      if (!raw) return '—';
+      const d = new Date(raw);
+      if (isNaN(d)) return raw;
+      return d.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+
+    // ─── BUILD CONTACT URL ────────────────────────────────────
+    function buildContactURL(lead) {
+      const phone = (lead.telefono || lead.phone || '').replace(/\D/g, '');
+      if (phone) {
+        const msg = encodeURIComponent(`Hola ${lead.nombre || ''}, te contactamos desde VURA DIGITAL. ¿Tienes un momento?`);
+        return { href: `https://wa.me/${phone}?text=${msg}`, label: 'WhatsApp', cls: 'btn-wa' };
+      }
+      const email = lead.email || lead.correo || '';
+      return {
+        href: `mailto:${email}?subject=Tu%20solicitud%20en%20VURA%20DIGITAL&body=Hola%20${encodeURIComponent(lead.nombre || '')}%2C`,
+        label: 'Contactar',
+        cls: 'btn-wa'
+      };
+    }
+
+    // ─── BUILD CARD ──────────────────────────────────────────
+    function buildCard(lead) {
+      const nombre  = lead.nombre  || lead.name  || 'Sin nombre';
+      const email   = lead.email   || lead.correo || '';
+      const fecha   = lead.fecha   || lead.date  || lead.timestamp || '';
+      const servicio = lead.servicio || lead.service || lead.mensaje || '';
+      const status   = normalizeStatus(lead.estado || lead.status || 'Nuevos');
+      const contact  = buildContactURL(lead);
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.draggable = true;
+      card.dataset.email  = email;
+      card.dataset.status = status;
+
+      const serviceHTML = servicio
+        ? `<div class="card-service"><span class="service-tag">${escHtml(servicio.slice(0, 40))}${servicio.length > 40 ? '…' : ''}</span></div>`
+        : '';
+
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="card-avatar">${initials(nombre)}</div>
+          <div class="card-info">
+            <div class="card-name" title="${escHtml(nombre)}">${escHtml(nombre)}</div>
+            <div class="card-email" title="${escHtml(email)}">${escHtml(email)}</div>
+          </div>
+        </div>
+        ${serviceHTML}
+        <div class="card-footer">
+          <div class="card-date">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+            </svg>
+            ${fmtDate(fecha)}
+          </div>
+          <a href="${contact.href}" target="_blank" class="contact-btn ${contact.cls}" draggable="false">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.523 5.845L0 24l6.335-1.492A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 01-5.001-1.37l-.359-.214-3.721.876.936-3.614-.235-.372A9.787 9.787 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/>
+            </svg>
+            ${contact.label}
+          </a>
+        </div>
+      `;
+
+      // ─ Drag events
+      card.addEventListener('dragstart', onDragStart);
+      card.addEventListener('dragend',   onDragEnd);
+
+      return card;
+    }
+
+    function escHtml(str) {
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ─── NORMALIZE STATUS ─────────────────────────────────────
+    function normalizeStatus(raw) {
+      const map = {
+        'nuevo': 'Nuevos', 'nuevos': 'Nuevos', 'new': 'Nuevos',
+        'contactado': 'Contactados', 'contactados': 'Contactados', 'contacted': 'Contactados',
+        'cerrado': 'Cerrados', 'cerrados': 'Cerrados', 'closed': 'Cerrados', 'won': 'Cerrados'
+      };
+      return map[(raw || '').toLowerCase()] || 'Nuevos';
+    }
+
+    // ─── LOAD LEADS ──────────────────────────────────────────
+    async function loadLeads() {
+      COLUMNS.forEach(col => {
+        document.getElementById(`body-${col}`).innerHTML = buildSkeletons(3);
+      });
+      document.getElementById('last-sync').textContent = 'Sincronizando…';
+
+      try {
+        const res  = await fetch(API);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        COLUMNS.forEach(col => {
+          document.getElementById(`body-${col}`).innerHTML = '';
+        });
+
+        const counts = { Nuevos: 0, Contactados: 0, Cerrados: 0 };
+
+        data.forEach(lead => {
+          const status = normalizeStatus(lead.estado || lead.status || 'Nuevos');
+          const body   = document.getElementById(`body-${status}`);
+          if (!body) return;
+          body.appendChild(buildCard(lead));
+          counts[status] = (counts[status] || 0) + 1;
+        });
+
+        COLUMNS.forEach(col => {
+          document.getElementById(`count-${col}`).textContent = counts[col] || 0;
+          document.getElementById(`stat-${col.toLowerCase()}`).textContent =
+            `${col}: ${counts[col] || 0}`;
+          const body = document.getElementById(`body-${col}`);
+          if (!body.children.length) {
+            body.innerHTML = emptyState(col);
+          }
+        });
+
+        const now = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+        document.getElementById('last-sync').textContent = `Actualizado ${now}`;
+
+      } catch (err) {
+        console.error(err);
+        COLUMNS.forEach(col => {
+          document.getElementById(`body-${col}`).innerHTML = emptyState(col, true);
+        });
+        document.getElementById('last-sync').textContent = 'Error al cargar';
+        toast('Error al cargar leads', 'error');
+      }
+    }
+
+    function buildSkeletons(n) {
+      return Array.from({ length: n }, () => `
+        <div class="skeleton">
+          <div class="skel-line w60"></div>
+          <div class="skel-line w80"></div>
+          <div class="skel-line w40"></div>
+        </div>
+      `).join('');
+    }
+
+    function emptyState(col, error = false) {
+      const msg = error
+        ? 'No se pudo conectar con la base de datos'
+        : 'Sin leads en esta etapa';
+      return `
+        <div class="empty-state">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+            <rect x="9" y="3" width="6" height="4" rx="1"/>
+          </svg>
+          <span>${msg}</span>
+        </div>
+      `;
+    }
+
+    // ─── DRAG & DROP ─────────────────────────────────────────
+    let dragging = null;
+    let placeholder = null;
+
+    function onDragStart(e) {
+      dragging = this;
+      this.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', this.dataset.email);
+
+      placeholder = document.createElement('div');
+      placeholder.className = 'drag-placeholder';
+    }
+
+    function onDragEnd() {
+      if (dragging) dragging.classList.remove('dragging');
+      dragging = null;
+      if (placeholder && placeholder.isConnected) placeholder.remove();
+      placeholder = null;
+      document.querySelectorAll('.column').forEach(c => c.classList.remove('drag-over'));
+    }
+
+    // Wire up columns as drop targets
+    document.querySelectorAll('.column').forEach(col => {
+      col.addEventListener('dragover', e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        col.classList.add('drag-over');
+
+        const body = col.querySelector('.column-body');
+        const afterEl = getDragAfterElement(body, e.clientY);
+        if (placeholder) {
+          if (afterEl) body.insertBefore(placeholder, afterEl);
+          else body.appendChild(placeholder);
+        }
+      });
+
+      col.addEventListener('dragleave', e => {
+        if (!col.contains(e.relatedTarget)) {
+          col.classList.remove('drag-over');
+          if (placeholder && placeholder.isConnected) placeholder.remove();
+        }
+      });
+
+      col.addEventListener('drop', e => {
+        e.preventDefault();
+        col.classList.remove('drag-over');
+        if (!dragging) return;
+
+        const newStatus = col.dataset.status;
+        const oldStatus = dragging.dataset.status;
+
+        if (newStatus === oldStatus) {
+          if (placeholder && placeholder.isConnected) placeholder.remove();
+          return;
+        }
+
+        const body = col.querySelector('.column-body');
+        const afterEl = getDragAfterElement(body, e.clientY);
+
+        // Remove placeholder & empty-state if present
+        if (placeholder && placeholder.isConnected) placeholder.remove();
+        const empty = body.querySelector('.empty-state');
+        if (empty) empty.closest('.column-body').innerHTML = '';
+
+        if (afterEl) body.insertBefore(dragging, afterEl);
+        else body.appendChild(dragging);
+
+        dragging.dataset.status = newStatus;
+
+        // Recount
+        updateCounts();
+
+        // Persist
+        patchLead(dragging.dataset.email, newStatus);
+
+        // Add empty state to old column if empty
+        const oldBody = document.getElementById(`body-${oldStatus}`);
+        if (oldBody && !oldBody.querySelector('.card')) {
+          oldBody.innerHTML = emptyState(oldStatus);
+        }
+      });
+    });
+
+    function getDragAfterElement(container, y) {
+      const cards = [...container.querySelectorAll('.card:not(.dragging)')];
+      return cards.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) return { offset, element: child };
+        return closest;
+      }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    function updateCounts() {
+      COLUMNS.forEach(col => {
+        const count = document.getElementById(`body-${col}`)
+          .querySelectorAll('.card').length;
+        document.getElementById(`count-${col}`).textContent = count;
+        document.getElementById(`stat-${col.toLowerCase()}`).textContent = `${col}: ${count}`;
+      });
+    }
+
+    // ─── PATCH LEAD ──────────────────────────────────────────
+    async function patchLead(email, newStatus) {
+      if (!email) return;
+
+      const loadingToast = toast('Actualizando estado…', 'loading', 0);
+
+      try {
+        const res = await fetch(`${API}/email/${encodeURIComponent(email)}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ data: { estado: newStatus } })
+        });
+
+        dismissToast(loadingToast);
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        toast('¡Guardado correctamente!', 'success');
+
+      } catch (err) {
+        console.error('PATCH error:', err);
+        dismissToast(loadingToast);
+        toast('Error al guardar. Recarga para sincronizar.', 'error');
+      }
+    }
+
+    // ─── INIT ─────────────────────────────────────────────────
+    loadLeads();
+  </script>
+</body>
+</html>
