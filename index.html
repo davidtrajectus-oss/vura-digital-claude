@@ -321,6 +321,32 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .final-note { font-size: 13px; color: var(--muted); }
 .final-note a { color: var(--accent-s); text-decoration: none; }
 
+/* CONTACTO — Reingeniería de Conversión */
+.contact-section { background: var(--bg); padding: 100px 0; position: relative; overflow: hidden; border-top: 1px solid var(--border); }
+.contact-section::before { content: ''; position: absolute; top: -200px; right: -100px; width: 640px; height: 640px; background: radial-gradient(circle, rgba(108,92,231,0.12) 0%, transparent 65%); pointer-events: none; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.contact-copy { display: flex; flex-direction: column; gap: 28px; }
+.contact-kicker { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-head); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-s); }
+.contact-kicker::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-s); animation: pulse-dot 2s infinite; }
+.contact-headline { font-family: var(--f-head); font-size: clamp(26px, 3.2vw, 46px); font-weight: 800; color: var(--white); letter-spacing: -1px; line-height: 1.1; margin: 0; }
+.contact-headline em { font-style: normal; color: var(--accent-s); }
+.contact-subline { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 420px; margin: 0; }
+.guarantee-seal { display: flex; gap: 16px; align-items: flex-start; background: linear-gradient(135deg, rgba(253,203,110,0.07), rgba(253,203,110,0.02)); border: 1px solid rgba(253,203,110,0.22); border-radius: var(--r-lg); padding: 20px 24px; }
+.guarantee-seal-icon { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+.guarantee-seal-title { font-family: var(--f-head); font-size: 12px; font-weight: 700; color: #fdcb6e; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+.guarantee-seal-text { font-size: 13px; color: var(--muted); line-height: 1.55; }
+.guarantee-seal-text strong { color: var(--text); font-weight: 500; }
+.contact-trust-row { display: flex; flex-direction: column; gap: 10px; }
+.contact-trust-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+.contact-trust-item::before { content: '✓'; display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: rgba(108,92,231,0.18); color: var(--accent-s); font-size: 10px; font-weight: 700; flex-shrink: 0; }
+.contact-form-card { background: var(--bg2); border: 1px solid var(--border-s); border-radius: var(--r-xl); padding: 44px 40px; position: relative; overflow: hidden; }
+.contact-form-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-s)); }
+.contact-form-title { font-family: var(--f-head); font-size: 20px; font-weight: 800; color: var(--white); margin-bottom: 5px; }
+.contact-form-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+.contact-divider { display: flex; align-items: center; gap: 12px; margin: 20px 0; font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+.contact-divider::before, .contact-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 44px; } .contact-form-card { padding: 32px 24px; } }
+
 /* Modales */
 .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: rgba(8, 8, 16, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 .modal-content { background-color: var(--bg2); margin: 5% auto; padding: 40px; border: 1px solid var(--border-s); border-radius: var(--r-xl); width: 90%; max-width: 680px; max-height: 80vh; overflow-y: auto; color: var(--muted); position: relative; }
@@ -660,24 +686,57 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
   </div>
 </section>
 
-<section style="border-top:1px solid var(--border); padding:80px 0" id="contacto">
+<section id="contacto" class="contact-section">
   <div class="container">
-    <div class="final-box fi">
-      <h2>¿Cuándo quieres empezar<br>a escalar tu negocio?</h2>
-      <p>Agenda una auditoría digital de 20 minutos por WhatsApp, o déjanos tus datos y te contactamos.</p>
-      
-      <form id="contact-form" class="custom-form">
-        <input type="text" id="user_name" name="user_name" placeholder="Tu Nombre / Nombre de tu Negocio" required>
-        <input type="email" id="user_email" name="user_email" placeholder="Tu Email de contacto" required>
-        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Enviar solicitud de auditoría →</button>
-        <div id="form-status" class="form-status">Enviando...</div>
-      </form>
+    <div class="contact-grid fi">
 
-      <div class="final-actions" style="border-top: 1px solid var(--border); padding-top: 30px; margin-top: 10px;">
-        <a href="https://wa.me/34657930828?text=Hola%2C%20quiero%20mi%20auditor%C3%ADa%20gratuita." class="btn btn-wa" target="_blank" rel="noopener">
-          WhatsApp ahora
-        </a>
+      <!-- COLUMNA IZQUIERDA: COPY -->
+      <div class="contact-copy">
+        <span class="contact-kicker">Auditoría Digital Gratuita</span>
+
+        <h2 class="contact-headline">Tu competencia ya tiene<br>clientes que <em>eran tuyos.</em><br>Detén la hemorragia.</h2>
+
+        <p class="contact-subline">Cada día sin presencia digital es dinero que se va al bolsillo de otro. En 20 minutos te decimos exactamente qué está fallando y cómo recuperarlo — sin coste, sin compromiso.</p>
+
+        <!-- SELLO GARANTÍA 90 DÍAS -->
+        <div class="guarantee-seal">
+          <div class="guarantee-seal-icon">🛡️</div>
+          <div>
+            <div class="guarantee-seal-title">Garantía de Riesgo Cero — 90 días</div>
+            <div class="guarantee-seal-text">Si en 90 días no ves resultados medibles, te <strong>devolvemos el 100% de tu inversión.</strong> Sin preguntas. Sin letra pequeña.</div>
+          </div>
+        </div>
+
+        <!-- MICROGARANTÍAS -->
+        <div class="contact-trust-row">
+          <div class="contact-trust-item">Web entregada en 7 días o es gratis</div>
+          <div class="contact-trust-item">Primeros resultados visibles en 30 días</div>
+          <div class="contact-trust-item">Sin contratos de permanencia — tú mandas</div>
+          <div class="contact-trust-item">Auditoría inicial 100% gratuita y sin compromiso</div>
+        </div>
       </div>
+
+      <!-- COLUMNA DERECHA: FORMULARIO -->
+      <div class="contact-form-card">
+        <div class="contact-form-title">Solicita tu Auditoría Gratuita</div>
+        <div class="contact-form-subtitle">Respondemos en menos de 24 h en días laborables.</div>
+
+        <form id="contact-form" class="custom-form" style="max-width:100%; margin:0 0 0 0;">
+          <input type="text" id="user_name" name="user_name" placeholder="Tu nombre o nombre de tu negocio" required>
+          <input type="email" id="user_email" name="user_email" placeholder="Tu email de contacto" required>
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:16px 28px;">Quiero mi Auditoría Gratuita →</button>
+          <div id="form-status" class="form-status"></div>
+        </form>
+
+        <div class="contact-divider">o contacta directamente</div>
+
+        <div class="final-actions" style="margin:0;">
+          <a href="https://wa.me/34657930828?text=Hola%2C%20quiero%20mi%20auditor%C3%ADa%20gratuita." class="btn btn-wa" target="_blank" rel="noopener" style="flex:1; justify-content:center;">
+            WhatsApp ahora
+          </a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
