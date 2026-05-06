@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Lanza tu MVP o Landing de validación en 7 días. Código HTML puro en Vercel — carga en 1.2s. Valida tu hipótesis con garantía de 90 días o devolución total.">
+<meta name="keywords" content="MVP landing page, web startup, landing validacion, diseño web rapido, vercel html, emprendedor digital, CAC optimización">
+<meta name="author" content="VURA DIGITAL">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://vuradigital.com/startups">
+
+<link rel="icon" href="logo favicon.png" type="image/png">
+
+<meta property="og:title" content="Lanza tu MVP en 7 Días — VURA DIGITAL para Startups">
+<meta property="og:description" content="Deja de perder CAC con builders lentos. Código puro, Vercel CDN, carga en 1.2s. Garantía de validación de 90 días.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://vuradigital.com/startups">
+
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "VURA DIGITAL — Startups",
+  "description": "Agencia de diseño web para startups y emprendedores digitales. MVPs y landings ultra-rápidas en 7 días.",
+  "url": "https://vuradigital.com",
+  "telephone": "+34657930828",
+  "email": "info@vuradigital.es",
+  "priceRange": "€€",
+  "areaServed": { "@type": "Country", "name": "ES" }
+}
+</script>
+
+<script>
+  window.chatbaseConfig = { chatbotId: "ruPl5ZRZ7DQ2pyoj88z0-" };
+</script>
+<script src="https://www.chatbase.co/embed.min.js" chatbotId="ruPl5ZRZ7DQ2pyoj88z0-" defer></script>
+
+<title>Lanza tu MVP en 7 Días — VURA DIGITAL para Startups</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* ============================================================
+   § DESIGN TOKENS
+   ============================================================ */
+:root {
+  --bg:          #050510;
+  --bg2:         #0a0a18;
+  --bg3:         #111122;
+  --bg4:         #191930;
+  --accent:      #6c5ce7;
+  --accent-h:    #7c6cf0;
+  --accent-s:    #a29bfe;
+  --gold:        #fdcb6e;
+  --danger:      #e17055;
+  --success:     #00b894;
+  --wa:          #25d366;
+  --text:        #e4e4f0;
+  --muted:       #6e6e9a;
+  --white:       #ffffff;
+  --border:      rgba(108,92,231,0.14);
+  --border-s:    rgba(108,92,231,0.34);
+  --r:           10px;
+  --r-lg:        16px;
+  --r-xl:        24px;
+  --f-head:      'Syne', sans-serif;
+  --f-body:      'DM Sans', sans-serif;
+  --f-mono:      'JetBrains Mono', monospace;
+  --ease:        0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  --max-w:       960px;
+}
+
+/* ============================================================
+   § BASE RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: auto; }
+body { background: var(--bg); color: var(--text); font-family: var(--f-body); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font-family: var(--f-body); cursor: pointer; }
+
+/* ============================================================
+   § GRID OVERLAY (tech feel)
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(108,92,231,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108,92,231,0.022) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   § LAYOUT & TYPOGRAPHY
+   ============================================================ */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+section { padding: 80px 0; }
+.eyebrow { display: block; font-family: var(--f-mono); font-size: 11px; font-weight: 500; color: var(--accent-s); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+.section-title { font-family: var(--f-head); font-size: clamp(24px, 4vw, 36px); font-weight: 800; color: var(--white); letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 12px; }
+.section-sub { font-size: 16px; color: var(--muted); max-width: 580px; line-height: 1.7; margin-bottom: 48px; }
+
+/* ============================================================
+   § BOTONES
+   ============================================================ */
+.btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-body); font-size: 15px; font-weight: 500; padding: 14px 28px; border-radius: var(--r); border: none; cursor: pointer; transition: transform var(--ease), box-shadow var(--ease), background var(--ease), border-color var(--ease); text-decoration: none; white-space: nowrap; line-height: 1; position: relative; overflow: hidden; }
+.btn::after { content: ''; position: absolute; top: 0; left: -110%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.13), transparent); transition: none; }
+.btn:hover::after { left: 160%; transition: left 0.55s ease; }
+.btn-primary { background: var(--accent); color: #fff; box-shadow: 0 2px 0 rgba(0,0,0,0.25); }
+.btn-primary:hover { background: var(--accent-h); transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 28px rgba(108,92,231,0.45); }
+.btn-primary:active { transform: translateY(0) scale(1); }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border-s); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--white); background: rgba(108,92,231,0.07); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--accent-s); border: 1px solid var(--border-s); width: 100%; justify-content: center; }
+.btn-outline:hover { background: rgba(108,92,231,0.08); border-color: var(--accent); color: var(--white); transform: translateY(-1px); }
+.btn-featured { background: var(--accent); color: #fff; width: 100%; justify-content: center; border: 1px solid var(--accent); }
+.btn-featured:hover { background: var(--accent-h); transform: translateY(-1px); box-shadow: 0 8px 22px rgba(108,92,231,0.38); }
+.btn-wa { background: var(--wa); color: #fff; border: none; }
+.btn-wa:hover { background: #1fbf5a; transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,211,102,0.38); }
+
+/* Formulario */
+.custom-form { display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin: 0 auto 30px; }
+.custom-form input { width: 100%; padding: 14px 18px; border-radius: var(--r); border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-family: var(--f-body); font-size: 14px; outline: none; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+.custom-form input::placeholder { color: var(--muted); }
+.custom-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(108,92,231,0.15); }
+.form-status { font-size: 13px; margin-top: 10px; display: none; font-weight: 500; font-family: var(--f-mono); }
+
+/* ============================================================
+   § ANIMACIONES
+   ============================================================ */
+.fi { opacity: 0; transform: translateY(30px) scale(0.98); filter: blur(4px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease; }
+.fi.v  { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+.fi.d1 { transition-delay: 0.08s; }
+.fi.d2 { transition-delay: 0.18s; }
+.fi.d3 { transition-delay: 0.28s; }
+.fi.d4 { transition-delay: 0.38s; }
+@media (prefers-reduced-motion: reduce) {
+  .fi { transition: opacity 0.3s ease; filter: none; transform: none; }
+  .fi.v { opacity: 1; }
+}
+
+/* ============================================================
+   § NAVEGACIÓN
+   ============================================================ */
+nav { position: sticky; top: 0; z-index: 200; background: rgba(5,5,16,0.92); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+.nav-logo { font-family: var(--f-head); font-size: 18px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.nav-logo span { color: var(--accent-s); }
+.nav-logo img { height: 32px; width: auto; object-fit: contain; mix-blend-mode: screen; }
+.nav-badge { font-family: var(--f-mono); font-size: 9px; color: var(--accent-s); border: 1px solid var(--border-s); padding: 2px 7px; border-radius: 4px; letter-spacing: 0.5px; margin-left: 4px; }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color var(--ease); }
+.nav-links a:hover { color: var(--white); }
+.nav-cta { font-size: 13px; padding: 10px 20px; }
+.nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; padding: 6px; cursor: pointer; z-index: 300; flex-shrink: 0; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { display: none; position: fixed; inset: 0; z-index: 250; background: rgba(5,5,16,0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
+.mobile-menu.open { display: flex; }
+.mobile-menu-close { position: absolute; top: 20px; right: 20px; background: none; border: 1px solid var(--border-s); color: var(--muted); font-size: 22px; line-height: 1; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: color var(--ease), border-color var(--ease); }
+.mobile-menu-close:hover { color: var(--white); border-color: var(--accent); }
+.mobile-nav-link { font-family: var(--f-head); font-size: 28px; font-weight: 800; color: var(--muted); text-decoration: none; letter-spacing: -0.5px; transition: color 0.2s ease; }
+.mobile-nav-link:hover { color: var(--accent-s); }
+.mobile-cta { font-size: 16px; padding: 14px 36px; margin-top: 8px; }
+
+/* ============================================================
+   § HERO
+   ============================================================ */
+.hero { padding: 96px 0 80px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 900px; height: 900px; background: radial-gradient(circle, rgba(108,92,231,0.13) 0%, transparent 65%); pointer-events: none; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(108,92,231,0.1); border: 1px solid var(--border-s); color: var(--accent-s); font-family: var(--f-mono); font-size: 11px; padding: 7px 18px; border-radius: 40px; margin-bottom: 32px; }
+.hero-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse-dot 2s ease-in-out infinite; }
+@keyframes pulse-dot { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.35; transform:scale(0.75); } }
+.hero h1 { font-family: var(--f-head); font-size: clamp(32px, 6vw, 62px); font-weight: 800; color: var(--white); letter-spacing: -2px; line-height: 1.06; margin-bottom: 24px; }
+.hero h1 em { font-style: normal; color: var(--accent-s); }
+.hero-sub { font-size: clamp(15px, 2vw, 17px); color: var(--muted); max-width: 600px; margin: 0 auto 40px; line-height: 1.7; }
+.hero-sub strong { color: var(--text); font-weight: 400; }
+.hero-sub code { font-family: var(--f-mono); font-size: 13px; background: var(--bg3); border: 1px solid var(--border-s); color: var(--accent-s); padding: 2px 7px; border-radius: 5px; }
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 64px; }
+.btn-hero { font-size: 16px; padding: 16px 34px; }
+.hero-metrics { display: flex; justify-content: center; overflow: hidden; border: 1px solid var(--border); border-radius: var(--r-lg); }
+.hero-metric { flex: 1; padding: 22px 16px; text-align: center; border-right: 1px solid var(--border); background: var(--bg2); max-width: 220px; }
+.hero-metric:last-child { border-right: none; }
+.metric-num { font-family: var(--f-head); font-size: 24px; font-weight: 800; color: var(--white); line-height: 1; margin-bottom: 4px; }
+.metric-num.accent { color: var(--accent-s); }
+.metric-label { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+/* ============================================================
+   § STACK STRIP
+   ============================================================ */
+.stack-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); padding: 18px 0; }
+.stack-strip-inner { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; padding: 0 24px; }
+.stack-item { display: flex; align-items: center; gap: 7px; font-family: var(--f-mono); font-size: 11px; color: var(--muted); white-space: nowrap; }
+.stack-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--border-s); flex-shrink: 0; }
+
+/* ============================================================
+   § CALCULADORA CAC
+   ============================================================ */
+.calc-section { padding: 64px 0; border-top: 1px solid var(--border); }
+.calc-box { background: var(--bg2); border: 1px solid var(--border-s); border-radius: var(--r-xl); padding: 48px; position: relative; overflow: hidden; }
+.calc-box::before { content: ''; position: absolute; top: 0; right: 0; width: 360px; height: 360px; background: radial-gradient(circle, rgba(108,92,231,0.07) 0%, transparent 70%); pointer-events: none; }
+.calc-tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--f-mono); font-size: 10px; color: var(--danger); border: 1px solid rgba(225,112,85,0.3); background: rgba(225,112,85,0.06); padding: 4px 10px; border-radius: 5px; margin-bottom: 12px; }
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.calc-inputs { display: flex; flex-direction: column; gap: 26px; }
+.input-group label { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.input-group label strong { color: var(--white); font-weight: 700; font-family: var(--f-mono); font-size: 13px; }
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: var(--bg4); border-radius: 4px; outline: none; cursor: pointer; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); transition: transform var(--ease); }
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); }
+.calc-result { background: var(--bg3); border: 1px solid var(--border-s); border-radius: var(--r-lg); padding: 32px 28px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.result-label { font-family: var(--f-mono); font-size: 10px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+.result-amount { font-family: var(--f-head); font-size: 54px; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 4px; transition: color 0.35s ease; }
+.result-amount.high { color: var(--danger); }
+.result-period { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+.result-period strong { color: var(--text); font-weight: 500; }
+.result-breakdown { width: 100%; background: var(--bg4); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; margin-bottom: 20px; text-align: left; }
+.breakdown-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); padding: 4px 0; }
+.breakdown-row strong { color: var(--text); font-family: var(--f-mono); font-size: 12px; }
+.breakdown-row.highlight strong { color: var(--danger); }
+.loss-bar-wrap { width: 100%; margin-bottom: 22px; }
+.loss-bar-labels { display: flex; justify-content: space-between; font-family: var(--f-mono); font-size: 10px; color: var(--muted); margin-bottom: 6px; }
+.loss-bar-track { width: 100%; height: 6px; background: var(--bg4); border-radius: 8px; overflow: hidden; }
+.loss-bar-fill { height: 100%; border-radius: 8px; background: linear-gradient(90deg, var(--accent), var(--danger)); transition: width 0.5s cubic-bezier(0.4,0,0.2,1); width: 0%; }
+.calc-cta-static { width: 100%; justify-content: center; margin-bottom: 10px; }
+.calc-cta-wa { width: 100%; justify-content: center; margin-top: 10px; font-size: 13px; padding: 12px 16px; opacity: 0; transform: translateY(6px); transition: opacity 0.4s ease, transform 0.4s ease; pointer-events: none; }
+.calc-cta-wa.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.result-note { font-family: var(--f-mono); font-size: 10px; color: var(--muted); margin-top: 10px; }
+
+/* ============================================================
+   § TESTIMONIOS
+   ============================================================ */
+.testimonials-section { border-top: 1px solid var(--border); padding: 72px 0; }
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.testimonial-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 28px; transition: border-color var(--ease), transform var(--ease); }
+.testimonial-card:hover { border-color: var(--border-s); transform: translateY(-3px); }
+.testimonial-metric { font-family: var(--f-head); font-size: 38px; font-weight: 800; color: var(--accent-s); line-height: 1; margin-bottom: 4px; }
+.testimonial-kpi { font-family: var(--f-mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 18px; }
+.testimonial-quote { font-size: 13px; color: var(--text); line-height: 1.65; font-style: italic; margin-bottom: 20px; opacity: 0.9; }
+.testimonial-divider { height: 1px; background: var(--border); margin-bottom: 14px; }
+.testimonial-author { display: flex; align-items: center; gap: 10px; }
+.testimonial-avatar { width: 36px; height: 36px; border-radius: 8px; background: rgba(108,92,231,0.15); color: var(--accent-s); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; font-family: var(--f-head); flex-shrink: 0; }
+.testimonial-name { font-size: 13px; color: var(--white); font-weight: 500; line-height: 1.2; }
+.testimonial-company { font-family: var(--f-mono); font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+/* ============================================================
+   § METODOLOGÍA
+   ============================================================ */
+.metod-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+.metod-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 32px 28px; position: relative; transition: border-color var(--ease), transform var(--ease); display: flex; flex-direction: column; }
+.metod-card:hover { border-color: var(--border-s); transform: translateY(-3px); }
+.metod-card.metod-featured { border-color: var(--accent); background: linear-gradient(160deg, rgba(108,92,231,0.08), var(--bg2)); }
+.metod-step { font-family: var(--f-mono); font-size: 11px; color: var(--accent-s); letter-spacing: 1.5px; margin-bottom: 16px; opacity: 0.7; }
+.metod-icon { width: 48px; height: 48px; border-radius: var(--r); background: rgba(108,92,231,0.12); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--accent-s); margin-bottom: 20px; flex-shrink: 0; transition: background var(--ease), border-color var(--ease); }
+.metod-card:hover .metod-icon { background: rgba(108,92,231,0.2); border-color: var(--border-s); }
+.metod-card.metod-featured .metod-icon { background: rgba(108,92,231,0.2); border-color: var(--border-s); }
+.metod-title { font-family: var(--f-head); font-size: 17px; font-weight: 800; color: var(--white); margin-bottom: 10px; line-height: 1.2; }
+.metod-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; flex: 1; }
+.metod-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.metod-list li { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; line-height: 1.4; }
+.metod-list li::before { content: '✓'; width: 14px; height: 14px; border-radius: 50%; background: rgba(108,92,231,0.15); border: 1px solid var(--border-s); flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 8px; color: var(--accent-s); font-weight: 700; }
+.metod-result { font-family: var(--f-mono); font-size: 11px; color: var(--accent-s); padding-top: 16px; border-top: 1px solid var(--border); margin-top: auto; }
+.metod-trust { display: flex; align-items: center; justify-content: center; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; flex-wrap: wrap; }
+.metod-trust-item { flex: 1; min-width: 140px; display: flex; flex-direction: column; align-items: center; padding: 22px 16px; text-align: center; }
+.metod-trust-sep { width: 1px; height: 40px; background: var(--border); flex-shrink: 0; }
+.metod-trust-num { font-family: var(--f-head); font-size: 22px; font-weight: 800; color: var(--white); line-height: 1; margin-bottom: 4px; }
+.metod-trust-label { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+/* ============================================================
+   § BENCHMARK
+   ============================================================ */
+.benchmark-section { border-top: 1px solid var(--border); padding: 80px 0; }
+.benchmark-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.benchmark-table { background: var(--bg2); border: 1px solid var(--border-s); border-radius: var(--r-xl); padding: 36px; }
+.benchmark-header { font-family: var(--f-mono); font-size: 10px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+.benchmark-row { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.benchmark-row:last-child { border-bottom: none; }
+.benchmark-name { font-size: 13px; color: var(--muted); width: 120px; flex-shrink: 0; }
+.benchmark-bar-wrap { flex: 1; }
+.benchmark-bar-track { height: 6px; background: var(--bg4); border-radius: 6px; overflow: hidden; }
+.benchmark-bar-fill { height: 100%; border-radius: 6px; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); width: 0; }
+.benchmark-fill-vura { background: linear-gradient(90deg, var(--accent), var(--accent-s)); }
+.benchmark-fill-bad { background: linear-gradient(90deg, var(--danger), rgba(225,112,85,0.4)); }
+.benchmark-val { font-family: var(--f-mono); font-size: 12px; width: 42px; text-align: right; flex-shrink: 0; }
+.benchmark-val.good { color: var(--accent-s); }
+.benchmark-val.bad { color: var(--danger); }
+.benchmark-copy { display: flex; flex-direction: column; gap: 20px; }
+
+/* ============================================================
+   § SISTEMA / STACK CARDS
+   ============================================================ */
+.system-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.sys-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; transition: border-color var(--ease), background var(--ease), transform var(--ease); }
+.sys-card:hover { border-color: var(--border-s); background: var(--bg3); transform: translateY(-2px); }
+.sys-icon { width: 44px; height: 44px; border-radius: var(--r); background: rgba(108,92,231,0.12); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; }
+.sys-title { font-family: var(--f-head); font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 5px; }
+.sys-tag { font-family: var(--f-mono); font-size: 10px; color: var(--accent-s); margin-bottom: 10px; opacity: 0.8; }
+.sys-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+.sys-result { font-family: var(--f-mono); font-size: 11px; color: var(--accent-s); }
+
+/* ============================================================
+   § PRECIOS
+   ============================================================ */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+.price-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 32px; transition: border-color var(--ease); position: relative; }
+.price-card:hover { border-color: var(--border-s); }
+.price-card.featured { border-color: var(--accent); background: linear-gradient(135deg, rgba(108,92,231,0.07), var(--bg2)); }
+.price-badge { display: inline-block; font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; background: var(--accent); color: #fff; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
+.price-name { font-family: var(--f-head); font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 6px; }
+.price-desc { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+.price-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+.price-amount { font-family: var(--f-head); font-size: 38px; font-weight: 800; color: var(--white); line-height: 1; }
+.price-amount sup { font-size: 18px; vertical-align: super; margin-right: 2px; }
+.price-amount sub { font-size: 14px; font-weight: 400; color: var(--muted); vertical-align: baseline; }
+.price-monthly { font-size: 12px; color: var(--muted); margin-top: 6px; margin-bottom: 20px; }
+.price-roi { font-family: var(--f-mono); font-size: 11px; color: var(--success); font-weight: 500; margin-bottom: 18px; display: flex; align-items: center; gap: 5px; }
+.price-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.price-features li { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 10px; line-height: 1.4; }
+.price-features li.on { color: var(--text); }
+.price-features li::before { content: ''; width: 16px; height: 16px; border-radius: 50%; background: var(--bg4); border: 1px solid var(--border); flex-shrink: 0; }
+.price-features li.on::before { background: rgba(108,92,231,0.2); border-color: var(--accent); content: '✓'; font-size: 9px; color: var(--accent-s); display: flex; align-items: center; justify-content: center; font-weight: 700; }
+
+/* ============================================================
+   § FAQ
+   ============================================================ */
+.faq-section { border-top: 1px solid var(--border); padding: 72px 0; }
+.faq-list { max-width: 680px; display: flex; flex-direction: column; gap: 0; margin-top: 40px; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item:first-child { border-top: 1px solid var(--border); }
+.faq-q { display: flex; justify-content: space-between; align-items: center; padding: 20px 4px; font-size: 15px; font-weight: 500; color: var(--white); cursor: pointer; gap: 20px; transition: color var(--ease); background: none; border: none; width: 100%; text-align: left; }
+.faq-q:hover { color: var(--accent-s); }
+.faq-icon { width: 24px; height: 24px; border-radius: 50%; background: rgba(108,92,231,0.12); display: flex; align-items: center; justify-content: center; color: var(--accent-s); font-size: 18px; font-weight: 300; flex-shrink: 0; transition: transform var(--ease), background var(--ease); line-height: 1; }
+.faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(108,92,231,0.25); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.38s ease; }
+.faq-item.open .faq-a { max-height: 280px; }
+.faq-a-inner { font-size: 14px; color: var(--muted); line-height: 1.75; padding: 0 4px 20px; }
+.faq-a-inner strong { color: var(--text); font-weight: 400; }
+.faq-a-inner code { font-family: var(--f-mono); font-size: 12px; background: var(--bg3); border: 1px solid var(--border); color: var(--accent-s); padding: 1px 6px; border-radius: 4px; }
+
+/* ============================================================
+   § CONTACTO
+   ============================================================ */
+.contact-section { background: var(--bg); padding: 100px 0; position: relative; overflow: hidden; border-top: 1px solid var(--border); }
+.contact-section::before { content: ''; position: absolute; top: -200px; right: -100px; width: 640px; height: 640px; background: radial-gradient(circle, rgba(108,92,231,0.12) 0%, transparent 65%); pointer-events: none; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.contact-copy { display: flex; flex-direction: column; gap: 28px; }
+.contact-kicker { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent-s); }
+.contact-kicker::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-s); animation: pulse-dot 2s infinite; }
+.contact-headline { font-family: var(--f-head); font-size: clamp(26px, 3.2vw, 46px); font-weight: 800; color: var(--white); letter-spacing: -1px; line-height: 1.1; margin: 0; }
+.contact-headline em { font-style: normal; color: var(--accent-s); }
+.contact-subline { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 420px; margin: 0; }
+.guarantee-seal { display: flex; gap: 16px; align-items: flex-start; background: linear-gradient(135deg, rgba(253,203,110,0.07), rgba(253,203,110,0.02)); border: 1px solid rgba(253,203,110,0.22); border-radius: var(--r-lg); padding: 20px 24px; }
+.guarantee-seal-icon { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+.guarantee-seal-title { font-family: var(--f-mono); font-size: 10px; color: #fdcb6e; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; }
+.guarantee-seal-text { font-size: 13px; color: var(--muted); line-height: 1.55; }
+.guarantee-seal-text strong { color: var(--text); font-weight: 500; }
+.contact-trust-row { display: flex; flex-direction: column; gap: 10px; }
+.contact-trust-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+.contact-trust-item::before { content: '✓'; display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: rgba(108,92,231,0.18); color: var(--accent-s); font-size: 10px; font-weight: 700; flex-shrink: 0; }
+.contact-form-card { background: var(--bg2); border: 1px solid var(--border-s); border-radius: var(--r-xl); padding: 44px 40px; position: relative; overflow: hidden; }
+.contact-form-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-s)); }
+.contact-form-title { font-family: var(--f-head); font-size: 20px; font-weight: 800; color: var(--white); margin-bottom: 5px; }
+.contact-form-subtitle { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin-bottom: 28px; }
+.contact-divider { display: flex; align-items: center; gap: 12px; margin: 20px 0; font-family: var(--f-mono); font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+.contact-divider::before, .contact-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* ============================================================
+   § MODALES, COOKIES, FOOTER
+   ============================================================ */
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(5,5,16,0.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.modal-content { background-color: var(--bg2); margin: 5% auto; padding: 40px; border: 1px solid var(--border-s); border-radius: var(--r-xl); width: 90%; max-width: 680px; max-height: 80vh; overflow-y: auto; color: var(--muted); position: relative; }
+.modal-content h2 { color: var(--white); font-family: var(--f-head); margin-bottom: 16px; font-size: 24px; }
+.modal-content p { margin-bottom: 12px; font-size: 14px; }
+.close-modal { color: var(--muted); position: absolute; top: 24px; right: 28px; font-size: 28px; font-weight: bold; cursor: pointer; transition: color var(--ease); }
+.close-modal:hover { color: var(--white); }
+.cookie-banner { position: fixed; bottom: 24px; left: 24px; right: 24px; z-index: 990; background: var(--bg2); border: 1px solid var(--border-s); border-radius: var(--r-lg); padding: 24px; display: flex; justify-content: space-between; align-items: center; gap: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+.cookie-text { font-size: 13px; color: var(--muted); }
+.cookie-text a { color: var(--accent-s); text-decoration: none; }
+footer { border-top: 1px solid var(--border); padding: 40px 0; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.footer-logo { font-family: var(--f-head); font-size: 16px; font-weight: 800; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.footer-logo span { color: var(--accent-s); }
+.footer-logo img { height: 24px; width: auto; object-fit: contain; mix-blend-mode: screen; }
+.footer-tagline { font-family: var(--f-mono); font-size: 10px; color: var(--muted); margin-top: 4px; }
+.footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color var(--ease); cursor: pointer; }
+.footer-links a:hover { color: var(--white); }
+.footer-copy { font-family: var(--f-mono); font-size: 10px; color: var(--muted); text-align: right; }
+
+/* ============================================================
+   § RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .nav-links a:not(.nav-cta) { display: none; }
+  .nav-links .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  section { padding: 48px 0; }
+  .container { padding: 0 16px; }
+  .hero { padding: 48px 0 36px; }
+  .hero-metrics { flex-wrap: wrap; border-radius: var(--r); }
+  .hero-metric { min-width: 130px; flex: 1 1 130px; border-right: none; border-bottom: 1px solid var(--border); padding: 16px 12px; }
+  .hero-metric:last-child { border-bottom: none; }
+  .metric-num { font-size: 20px; }
+  .calc-section { padding: 40px 0; overflow-x: hidden; }
+  .calc-box { padding: 24px 16px; }
+  .calc-grid { grid-template-columns: 1fr; gap: 28px; }
+  .calc-result { padding: 24px 18px; }
+  .result-amount { font-size: 40px; }
+  .metod-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 32px; }
+  .metod-trust-sep { display: none; }
+  .metod-trust-item { min-width: 120px; border-bottom: 1px solid var(--border); padding: 16px 12px; }
+  .metod-trust-item:last-child { border-bottom: none; }
+  .testimonials-grid, .pricing-grid { grid-template-columns: 1fr; }
+  .system-grid { grid-template-columns: repeat(2, 1fr); }
+  .benchmark-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 44px; }
+  .contact-form-card { padding: 32px 24px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .footer-copy { text-align: left; }
+  .cookie-banner { flex-direction: column; text-align: center; left: 16px; right: 16px; bottom: 16px; padding: 20px; }
+  .stack-strip-inner { gap: 16px; justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding: 0 16px; }
+}
+
+@media (max-width: 480px) {
+  .system-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { justify-content: center; }
+  .price-card { padding: 24px 18px; }
+}
+
+@media print {
+  nav, .cookie-banner { display: none !important; }
+  body::before { display: none; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVEGACIÓN -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#inicio" class="nav-logo" aria-label="VURA DIGITAL startups">
+        <img src="logo favicon.png" alt="Logo VURA">
+        <div>VURA <span>DIGITAL</span> <span class="nav-badge">STARTUPS</span></div>
+      </a>
+      <div class="nav-links" role="navigation" aria-label="Menú principal">
+        <a href="#casos">Casos</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#stack">Stack</a>
+        <a href="#precios">Precios</a>
+        <a href="index.html">Negocios Locales</a>
+        <a href="#contacto" class="btn btn-primary nav-cta">Lanzar mi MVP →</a>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menú de navegación móvil">
+  <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Cerrar menú">×</button>
+  <a href="#casos" class="mobile-nav-link">Casos</a>
+  <a href="#proceso" class="mobile-nav-link">Proceso</a>
+  <a href="#stack" class="mobile-nav-link">Stack</a>
+  <a href="#precios" class="mobile-nav-link">Precios</a>
+  <a href="index.html" class="mobile-nav-link">Negocios Locales</a>
+  <a href="#contacto" class="btn btn-primary mobile-cta">Lanzar mi MVP →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio" aria-labelledby="hero-h1">
+  <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="hero-badge fi" role="note">
+      <div class="hero-dot" aria-hidden="true"></div>
+      // deploy_ready → 7 días · 1.2s load · validación garantizada
+    </div>
+    <h1 id="hero-h1" class="fi d1">
+      Lanza tu MVP<br>
+      <em>en 7 días.</em><br>
+      No en 7 semanas.
+    </h1>
+    <p class="hero-sub fi d2">
+      Los builders lentos destruyen tu CAC antes de empezar. Nosotros codificamos tu landing en <code>HTML puro</code> + <code>Vercel</code> — carga en <strong>1.2 segundos</strong> para que tus ads conviertan desde el primer día.
+    </p>
+    <div class="hero-actions fi d3">
+      <a href="#calculadora" class="btn btn-primary btn-hero">Calcular mi CAC perdido →</a>
+      <a href="#casos" class="btn btn-ghost">Ver MVPs lanzados</a>
+    </div>
+    <div class="hero-metrics fi d4" role="list">
+      <div class="hero-metric" role="listitem"><div class="metric-num accent">1.2s</div><div class="metric-label">Velocidad garantizada</div></div>
+      <div class="hero-metric" role="listitem"><div class="metric-num">7 días</div><div class="metric-label">Entrega o es gratis</div></div>
+      <div class="hero-metric" role="listitem"><div class="metric-num">90 días</div><div class="metric-label">Garantía de validación</div></div>
+      <div class="hero-metric" role="listitem"><div class="metric-num">0</div><div class="metric-label">Frameworks pesados</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK STRIP -->
+<div class="stack-strip" role="complementary" aria-label="Stack tecnológico">
+  <div class="stack-strip-inner">
+    <div class="stack-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      HTML5 puro
+    </div>
+    <div class="stack-dot"></div>
+    <div class="stack-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Vercel CDN global
+    </div>
+    <div class="stack-dot"></div>
+    <div class="stack-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      Vanilla JS
+    </div>
+    <div class="stack-dot"></div>
+    <div class="stack-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      GSAP animations
+    </div>
+    <div class="stack-dot"></div>
+    <div class="stack-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Google Analytics 4
+    </div>
+    <div class="stack-dot"></div>
+    <div class="stack-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Meta Pixel
+    </div>
+    <div class="stack-dot"></div>
+    <div class="stack-item">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      CRM integrado
+    </div>
+  </div>
+</div>
+
+<!-- CALCULADORA CAC -->
+<div class="calc-section" id="calculadora" role="region" aria-label="Calculadora de CAC perdido por velocidad de carga">
+  <div class="container">
+    <div class="calc-box fi">
+      <div class="calc-tag">
+        ⚠ cac_leak_detector.js · activo
+      </div>
+      <span class="eyebrow">// diagnóstico de rentabilidad publicitaria</span>
+      <h2 class="section-title">¿Cuánto CAC extra pagas<br>por una web lenta?</h2>
+      <p class="section-sub">Google lo documentó: cada segundo extra de carga = 20% menos de conversiones. Configura tu situación y descubre cuánto dinero tiras cada mes en ads que no convierten por culpa de la velocidad.</p>
+
+      <div class="calc-grid">
+        <div class="calc-inputs" role="group" aria-label="Variables de tu campaña">
+          <div class="input-group">
+            <label for="adspend">Gasto mensual en Ads <strong id="ads-val">800 €</strong></label>
+            <input type="range" id="adspend" min="100" max="5000" value="800" step="50" oninput="updateCalc()">
+          </div>
+          <div class="input-group">
+            <label for="visitors">Visitas mensuales desde ads <strong id="vis-val">3.000</strong></label>
+            <input type="range" id="visitors" min="200" max="20000" value="3000" step="100" oninput="updateCalc()">
+          </div>
+          <div class="input-group">
+            <label for="ticket">Ticket medio de tu producto <strong id="ticket-val">79 €</strong></label>
+            <input type="range" id="ticket" min="10" max="500" value="79" step="1" oninput="updateCalc()">
+          </div>
+          <div class="input-group">
+            <label for="loadtime">Velocidad de carga actual <strong id="load-val">4.2 seg</strong></label>
+            <input type="range" id="loadtime" min="1" max="9" value="4.2" step="0.1" oninput="updateCalc()">
+          </div>
+        </div>
+
+        <div class="calc-result" role="region" aria-live="polite">
+          <div class="result-label">// cac_extra_por_velocidad</div>
+          <div class="result-amount" id="lost-amount">22 €</div>
+          <div class="result-period">extra por cliente · <strong id="lost-year">438 €</strong> al mes malgastados</div>
+
+          <div class="result-breakdown">
+            <div class="breakdown-row">
+              <span>CAC a 1.2s (VURA)</span>
+              <strong id="cac-vura">53 €</strong>
+            </div>
+            <div class="breakdown-row highlight">
+              <span>CAC con tu web actual</span>
+              <strong id="cac-actual">75 €</strong>
+            </div>
+            <div class="breakdown-row">
+              <span>Clientes perdidos/mes</span>
+              <strong id="clients-lost">6</strong>
+            </div>
+            <div class="breakdown-row">
+              <span>Revenue no capturado</span>
+              <strong id="revenue-lost">474 €</strong>
+            </div>
+          </div>
+
+          <div class="loss-bar-wrap" aria-hidden="true">
+            <div class="loss-bar-labels">
+              <span>1.2s → VURA</span>
+              <span id="bar-pct-label">tu web actual</span>
+            </div>
+            <div class="loss-bar-track"><div class="loss-bar-fill" id="loss-bar"></div></div>
+          </div>
+          <a href="#contacto" class="btn btn-primary calc-cta-static">Eliminar este coste →</a>
+          <a id="calc-wa-btn" href="#" target="_blank" rel="noopener" class="btn btn-wa calc-cta-wa">Enviar análisis por WhatsApp</a>
+          <div class="result-note">// Google: cada segundo extra = -20% conversiones</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CASOS / TESTIMONIOS -->
+<section class="testimonials-section" id="casos">
+  <div class="container">
+    <div class="fi">
+      <span class="eyebrow">// social_proof → founders reales</span>
+      <h2 class="section-title">MVPs que validaron hipótesis reales</h2>
+      <p class="section-sub">Sin proyecciones. Métricas de founders que lanzaron con VURA y consiguieron señal antes de gastar en producto.</p>
+    </div>
+    <div class="testimonials-grid" role="list">
+      <article class="testimonial-card fi d1" role="listitem">
+        <div class="testimonial-metric">47%</div>
+        <div class="testimonial-kpi">conversion_rate → landing</div>
+        <blockquote class="testimonial-quote">"Necesitaba saber si había demanda antes de contratar devs. La landing cargó en 1.1s y tuvimos señal clara en 3 semanas de campaña."</blockquote>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MR</div>
+          <div>
+            <div class="testimonial-name">María R.</div>
+            <div class="testimonial-company">founder · B2B SaaS · Madrid</div>
+          </div>
+        </div>
+      </article>
+      <article class="testimonial-card fi d2" role="listitem">
+        <div class="testimonial-metric">−38%</div>
+        <div class="testimonial-kpi">reducción de CAC en 30 días</div>
+        <blockquote class="testimonial-quote">"Usaba Webflow y el CAC era inasumible. Con VURA bajé el coste por adquisición un 38% el primer mes y pude reinvertir en más ads."</blockquote>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AC</div>
+          <div>
+            <div class="testimonial-name">Álvaro C.</div>
+            <div class="testimonial-company">founder · App fintech · Barcelona</div>
+          </div>
+        </div>
+      </article>
+      <article class="testimonial-card fi d3" role="listitem">
+        <div class="testimonial-metric">3.2×</div>
+        <div class="testimonial-kpi">ROAS → primera campaña</div>
+        <blockquote class="testimonial-quote">"Lanzamos el martes, el viernes teníamos los primeros signos de validación. Velocidad de ejecución imposible con cualquier builder del mercado."</blockquote>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">LV</div>
+          <div>
+            <div class="testimonial-name">Laura V.</div>
+            <div class="testimonial-company">founder · eCommerce D2C · Valencia</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso" style="border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="fi">
+      <span class="eyebrow">// process → de idea a deploy</span>
+      <h2 class="section-title">Tres fases. MVP en producción.</h2>
+      <p class="section-sub">Un flujo diseñado para founders que necesitan velocidad, no metodologías infinitas.</p>
+    </div>
+    <div class="metod-grid" role="list">
+      <article class="metod-card" role="listitem">
+        <div class="metod-step">// 01_brief</div>
+        <div class="metod-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3 class="metod-title">Brief & Wireframes</h3>
+        <p class="metod-desc">Analizamos tu hipótesis, identificamos el mensaje que convierte y diseñamos la arquitectura de la landing en 24 horas.</p>
+        <ul class="metod-list">
+          <li>Análisis de propuesta de valor</li>
+          <li>Definición del ICP y el dolor clave</li>
+          <li>Wireframe de alta fidelidad</li>
+        </ul>
+        <div class="metod-result">→ Entregable: wireframe en 48h</div>
+      </article>
+      <article class="metod-card metod-featured" role="listitem">
+        <div class="metod-step">// 02_code</div>
+        <div class="metod-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3 class="metod-title">Código & Deploy</h3>
+        <p class="metod-desc">Codificamos en HTML puro. Deploy en Vercel CDN global. Tu página carga en 1.2s desde cualquier país del mundo.</p>
+        <ul class="metod-list">
+          <li>HTML5 + CSS3 + Vanilla JS</li>
+          <li>Deploy automático en Vercel</li>
+          <li>GA4 + Meta Pixel configurados</li>
+          <li>Formulario conectado al CRM</li>
+        </ul>
+        <div class="metod-result">→ Entregable: live en 7 días</div>
+      </article>
+      <article class="metod-card" role="listitem">
+        <div class="metod-step">// 03_validate</div>
+        <div class="metod-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <h3 class="metod-title">Tests & Optimización</h3>
+        <p class="metod-desc">Revisamos métricas al cabo de 30 días. Si el copy no convierte, lo iteramos. La hipótesis importa más que el diseño.</p>
+        <ul class="metod-list">
+          <li>Revisión de métricas en 30 días</li>
+          <li>Iteración de copy si falla la señal</li>
+          <li>Soporte prioritario continuo</li>
+        </ul>
+        <div class="metod-result">→ Entregable: informe de señal</div>
+      </article>
+    </div>
+    <div class="metod-trust" role="list">
+      <div class="metod-trust-item" role="listitem"><div class="metod-trust-num">+80</div><div class="metod-trust-label">MVPs lanzados</div></div>
+      <div class="metod-trust-sep" aria-hidden="true"></div>
+      <div class="metod-trust-item" role="listitem"><div class="metod-trust-num">1.2s</div><div class="metod-trust-label">Velocidad media de carga</div></div>
+      <div class="metod-trust-sep" aria-hidden="true"></div>
+      <div class="metod-trust-item" role="listitem"><div class="metod-trust-num">100%</div><div class="metod-trust-label">Garantía de devolución</div></div>
+      <div class="metod-trust-sep" aria-hidden="true"></div>
+      <div class="metod-trust-item" role="listitem"><div class="metod-trust-num">7 días</div><div class="metod-trust-label">Tiempo medio hasta deploy</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BENCHMARK + STACK -->
+<section id="stack" class="benchmark-section">
+  <div class="container">
+    <div class="benchmark-grid">
+      <div class="benchmark-copy fi">
+        <span class="eyebrow">// performance_benchmark</span>
+        <h2 class="section-title">Tu builder lento<br>te roba dinero.</h2>
+        <p style="font-size:15px; color:var(--muted); line-height:1.7; margin-bottom:16px;">Webflow, Framer o WordPress cargan entre 3 y 7 segundos. Amazon documentó que <strong style="color:var(--text); font-weight:500;">cada 100ms de retraso = 1% menos de ventas</strong>. En un solo segundo destruyes el 10% de tu presupuesto de ads.</p>
+        <p style="font-size:15px; color:var(--muted); line-height:1.7;">Codificamos sin capas intermedias. HTML nativo, CSS optimizado, cero JavaScript innecesario. El resultado: tu CAC baja desde el primer día de campaña.</p>
+      </div>
+      <div class="benchmark-table fi d1">
+        <div class="benchmark-header">// load_time_comparison (segundos)</div>
+        <div class="benchmark-row">
+          <div class="benchmark-name" style="color:var(--text);">VURA (HTML)</div>
+          <div class="benchmark-bar-wrap"><div class="benchmark-bar-track"><div class="benchmark-bar-fill benchmark-fill-vura" data-width="13"></div></div></div>
+          <div class="benchmark-val good">1.2s</div>
+        </div>
+        <div class="benchmark-row">
+          <div class="benchmark-name">Webflow</div>
+          <div class="benchmark-bar-wrap"><div class="benchmark-bar-track"><div class="benchmark-bar-fill benchmark-fill-bad" data-width="38"></div></div></div>
+          <div class="benchmark-val bad">3.4s</div>
+        </div>
+        <div class="benchmark-row">
+          <div class="benchmark-name">Framer</div>
+          <div class="benchmark-bar-wrap"><div class="benchmark-bar-track"><div class="benchmark-bar-fill benchmark-fill-bad" data-width="46"></div></div></div>
+          <div class="benchmark-val bad">4.1s</div>
+        </div>
+        <div class="benchmark-row">
+          <div class="benchmark-name">WordPress</div>
+          <div class="benchmark-bar-wrap"><div class="benchmark-bar-track"><div class="benchmark-bar-fill benchmark-fill-bad" data-width="58"></div></div></div>
+          <div class="benchmark-val bad">5.2s</div>
+        </div>
+        <div class="benchmark-row">
+          <div class="benchmark-name">Wix</div>
+          <div class="benchmark-bar-wrap"><div class="benchmark-bar-track"><div class="benchmark-bar-fill benchmark-fill-bad" data-width="78"></div></div></div>
+          <div class="benchmark-val bad">7.0s</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SISTEMA TECH -->
+<section id="sistema" style="border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="fi">
+      <span class="eyebrow">// tech_stack → lo que usamos</span>
+      <h2 class="section-title">Cuatro tecnologías. Una ventaja competitiva.</h2>
+      <p class="section-sub">Sin frameworks porque no los necesitamos. Código limpio, cero dependencias, rendimiento máximo.</p>
+    </div>
+    <div class="system-grid">
+      <div class="sys-card fi d1">
+        <div class="sys-icon">⚡</div>
+        <h3 class="sys-title">HTML5 Puro</h3>
+        <div class="sys-tag">// zero framework overhead</div>
+        <p class="sys-desc">Sin React, Vue ni Svelte. HTML semántico, CSS nativo y JS mínimo. El código más rápido posible.</p>
+        <div class="sys-result">→ Core Web Vitals top 5%</div>
+      </div>
+      <div class="sys-card fi d2">
+        <div class="sys-icon">🌐</div>
+        <h3 class="sys-title">Vercel CDN</h3>
+        <div class="sys-tag">// global edge network</div>
+        <p class="sys-desc">Deploy automático desde GitHub. Tu web sirve desde el nodo más cercano a cada usuario del mundo.</p>
+        <div class="sys-result">→ TTFB &lt; 80ms global</div>
+      </div>
+      <div class="sys-card fi d3">
+        <div class="sys-icon">🎯</div>
+        <h3 class="sys-title">Analytics + Pixel</h3>
+        <div class="sys-tag">// track desde día 1</div>
+        <p class="sys-desc">Google Analytics 4 y Meta Pixel configurados desde el primer deploy. Datos reales desde el primer clic.</p>
+        <div class="sys-result">→ Señal de validación inmediata</div>
+      </div>
+      <div class="sys-card fi d4">
+        <div class="sys-icon">🛡️</div>
+        <h3 class="sys-title">CRM integrado</h3>
+        <div class="sys-tag">// lead capture automático</div>
+        <p class="sys-desc">Cada lead va a tu hoja de gestión y a tu correo. Sin perder un contacto, sin configurar nada.</p>
+        <div class="sys-result">→ CAC medible desde el día 1</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section id="precios" style="border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="fi">
+      <span class="eyebrow">// pricing → inversión en validación</span>
+      <h2 class="section-title">El precio de <em style="font-style:normal; color:var(--accent-s);">no lanzar</em> es mayor.</h2>
+      <p class="section-sub">Cada semana sin tu landing es una semana sin datos reales. Elige según tu fase.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3 class="price-name">MVP Landing</h3>
+        <p class="price-desc">Para validar tu hipótesis con la mínima inversión posible.</p>
+        <div class="price-divider"></div>
+        <div class="price-amount"><sup>€</sup>150<sub> único</sub></div>
+        <div class="price-monthly">Sin cuota mensual</div>
+        <ul class="price-features">
+          <li class="on">Landing de 1 página</li>
+          <li class="on">Formulario de leads al CRM</li>
+          <li class="on">Deploy en Vercel</li>
+          <li class="on">Google Analytics 4</li>
+          <li>Meta Pixel</li>
+          <li>Iteración de copy</li>
+        </ul>
+        <a href="#contacto" class="btn btn-outline">Lanzar MVP →</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Más elegido por founders</div>
+        <h3 class="price-name">Launch Ready</h3>
+        <p class="price-desc">El sistema completo para captar early adopters y medir CAC real.</p>
+        <div class="price-divider"></div>
+        <div class="price-amount"><sup>€</sup>250<sub> setup</sub></div>
+        <div class="price-monthly">+ 30 €/mes soporte</div>
+        <div class="price-roi">✓ Validación garantizada en 30 días</div>
+        <ul class="price-features">
+          <li class="on">Landing multi-sección</li>
+          <li class="on">Formulario leads + CRM</li>
+          <li class="on">GA4 + Meta Pixel completo</li>
+          <li class="on">Iteración de copy incluida</li>
+          <li class="on">Garantía de 90 días</li>
+          <li class="on">Soporte prioritario</li>
+        </ul>
+        <a href="#contacto" class="btn btn-featured">Activar Launch Ready →</a>
+      </div>
+      <div class="price-card">
+        <h3 class="price-name">Scale Mode</h3>
+        <p class="price-desc">Para startups que validaron y necesitan escalar su presencia digital.</p>
+        <div class="price-divider"></div>
+        <div class="price-amount"><sup>€</sup>500+<sub> setup</sub></div>
+        <div class="price-monthly">+ 60 €/mes</div>
+        <ul class="price-features">
+          <li class="on">Web multi-página de producto</li>
+          <li class="on">Todo en Launch Ready</li>
+          <li class="on">Blog o changelog</li>
+          <li class="on">A/B testing de páginas</li>
+          <li class="on">Consultoría de crecimiento</li>
+        </ul>
+        <a href="#contacto" class="btn btn-outline">Consultar proyecto →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="fi">
+      <span class="eyebrow">// faq → preguntas frecuentes</span>
+      <h2 class="section-title">Dudas habituales.</h2>
+    </div>
+    <div class="faq-list" role="list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Por qué no usar Webflow, Framer o WordPress?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Son herramientas buenas para diseñadores sin código, pero generan <strong>entre 3 y 7 segundos de tiempo de carga</strong>. Para validar con ads, eso duplica el CAC. <code>HTML puro + Vercel</code> es técnicamente imbatible. Es la misma base que usan Linear, Stripe y Vercel en sus propias landing pages.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Cuándo puedo lanzar mis primeras campañas de ads?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><strong>A las 24 horas del deploy.</strong> Meta Pixel y Google Analytics quedan configurados desde el primer día. El formulario de leads está conectado al CRM y recibirás un email por cada conversión. Puedes activar la campaña en cuanto la landing esté live.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Qué incluye exactamente la garantía de 90 días?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Si en 90 días la landing no genera señal medible de conversión de usuarios (leads, sign-ups), te <strong>devolvemos el 100% de la inversión.</strong> La garantía cubre que el producto técnico funcione: velocidad, carga y formulario. No cubre si tu hipótesis de mercado es incorrecta — de eso nos encargamos iterando el copy contigo.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Puedo iterar el copy o el diseño después del lanzamiento?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><strong>Sí, y es lo más habitual.</strong> En Launch Ready incluimos iteraciones de copy en los primeros 30 días. Es normal que el primer mensaje no sea el definitivo — lo importante es tener datos reales y moverse rápido. La velocidad de iteración es tu ventaja sobre competidores más lentos.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">¿Necesito tener el copy escrito antes de empezar?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">No. En el brief de 24 horas trabajamos contigo el mensaje principal, la propuesta de valor y los calls-to-action. Necesitas saber <strong>quién es tu cliente y qué problema resuelves</strong>. El resto lo convertimos nosotros en copy de conversión.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="contact-section">
+  <div class="container">
+    <div class="contact-grid fi">
+
+      <div class="contact-copy">
+        <span class="contact-kicker">// launch_request → iniciar proyecto</span>
+
+        <h2 class="contact-headline">Tu competencia ya está<br>capturando a tus<br><em>early adopters.</em></h2>
+
+        <p class="contact-subline">Cada día que tu MVP no está online es un día sin datos reales. Builders lentos matan hipótesis correctas. Cuéntanos tu idea y en 24 horas tienes el plan de lanzamiento.</p>
+
+        <div class="guarantee-seal">
+          <div class="guarantee-seal-icon">🛡️</div>
+          <div>
+            <div class="guarantee-seal-title">// garantía_riesgo_cero → 90 días</div>
+            <div class="guarantee-seal-text">Si en 90 días tu landing no genera señal medible de conversión de usuarios, te <strong>devolvemos el 100% de la inversión.</strong> Sin preguntas. Sin letra pequeña.</div>
+          </div>
+        </div>
+
+        <div class="contact-trust-row">
+          <div class="contact-trust-item">MVP entregado en 7 días o es gratis</div>
+          <div class="contact-trust-item">Velocidad garantizada de 1.2 segundos</div>
+          <div class="contact-trust-item">Sin contratos de permanencia — tú decides</div>
+          <div class="contact-trust-item">Consulta inicial gratuita y sin compromiso</div>
+        </div>
+      </div>
+
+      <div class="contact-form-card">
+        <div class="contact-form-title">Lanza tu MVP</div>
+        <div class="contact-form-subtitle">// respuesta en &lt; 24h · días hábiles</div>
+
+        <form id="contact-form" class="custom-form" style="max-width:100%; margin:0;">
+          <input type="text" id="user_name" name="user_name" placeholder="Tu nombre o nombre del proyecto" required>
+          <input type="email" id="user_email" name="user_email" placeholder="Tu email de contacto" required>
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:16px 28px;">Quiero lanzar mi MVP →</button>
+          <div id="form-status" class="form-status"></div>
+        </form>
+
+        <div class="contact-divider">o contacta directamente</div>
+
+        <a href="https://wa.me/34657930828?text=Hola%2C%20quiero%20lanzar%20mi%20MVP%20con%20VURA." class="btn btn-wa" target="_blank" rel="noopener" style="width:100%; justify-content:center;">
+          WhatsApp ahora
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <a href="#inicio" class="footer-logo">
+          <img src="logo favicon.png" alt="Logo VURA">
+          <div>VURA <span>DIGITAL</span></div>
+        </a>
+        <div class="footer-tagline">// mvp_ready · 1.2s · deploy en 7 días</div>
+      </div>
+      <div class="footer-links">
+        <a href="#stack">Stack</a>
+        <a href="#precios">Precios</a>
+        <a href="index.html">Negocios Locales</a>
+        <a href="#" onclick="openModal('modal-privacidad'); return false;">Privacidad</a>
+      </div>
+      <div class="footer-copy">© 2026 VURA DIGITAL</div>
+    </div>
+  </div>
+</footer>
+
+<div id="cookie-banner" class="cookie-banner" style="display:none;">
+  <div class="cookie-text">Usamos cookies técnicas propias. <a href="#" onclick="openModal('modal-privacidad'); return false;">Política de Privacidad</a>.</div>
+  <button class="btn btn-primary" onclick="acceptCookies()">Aceptar</button>
+</div>
+<div id="modal-privacidad" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeModal('modal-privacidad')">&times;</span>
+    <h2>Privacidad</h2>
+    <p>VURA DIGITAL. Contacto: info@vuradigital.es</p>
+  </div>
+</div>
+
+<script>
+/* =============================================
+   MÓDULO 1: CALCULADORA CAC
+   ============================================= */
+var _calc = { extraCac: 0, extraMonth: 0, touched: false };
+
+function updateCalc() {
+  var ads   = parseInt(document.getElementById('adspend').value, 10);
+  var vis   = parseInt(document.getElementById('visitors').value, 10);
+  var tick  = parseInt(document.getElementById('ticket').value, 10);
+  var load  = parseFloat(document.getElementById('loadtime').value);
+
+  document.getElementById('ads-val').textContent    = ads.toLocaleString('es-ES') + ' €';
+  document.getElementById('vis-val').textContent    = vis.toLocaleString('es-ES');
+  document.getElementById('ticket-val').textContent = tick + ' €';
+  document.getElementById('load-val').textContent   = load.toFixed(1) + ' seg';
+
+  var BASE_CONV  = 0.03;
+  var penalty    = Math.max(0, (load - 1.2) * 0.20);
+  var actualConv = Math.max(BASE_CONV * 0.05, BASE_CONV * (1 - penalty));
+
+  var cacVura    = ads / (vis * BASE_CONV);
+  var cacActual  = ads / (vis * actualConv);
+  var extraCac   = Math.round(cacActual - cacVura);
+  var clientsLost = Math.round(vis * (BASE_CONV - actualConv));
+  var revLost    = Math.round(clientsLost * tick);
+  var extraMonth = Math.max(0, Math.round((cacActual - cacVura) * (vis * actualConv)));
+
+  document.getElementById('lost-amount').textContent  = extraCac.toLocaleString('es-ES') + ' €';
+  document.getElementById('lost-year').textContent    = extraMonth.toLocaleString('es-ES') + ' €';
+  document.getElementById('cac-vura').textContent     = Math.round(cacVura).toLocaleString('es-ES') + ' €';
+  document.getElementById('cac-actual').textContent   = Math.round(cacActual).toLocaleString('es-ES') + ' €';
+  document.getElementById('clients-lost').textContent = clientsLost.toLocaleString('es-ES');
+  document.getElementById('revenue-lost').textContent = revLost.toLocaleString('es-ES') + ' €';
+
+  document.getElementById('lost-amount').classList.toggle('high', extraCac > 50);
+
+  var barPct = Math.min(Math.round(penalty * 150), 95);
+  document.getElementById('loss-bar').style.width = barPct + '%';
+  document.getElementById('bar-pct-label').textContent = load.toFixed(1) + 's → +' + Math.round(penalty * 100) + '% penalización';
+
+  if (!_calc.touched && load > 1.5) {
+    _calc.touched = true;
+    document.getElementById('calc-wa-btn').classList.add('show');
+  }
+  document.getElementById('calc-wa-btn').href =
+    'https://wa.me/34657930828?text=Hola%2C%20mi%20web%20carga%20en%20' + load.toFixed(1) +
+    's%20y%20pierdo%20' + extraMonth + '%E2%82%AC%2Fmes%20en%20CAC.%20Quiero%20lanzar%20con%20VURA.';
+}
+
+/* =============================================
+   MÓDULO 2: FADE-IN
+   ============================================= */
+function onScroll() {
+  var wh = window.innerHeight;
+  document.querySelectorAll('.fi:not(.v)').forEach(function(el) {
+    if (el.getBoundingClientRect().top < wh - 56) el.classList.add('v');
+  });
+}
+
+/* =============================================
+   MÓDULO 3: BENCHMARK BARS
+   ============================================= */
+var benchmarkAnimated = false;
+function checkBenchmark() {
+  if (benchmarkAnimated) return;
+  var table = document.querySelector('.benchmark-table');
+  if (!table) return;
+  if (table.getBoundingClientRect().top < window.innerHeight - 80) {
+    benchmarkAnimated = true;
+    setTimeout(function() {
+      document.querySelectorAll('.benchmark-bar-fill').forEach(function(bar) {
+        var w = bar.getAttribute('data-width');
+        if (w) bar.style.width = w + '%';
+      });
+    }, 200);
+  }
+}
+
+/* =============================================
+   MÓDULO 4: PARTÍCULAS HERO
+   ============================================= */
+function initParticles() {
+  var canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  function resize() {
+    canvas.width  = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+  }
+  function init() {
+    particles = [];
+    for (var i = 0; i < 55; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: 0.8 + Math.random() * 1.6,
+        op: 0.06 + Math.random() * 0.18,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35
+      });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(function(p) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(108,92,231,' + p.op + ')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  resize(); init(); draw();
+  window.addEventListener('resize', function() { resize(); init(); }, { passive: true });
+}
+
+/* =============================================
+   MÓDULO 5: COOKIES / MODALES
+   ============================================= */
+function openModal(id)  { document.getElementById(id).style.display = 'block'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+function acceptCookies() {
+  document.getElementById('cookie-banner').style.display = 'none';
+  localStorage.setItem('vura_cookies_accepted', 'true');
+}
+if (!localStorage.getItem('vura_cookies_accepted')) {
+  setTimeout(function() {
+    document.getElementById('cookie-banner').style.display = 'flex';
+  }, 1800);
+}
+
+/* =============================================
+   MÓDULO 6: FAQ ACCORDION
+   ============================================= */
+function toggleFaq(btn) {
+  var item   = btn.closest('.faq-item');
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(el) {
+    el.classList.remove('open');
+    el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+
+/* =============================================
+   MÓDULO 7: LENIS (SMOOTH SCROLL)
+   ============================================= */
+var lenis = new Lenis({
+  duration: 1.2,
+  easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+  smooth: true
+});
+function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+requestAnimationFrame(raf);
+
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    lenis.scrollTo(this.getAttribute('href'));
+  });
+});
+
+/* =============================================
+   MÓDULO 8: GSAP
+   ============================================= */
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.from('.metod-card', {
+  scrollTrigger: { trigger: '.metod-grid', start: 'top 85%' },
+  y: 60, opacity: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out'
+});
+gsap.from('.price-card', {
+  scrollTrigger: { trigger: '.pricing-grid', start: 'top 85%' },
+  y: 60, opacity: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out'
+});
+gsap.from('.sys-card', {
+  scrollTrigger: { trigger: '.system-grid', start: 'top 85%' },
+  y: 40, opacity: 0, duration: 0.7, stagger: 0.15, ease: 'power3.out'
+});
+
+/* =============================================
+   MÓDULO 9: CAPTACIÓN DE LEADS (EMAILJS + SHEETDB)
+   ============================================= */
+emailjs.init('n-SpRg6RMLARzrEfn');
+
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  var status = document.getElementById('form-status');
+  status.style.display = 'block';
+  status.style.color   = 'var(--accent-s)';
+  status.textContent   = '// procesando...';
+
+  var nameValue  = document.getElementById('user_name').value;
+  var emailValue = document.getElementById('user_email').value;
+  var dateValue  = new Date().toLocaleDateString('es-ES');
+
+  fetch('https://sheetdb.io/api/v1/jtupg6j7hh3vy', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      data: [{
+        'nombre': nameValue,
+        'email':  emailValue,
+        'fecha':  dateValue,
+        'estado': 'Nuevo',
+        'fuente': 'startups'
+      }]
+    })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(d) { console.log('Lead [startups] guardado en CRM:', d); })
+  .catch(function(e) { console.error('Error SheetDB:', e); });
+
+  emailjs.sendForm('service_tchmeeg', 'template_giu9vml', this)
+    .then(function() {
+      status.style.color = 'var(--success)';
+      status.textContent = '// success → te contactamos en < 24h';
+      document.getElementById('contact-form').reset();
+    }, function(error) {
+      status.style.color = 'var(--danger)';
+      status.textContent = '// error → contacta por WhatsApp';
+      console.log('Error EmailJS:', error);
+    });
+});
+
+/* Hamburger menu móvil */
+(function() {
+  var ham  = document.getElementById('nav-hamburger');
+  var menu = document.getElementById('mobile-menu');
+  var cls  = document.getElementById('mobile-menu-close');
+  if (!ham || !menu) return;
+  function openMenu()  { menu.classList.add('open'); ham.classList.add('open'); ham.setAttribute('aria-expanded','true'); menu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function closeMenu() { menu.classList.remove('open'); ham.classList.remove('open'); ham.setAttribute('aria-expanded','false'); menu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  ham.addEventListener('click', openMenu);
+  cls.addEventListener('click', closeMenu);
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMenu(); });
+})();
+
+/* INIT */
+updateCalc();
+initParticles();
+window.addEventListener('scroll', function() { onScroll(); checkBenchmark(); }, { passive: true });
+onScroll();
+checkBenchmark();
+</script>
+
+</body>
+</html>
