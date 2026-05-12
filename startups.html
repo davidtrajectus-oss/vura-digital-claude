@@ -8,7 +8,7 @@
 <meta name="keywords" content="MVP landing page, web startup, landing validacion, diseño web rapido, vercel html, emprendedor digital, CAC optimización">
 <meta name="author" content="VURA DIGITAL">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://vuradigital.com/startups">
+<link rel="canonical" href="https://www.vuradigital.es/startups.html">
 
 <link rel="icon" href="logo favicon.png" type="image/png">
 
@@ -16,12 +16,12 @@
 <meta property="og:description" content="Deja de perder CAC con builders lentos. Código puro, Vercel CDN, carga en 1.2s. Garantía de validación de 90 días.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
-<meta property="og:url" content="https://vuradigital.com/startups">
-
-<script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<meta property="og:url" content="https://www.vuradigital.es/startups.html">
+<meta property="og:image" content="https://www.vuradigital.es/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lanza tu MVP en 7 Días — VURA DIGITAL para Startups">
+<meta name="twitter:description" content="Deja de perder CAC con builders lentos. Código puro, Vercel CDN, carga en 1.2s. Garantía de validación de 90 días.">
+<meta name="twitter:image" content="https://www.vuradigital.es/og-image.png">
 
 <script type="application/ld+json">
 {
@@ -29,18 +29,13 @@
   "@type": "ProfessionalService",
   "name": "VURA DIGITAL — Startups",
   "description": "Agencia de diseño web para startups y emprendedores digitales. MVPs y landings ultra-rápidas en 7 días.",
-  "url": "https://vuradigital.com",
+  "url": "https://www.vuradigital.es",
   "telephone": "+34657930828",
   "email": "info@vuradigital.es",
   "priceRange": "€€",
   "areaServed": { "@type": "Country", "name": "ES" }
 }
 </script>
-
-<script>
-  window.chatbaseConfig = { chatbotId: "ruPl5ZRZ7DQ2pyoj88z0-" };
-</script>
-<script src="https://www.chatbase.co/embed.min.js" chatbotId="ruPl5ZRZ7DQ2pyoj88z0-" defer></script>
 
 <title>Lanza tu MVP en 7 Días — VURA DIGITAL para Startups</title>
 
@@ -389,9 +384,20 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .modal-content p { margin-bottom: 12px; font-size: 14px; }
 .close-modal { color: var(--muted); position: absolute; top: 24px; right: 28px; font-size: 28px; font-weight: bold; cursor: pointer; transition: color var(--ease); }
 .close-modal:hover { color: var(--white); }
-.cookie-banner { position: fixed; bottom: 24px; left: 24px; right: 24px; z-index: 990; background: var(--bg2); border: 1px solid var(--border-s); border-radius: var(--r-lg); padding: 24px; display: flex; justify-content: space-between; align-items: center; gap: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
-.cookie-text { font-size: 13px; color: var(--muted); }
+.cookie-banner { position: fixed; bottom: 24px; left: 24px; right: 24px; z-index: 990; background: var(--bg2); border: 1px solid var(--border-s); border-radius: var(--r-lg); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+.cookie-text { font-size: 13px; color: var(--muted); flex: 1; }
 .cookie-text a { color: var(--accent-s); text-decoration: none; }
+.cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.cookie-btn-sm { font-size: 12px; padding: 9px 16px; white-space: nowrap; }
+.form-consent { display: flex; align-items: flex-start; gap: 10px; margin: 12px 0 4px; }
+.form-consent input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; }
+.form-consent label { font-size: 12px; color: var(--muted); line-height: 1.5; cursor: pointer; }
+.form-consent a { color: var(--accent-s); text-decoration: none; }
+.hp-field { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+.guarantee-conditions { font-size: 11px; color: var(--muted); margin-top: 8px; opacity: 0.7; }
+@media (prefers-reduced-motion: reduce) {
+  .fi { transition: none !important; opacity: 1 !important; transform: none !important; }
+}
 footer { border-top: 1px solid var(--border); padding: 40px 0; }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
 .footer-logo { font-family: var(--f-head); font-size: 16px; font-weight: 800; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
@@ -434,6 +440,8 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
   .footer-copy { text-align: left; }
   .cookie-banner { flex-direction: column; text-align: center; left: 16px; right: 16px; bottom: 16px; padding: 20px; }
+  .cookie-actions { flex-direction: column; width: 100%; }
+  .cookie-btn-sm { width: 100%; text-align: center; justify-content: center; }
   .stack-strip-inner { gap: 16px; justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding: 0 16px; }
 }
 
@@ -937,7 +945,8 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
           <div class="guarantee-seal-icon">🛡️</div>
           <div>
             <div class="guarantee-seal-title">// garantía_riesgo_cero → 90 días</div>
-            <div class="guarantee-seal-text">Si en 90 días tu landing no genera señal medible de conversión de usuarios, te <strong>devolvemos el 100% de la inversión.</strong> Sin preguntas. Sin letra pequeña.</div>
+            <div class="guarantee-seal-text">Si en 90 días tu landing no genera señal medible de conversión, te <strong>devolvemos el 100% de la inversión.</strong></div>
+            <div class="guarantee-conditions">*Sujeto a contrato activo. Señal medible = leads, suscripciones o ventas documentadas según KPIs acordados en propuesta.</div>
           </div>
         </div>
 
@@ -954,8 +963,13 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
         <div class="contact-form-subtitle">// respuesta en &lt; 24h · días hábiles</div>
 
         <form id="contact-form" class="custom-form" style="max-width:100%; margin:0;">
+          <div class="hp-field" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
           <input type="text" id="user_name" name="user_name" placeholder="Tu nombre o nombre del proyecto" required>
           <input type="email" id="user_email" name="user_email" placeholder="Tu email de contacto" required>
+          <div class="form-consent">
+            <input type="checkbox" id="form-consent" name="form_consent" required>
+            <label for="form-consent">He leído y acepto la <a href="#" onclick="openModal('modal-privacidad'); return false;">Política de Privacidad</a>. Consiento el tratamiento de mis datos.</label>
+          </div>
           <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:16px 28px;">Quiero lanzar mi MVP →</button>
           <div id="form-status" class="form-status"></div>
         </form>
@@ -985,24 +999,74 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
         <a href="#stack">Stack</a>
         <a href="#precios">Precios</a>
         <a href="index.html">Negocios Locales</a>
+        <a href="#" onclick="openModal('modal-aviso-legal'); return false;">Aviso Legal</a>
         <a href="#" onclick="openModal('modal-privacidad'); return false;">Privacidad</a>
+        <a href="#" onclick="openModal('modal-cookies'); return false;">Cookies</a>
       </div>
       <div class="footer-copy">© 2026 VURA DIGITAL</div>
     </div>
   </div>
 </footer>
 
-<div id="cookie-banner" class="cookie-banner" style="display:none;">
-  <div class="cookie-text">Usamos cookies técnicas propias. <a href="#" onclick="openModal('modal-privacidad'); return false;">Política de Privacidad</a>.</div>
-  <button class="btn btn-primary" onclick="acceptCookies()">Aceptar</button>
-</div>
-<div id="modal-privacidad" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal('modal-privacidad')">&times;</span>
-    <h2>Privacidad</h2>
-    <p>VURA DIGITAL. Contacto: info@vuradigital.es</p>
+<div id="cookie-banner" class="cookie-banner" style="display:none;" role="region" aria-label="Aviso de cookies">
+  <div class="cookie-text">Usamos <strong>cookies técnicas</strong> (necesarias) y, con tu consentimiento, cookies de terceros (chat). <a href="#" onclick="openModal('modal-cookies'); return false;">Política de Cookies</a>.</div>
+  <div class="cookie-actions">
+    <button class="btn btn-ghost cookie-btn-sm" onclick="rejectCookies()">Solo necesarias</button>
+    <button class="btn btn-primary cookie-btn-sm" onclick="acceptAllCookies()">Aceptar todo</button>
   </div>
 </div>
+
+<div id="modal-aviso-legal" class="modal" role="dialog" aria-modal="true" aria-labelledby="title-aviso-legal">
+  <div class="modal-content">
+    <button class="close-modal" onclick="closeModal('modal-aviso-legal')" aria-label="Cerrar">&times;</button>
+    <h2 id="title-aviso-legal">Aviso Legal</h2>
+    <h3>Titular</h3>
+    <p><strong>VURA DIGITAL</strong> · NIF: [Completar] · Salamanca, España<br>info@vuradigital.es · +34 657 930 828</p>
+    <h3>Propiedad intelectual</h3>
+    <p>Los textos, imágenes y código de este sitio son propiedad de VURA DIGITAL. Queda prohibida su reproducción sin autorización expresa.</p>
+    <h3>Legislación</h3>
+    <p>Ley 34/2002 (LSSI-CE) y normativa española y europea aplicable. Juzgados de Salamanca.</p>
+  </div>
+</div>
+
+<div id="modal-privacidad" class="modal" role="dialog" aria-modal="true" aria-labelledby="title-privacidad">
+  <div class="modal-content">
+    <button class="close-modal" onclick="closeModal('modal-privacidad')" aria-label="Cerrar">&times;</button>
+    <h2 id="title-privacidad">Política de Privacidad</h2>
+    <h3>Responsable</h3>
+    <p>VURA DIGITAL · info@vuradigital.es · Salamanca, España</p>
+    <h3>Finalidad y base jurídica</h3>
+    <p>Gestionar solicitudes de contacto y lanzamiento. Base jurídica: <strong>consentimiento del interesado</strong> (Art. 6.1.a RGPD).</p>
+    <h3>Datos tratados</h3>
+    <p>Nombre del proyecto y dirección de correo electrónico.</p>
+    <h3>Encargados de tratamiento</h3>
+    <p>EmailJS (EE.UU., SCCs) para notificaciones; SheetDB / Google Sheets para registro de leads.</p>
+    <h3>Conservación</h3>
+    <p>Máximo 2 años desde el último contacto, salvo obligación legal.</p>
+    <h3>Derechos</h3>
+    <p>Acceso, rectificación, supresión, limitación, portabilidad y oposición → info@vuradigital.es (asunto "Derechos RGPD"). Reclamación ante la AEPD (www.aepd.es).</p>
+  </div>
+</div>
+
+<div id="modal-cookies" class="modal" role="dialog" aria-modal="true" aria-labelledby="title-cookies">
+  <div class="modal-content">
+    <button class="close-modal" onclick="closeModal('modal-cookies')" aria-label="Cerrar">&times;</button>
+    <h2 id="title-cookies">Política de Cookies</h2>
+    <h3>Cookies técnicas (siempre activas)</h3>
+    <p>• <strong>vura_cookies_accepted</strong>: preferencia de cookies (1 año).<br>• <strong>vura_last_submit</strong>: anti-spam de formulario (sesión).</p>
+    <h3>Cookies de terceros (con consentimiento)</h3>
+    <p>• <strong>Google Fonts</strong>: tipografía, puede registrar IP. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política Google</a>.<br>• <strong>Chatbase</strong>: chat de soporte. <a href="https://www.chatbase.co/privacy" target="_blank" rel="noopener">Política Chatbase</a>.</p>
+    <h3>Gestión</h3>
+    <p>Puedes retirar tu consentimiento en cualquier momento. <a href="https://www.aepd.es/es/areas-de-actuacion/internet-y-redes-sociales/cookies" target="_blank" rel="noopener">Guía AEPD</a>.</p>
+    <p style="margin-top:16px;"><button class="btn btn-ghost" style="font-size:13px;padding:9px 18px;" onclick="rejectCookies(); closeModal('modal-cookies');">Retirar consentimiento</button></p>
+  </div>
+</div>
+
+<!-- Librerías: al final del body -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <script>
 /* =============================================
@@ -1126,18 +1190,51 @@ function initParticles() {
 }
 
 /* =============================================
-   MÓDULO 5: COOKIES / MODALES
+   MÓDULO 5: COOKIES / MODALES / CHATBASE
    ============================================= */
-function openModal(id)  { document.getElementById(id).style.display = 'block'; }
-function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-function acceptCookies() {
-  document.getElementById('cookie-banner').style.display = 'none';
-  localStorage.setItem('vura_cookies_accepted', 'true');
+function loadChatbase() {
+  if (document.getElementById('chatbase-script')) return;
+  window.chatbaseConfig = { chatbotId: 'ruPl5ZRZ7DQ2pyoj88z0-' };
+  var s = document.createElement('script');
+  s.id = 'chatbase-script';
+  s.src = 'https://www.chatbase.co/embed.min.js';
+  s.setAttribute('chatbotId', 'ruPl5ZRZ7DQ2pyoj88z0-');
+  document.body.appendChild(s);
 }
-if (!localStorage.getItem('vura_cookies_accepted')) {
-  setTimeout(function() {
-    document.getElementById('cookie-banner').style.display = 'flex';
-  }, 1800);
+var _modalFocusReturn = null;
+function openModal(id) {
+  _modalFocusReturn = document.activeElement;
+  var m = document.getElementById(id);
+  m.style.display = 'block';
+  var focusEl = m.querySelector('.close-modal');
+  if (focusEl) setTimeout(function() { focusEl.focus(); }, 50);
+  document.addEventListener('keydown', _trapEscModal);
+}
+function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+  document.removeEventListener('keydown', _trapEscModal);
+  if (_modalFocusReturn) { _modalFocusReturn.focus(); _modalFocusReturn = null; }
+}
+function _trapEscModal(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal[style*="block"]').forEach(function(m) { closeModal(m.id); });
+  }
+}
+function acceptAllCookies() {
+  document.getElementById('cookie-banner').style.display = 'none';
+  localStorage.setItem('vura_cookies_accepted', 'all');
+  loadChatbase();
+}
+function rejectCookies() {
+  document.getElementById('cookie-banner').style.display = 'none';
+  localStorage.setItem('vura_cookies_accepted', 'essential');
+}
+function acceptCookies() { acceptAllCookies(); }
+var _cookiePref = localStorage.getItem('vura_cookies_accepted');
+if (!_cookiePref) {
+  setTimeout(function() { document.getElementById('cookie-banner').style.display = 'flex'; }, 1500);
+} else if (_cookiePref === 'all') {
+  loadChatbase();
 }
 
 /* =============================================
@@ -1201,32 +1298,39 @@ emailjs.init('n-SpRg6RMLARzrEfn');
 
 document.getElementById('contact-form').addEventListener('submit', function(event) {
   event.preventDefault();
-
   var status = document.getElementById('form-status');
+
+  var hp = this.querySelector('[name="website"]');
+  if (hp && hp.value !== '') {
+    status.style.display = 'block';
+    status.style.color = 'var(--success)';
+    status.textContent = '// solicitud recibida...';
+    return;
+  }
+
+  var lastSubmit = localStorage.getItem('vura_last_submit');
+  if (lastSubmit && (Date.now() - parseInt(lastSubmit)) < 60000) {
+    status.style.display = 'block';
+    status.style.color = 'var(--danger)';
+    status.textContent = '// ya enviado → espera un momento';
+    return;
+  }
+
   status.style.display = 'block';
   status.style.color   = 'var(--accent-s)';
   status.textContent   = '// procesando...';
 
-  var nameValue  = document.getElementById('user_name').value;
-  var emailValue = document.getElementById('user_email').value;
+  var nameValue  = document.getElementById('user_name').value.trim();
+  var emailValue = document.getElementById('user_email').value.trim();
   var dateValue  = new Date().toLocaleDateString('es-ES');
+
+  localStorage.setItem('vura_last_submit', Date.now().toString());
 
   fetch('https://sheetdb.io/api/v1/jtupg6j7hh3vy', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      data: [{
-        'nombre': nameValue,
-        'email':  emailValue,
-        'fecha':  dateValue,
-        'estado': 'Nuevo',
-        'fuente': 'startups'
-      }]
-    })
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(d) { console.log('Lead [startups] guardado en CRM:', d); })
-  .catch(function(e) { console.error('Error SheetDB:', e); });
+    body: JSON.stringify({ data: [{ nombre: nameValue, email: emailValue, fecha: dateValue, estado: 'Nuevo', fuente: 'startups' }] })
+  }).catch(function(e) { console.warn('SheetDB:', e); });
 
   emailjs.sendForm('service_tchmeeg', 'template_giu9vml', this)
     .then(function() {
@@ -1236,7 +1340,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     }, function(error) {
       status.style.color = 'var(--danger)';
       status.textContent = '// error → contacta por WhatsApp';
-      console.log('Error EmailJS:', error);
+      console.warn('EmailJS:', error);
     });
 });
 

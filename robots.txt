@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /crm.html
+Disallow: /onboarding_cliente.html
+
+Sitemap: https://www.vuradigital.es/sitemap.xml
