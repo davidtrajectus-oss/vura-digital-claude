@@ -696,7 +696,7 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
       <p class="section-sub">Un flujo diseñado para founders que necesitan velocidad, no metodologías infinitas.</p>
     </div>
     <div class="metod-grid" role="list">
-      <article class="metod-card" role="listitem">
+      <article class="metod-card fi d1" role="listitem">
         <div class="metod-step">// 01_brief</div>
         <div class="metod-icon">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
@@ -710,7 +710,7 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
         </ul>
         <div class="metod-result">→ Entregable: wireframe en 48h</div>
       </article>
-      <article class="metod-card metod-featured" role="listitem">
+      <article class="metod-card metod-featured fi d2" role="listitem">
         <div class="metod-step">// 02_code</div>
         <div class="metod-icon">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -725,7 +725,7 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
         </ul>
         <div class="metod-result">→ Entregable: live en 7 días</div>
       </article>
-      <article class="metod-card" role="listitem">
+      <article class="metod-card fi d3" role="listitem">
         <div class="metod-step">// 03_validate</div>
         <div class="metod-icon">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
@@ -844,7 +844,7 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
       <p class="section-sub">Cada semana sin tu landing es una semana sin datos reales. Elige según tu fase.</p>
     </div>
     <div class="pricing-grid">
-      <div class="price-card">
+      <div class="price-card fi d1">
         <h3 class="price-name">MVP Landing</h3>
         <p class="price-desc">Para validar tu hipótesis con la mínima inversión posible.</p>
         <div class="price-divider"></div>
@@ -860,7 +860,7 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
         </ul>
         <a href="#contacto" class="btn btn-outline">Lanzar MVP →</a>
       </div>
-      <div class="price-card featured">
+      <div class="price-card featured fi d2">
         <div class="price-badge">Más elegido por founders</div>
         <h3 class="price-name">Launch Ready</h3>
         <p class="price-desc">El sistema completo para captar early adopters y medir CAC real.</p>
@@ -878,7 +878,7 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
         </ul>
         <a href="#contacto" class="btn btn-featured">Activar Launch Ready →</a>
       </div>
-      <div class="price-card">
+      <div class="price-card fi d3">
         <h3 class="price-name">Scale Mode</h3>
         <p class="price-desc">Para startups que validaron y necesitan escalar su presencia digital.</p>
         <div class="price-divider"></div>
@@ -1277,14 +1277,6 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
    ============================================= */
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.from('.metod-card', {
-  scrollTrigger: { trigger: '.metod-grid', start: 'top 85%' },
-  y: 60, opacity: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out'
-});
-gsap.from('.price-card', {
-  scrollTrigger: { trigger: '.pricing-grid', start: 'top 85%' },
-  y: 60, opacity: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out'
-});
 
 /* =============================================
    MÓDULO 9: CAPTACIÓN DE LEADS → /api/contact
