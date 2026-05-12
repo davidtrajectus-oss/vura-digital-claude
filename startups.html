@@ -1066,7 +1066,6 @@ footer { border-top: 1px solid var(--border); padding: 40px 0; }
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <script>
 /* =============================================
@@ -1292,10 +1291,8 @@ gsap.from('.sys-card', {
 });
 
 /* =============================================
-   MÓDULO 9: CAPTACIÓN DE LEADS (EMAILJS + SHEETDB)
+   MÓDULO 9: CAPTACIÓN DE LEADS → /api/contact
    ============================================= */
-emailjs.init('n-SpRg6RMLARzrEfn');
-
 document.getElementById('contact-form').addEventListener('submit', function(event) {
   event.preventDefault();
   var status = document.getElementById('form-status');
@@ -1322,26 +1319,30 @@ document.getElementById('contact-form').addEventListener('submit', function(even
 
   var nameValue  = document.getElementById('user_name').value.trim();
   var emailValue = document.getElementById('user_email').value.trim();
-  var dateValue  = new Date().toLocaleDateString('es-ES');
+  var form = this;
 
   localStorage.setItem('vura_last_submit', Date.now().toString());
 
-  fetch('https://sheetdb.io/api/v1/jtupg6j7hh3vy', {
-    method: 'POST',
-    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify({ data: [{ nombre: nameValue, email: emailValue, fecha: dateValue, estado: 'Nuevo', fuente: 'startups' }] })
-  }).catch(function(e) { console.warn('SheetDB:', e); });
-
-  emailjs.sendForm('service_tchmeeg', 'template_giu9vml', this)
-    .then(function() {
+  fetch('/api/contact', {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify({ name: nameValue, email: emailValue, website: (hp ? hp.value : ''), source: 'startups' })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.ok) {
       status.style.color = 'var(--success)';
       status.textContent = '// success → te contactamos en < 24h';
-      document.getElementById('contact-form').reset();
-    }, function(error) {
-      status.style.color = 'var(--danger)';
-      status.textContent = '// error → contacta por WhatsApp';
-      console.warn('EmailJS:', error);
-    });
+      form.reset();
+    } else {
+      throw new Error(data.error || 'error');
+    }
+  })
+  .catch(function(err) {
+    status.style.color = 'var(--danger)';
+    status.textContent = '// error → contacta por WhatsApp';
+    console.warn('[contact]', err.message);
+  });
 });
 
 /* Hamburger menu móvil */

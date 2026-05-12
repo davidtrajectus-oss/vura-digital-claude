@@ -1074,7 +1074,6 @@ section[id], div[id].calc-section { scroll-margin-top: 72px; }
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <script>
 /* =============================================
@@ -1197,60 +1196,58 @@ gsap.from(".price-card", {
 });
 
 /* =============================================
-   MÓDULO 7: CAPTACIÓN DE LEADS (EMAILJS + SHEETDB)
+   MÓDULO 7: CAPTACIÓN DE LEADS → /api/contact
+   Credenciales 100% en servidor (variables de entorno).
    ============================================= */
-emailjs.init("n-SpRg6RMLARzrEfn");
-
 document.getElementById('contact-form').addEventListener('submit', function(event) {
     event.preventDefault();
     var status = document.getElementById('form-status');
+    var form   = this;
 
-    // Honeypot: si el campo oculto está relleno, es un bot
-    var hp = this.querySelector('[name="website"]');
+    var hp = form.querySelector('[name="website"]');
     if (hp && hp.value !== '') {
         status.style.display = 'block';
-        status.style.color = 'var(--success)';
-        status.textContent = '¡Solicitud recibida! Nos pondremos en contacto pronto.';
+        status.style.color   = 'var(--success)';
+        status.textContent   = '¡Solicitud recibida! Nos pondremos en contacto pronto.';
         return;
     }
 
-    // Rate limiting: máximo 1 envío cada 60 segundos por dispositivo
     var lastSubmit = localStorage.getItem('vura_last_submit');
     if (lastSubmit && (Date.now() - parseInt(lastSubmit)) < 60000) {
         status.style.display = 'block';
-        status.style.color = 'var(--danger)';
-        status.textContent = 'Ya hemos recibido tu solicitud. Espera un momento antes de volver a enviar.';
+        status.style.color   = 'var(--danger)';
+        status.textContent   = 'Ya hemos recibido tu solicitud. Espera un momento.';
         return;
     }
 
     status.style.display = 'block';
-    status.style.color = 'var(--accent-s)';
-    status.textContent = 'Procesando solicitud...';
+    status.style.color   = 'var(--accent-s)';
+    status.textContent   = 'Procesando solicitud...';
 
     var nameValue  = document.getElementById('user_name').value.trim();
     var emailValue = document.getElementById('user_email').value.trim();
-    var dateValue  = new Date().toLocaleDateString('es-ES');
-
     localStorage.setItem('vura_last_submit', Date.now().toString());
 
-    // Guardar en CRM (SheetDB → Google Sheets)
-    fetch('https://sheetdb.io/api/v1/jtupg6j7hh3vy', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: [{ nombre: nameValue, email: emailValue, fecha: dateValue, estado: 'Nuevo' }] })
-    }).catch(function(e) { console.warn('SheetDB:', e); });
-
-    // Notificación por email (EmailJS)
-    emailjs.sendForm('service_tchmeeg', 'template_giu9vml', this)
-        .then(function() {
+    fetch('/api/contact', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ name: nameValue, email: emailValue, website: (hp ? hp.value : ''), source: 'negocios' })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        if (data.ok) {
             status.style.color = 'var(--success)';
             status.textContent = '¡Solicitud enviada! Te contactamos en menos de 24 h.';
-            document.getElementById('contact-form').reset();
-        }, function(error) {
-            status.style.color = 'var(--danger)';
-            status.textContent = 'Error de conexión. Usa el botón de WhatsApp para contactarnos.';
-            console.warn('EmailJS error:', error);
-        });
+            form.reset();
+        } else {
+            throw new Error(data.error || 'Error desconocido');
+        }
+    })
+    .catch(function(err) {
+        status.style.color = 'var(--danger)';
+        status.textContent = 'Error de conexión. Usa el botón de WhatsApp para contactarnos.';
+        console.warn('[contact]', err.message);
+    });
 });
 
 /* =============================================
