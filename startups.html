@@ -1169,8 +1169,10 @@ requestAnimationFrame(raf);
 
 document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
   anchor.addEventListener('click', function(e) {
+    var href = this.getAttribute('href');
+    if (!href || href === '#' || !href.startsWith('#')) return;
     e.preventDefault();
-    lenis.scrollTo(this.getAttribute('href'));
+    lenis.scrollTo(href);
   });
 });
 
