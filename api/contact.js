@@ -71,15 +71,11 @@ module.exports = async function handler(req, res) {
     if (!ejRes.ok) {
       const txt = await ejRes.text();
       console.error('[contact] EmailJS error:', ejRes.status, txt);
-      // DEBUG TEMPORAL — revertir tras diagnóstico
-      return res.status(502).json({
-        error: 'Error al enviar la notificación',
-        debug: { ejStatus: ejRes.status, ejBody: txt, hasPrivKey: !!process.env.EMAILJS_PRIVATE_KEY, hasPubKey: !!process.env.EMAILJS_PUBLIC_KEY, hasService: !!process.env.EMAILJS_SERVICE_ID, hasTemplate: !!process.env.EMAILJS_TEMPLATE_ID }
-      });
+      return res.status(502).json({ error: 'Error al enviar la notificación' });
     }
   } catch (err) {
     console.error('[contact] EmailJS fetch error:', err.message);
-    return res.status(502).json({ error: 'Error de conexión con el servicio de email', debug: { fetchError: err.message } });
+    return res.status(502).json({ error: 'Error de conexión con el servicio de email' });
   }
 
   return res.status(200).json({ ok: true });
