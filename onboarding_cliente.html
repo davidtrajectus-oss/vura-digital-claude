@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VURA Digital — Configurador de Proyecto</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary:    #080810;
+            --bg-secondary:  #0f0f1a;
+            --bg-card:       #161625;
+            --accent:        #6c5ce7;
+            --accent-light:  #a29bfe;
+            --accent-gold:   #fdcb6e;
+            --text:          #e4e4f0;
+            --muted:         #7878a0;
+            --border:        rgba(108,92,231,.15);
+            --border-active: rgba(108,92,231,.45);
+            --glass:         rgba(22,22,37,.85);
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Background ── */
+        .bg-grid {
+            position: fixed; inset: 0;
+            background-image:
+                linear-gradient(rgba(108,92,231,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(108,92,231,.025) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none; z-index: 0;
+        }
+        .bg-glow {
+            position: fixed; top: -15%; left: -10%;
+            width: 640px; height: 640px;
+            background: radial-gradient(circle, rgba(108,92,231,.07) 0%, transparent 70%);
+            pointer-events: none; z-index: 0;
+            animation: breathe 9s ease-in-out infinite;
+        }
+        .bg-glow-2 {
+            position: fixed; bottom: -20%; right: -10%;
+            width: 520px; height: 520px;
+            background: radial-gradient(circle, rgba(162,155,254,.05) 0%, transparent 70%);
+            pointer-events: none; z-index: 0;
+            animation: breathe 11s ease-in-out infinite reverse;
+        }
+        @keyframes breathe {
+            0%,100% { opacity:.5; transform:scale(1); }
+            50% { opacity:1; transform:scale(1.08); }
+        }
+
+        /* ── Layout ── */
+        .app {
+            position: relative; z-index: 1;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 44px 20px 100px;
+        }
+
+        /* ── Header ── */
+        .header { text-align: center; margin-bottom: 44px; }
+        .logo {
+            font-size: 11px; font-weight: 800; letter-spacing: .35em;
+            color: var(--accent-light); text-transform: uppercase; margin-bottom: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .logo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+        .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+        .header p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+        /* ── Progress ── */
+        #progress-wrap { margin-bottom: 36px; }
+        .steps-row {
+            display: flex; justify-content: space-between; margin-bottom: 10px;
+        }
+        .p-step {
+            font-size: 11px; font-weight: 600; letter-spacing: .06em;
+            color: var(--muted); display: flex; align-items: center; gap: 6px;
+            transition: color .3s;
+        }
+        .p-step.active  { color: var(--accent-light); }
+        .p-step.done    { color: var(--accent); }
+        .p-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            border: 1.5px solid currentColor; transition: background .3s;
+        }
+        .p-step.done .p-dot { background: var(--accent); }
+
+        .bar-track { height: 2px; background: var(--bg-card); border-radius: 1px; overflow: hidden; }
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            border-radius: 1px; transition: width .5s cubic-bezier(.4,0,.2,1);
+        }
+
+        /* ── Step Cards ── */
+        .step {
+            background: var(--glass); border: 1px solid var(--border);
+            border-radius: 16px; padding: 40px;
+            backdrop-filter: blur(20px);
+            display: none;
+        }
+        .step.active {
+            display: block;
+            animation: slideUp .4s cubic-bezier(.4,0,.2,1) both;
+        }
+        @keyframes slideUp {
+            from { opacity:0; transform:translateY(18px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+
+        .step-label {
+            font-size: 10px; font-weight: 800; letter-spacing: .25em;
+            color: var(--accent); text-transform: uppercase; margin-bottom: 8px;
+        }
+        .step-title { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+        .step-desc  { font-size: 13.5px; color: var(--muted); margin-bottom: 28px; line-height: 1.65; }
+
+        /* ── Fields ── */
+        .field { margin-bottom: 20px; }
+        .field label {
+            display: block; font-size: 11px; font-weight: 700;
+            letter-spacing: .12em; color: var(--muted);
+            text-transform: uppercase; margin-bottom: 7px;
+        }
+        .field input, .field textarea {
+            width: 100%;
+            background: rgba(8,8,16,.65); border: 1px solid var(--border);
+            border-radius: 10px; padding: 13px 16px;
+            font-size: 14.5px; color: var(--text);
+            outline: none; font-family: inherit;
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .field input:focus, .field textarea:focus {
+            border-color: var(--border-active);
+            box-shadow: 0 0 0 3px rgba(108,92,231,.1);
+        }
+        .field input::placeholder, .field textarea::placeholder {
+            color: rgba(120,120,160,.45);
+        }
+        .field textarea { resize: none; min-height: 88px; }
+
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+        /* ── Services ── */
+        .svc-row {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+        }
+        .svc-num {
+            width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
+            background: rgba(108,92,231,.12); border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 800; color: var(--accent-light);
+        }
+
+        /* ── Style Selector ── */
+        .style-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 4px; }
+        .style-card {
+            border: 1.5px solid var(--border); border-radius: 12px;
+            padding: 18px 14px; cursor: pointer;
+            transition: border-color .2s, background .2s, transform .15s;
+            text-align: center;
+        }
+        .style-card:hover { border-color: var(--border-active); background: rgba(108,92,231,.04); transform: translateY(-2px); }
+        .style-card.sel    { border-color: var(--accent); background: rgba(108,92,231,.1); }
+        .style-swatch { width: 100%; height: 52px; border-radius: 7px; margin-bottom: 10px; }
+        .sw-dark    { background: linear-gradient(135deg,#080810 0%,#1a1a2e 55%,#6c5ce7 100%); }
+        .sw-light   { background: linear-gradient(135deg,#f0f0f5 0%,#d8d8e8 55%,#8888a0 100%); }
+        .sw-vibrant { background: linear-gradient(135deg,#ff6b6b 0%,#feca57 55%,#ff9ff3 100%); }
+        .style-name { font-size: 12.5px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+        .style-tag  { font-size: 10.5px; color: var(--muted); }
+
+        /* ── Competitor inputs ── */
+        .comp-wrap {
+            display: flex; align-items: center; gap: 11px;
+            background: rgba(8,8,16,.65); border: 1px solid var(--border);
+            border-radius: 10px; padding: 13px 16px;
+            margin-bottom: 10px; transition: border-color .2s;
+        }
+        .comp-wrap:focus-within { border-color: rgba(253,203,110,.4); }
+        .comp-icon { font-size: 15px; flex-shrink: 0; }
+        .comp-wrap input {
+            flex: 1; background: transparent; border: none; outline: none;
+            font-size: 14.5px; color: var(--text); font-family: inherit;
+        }
+        .comp-wrap input::placeholder { color: rgba(120,120,160,.45); }
+
+        /* ── Buttons ── */
+        .btn-row {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-top: 28px; gap: 10px;
+        }
+        .btn {
+            padding: 13px 24px; border-radius: 10px; font-size: 13.5px;
+            font-weight: 600; cursor: pointer; border: none;
+            transition: all .2s; font-family: inherit; letter-spacing: .01em;
+        }
+        .btn-ghost {
+            background: transparent; border: 1px solid var(--border); color: var(--muted);
+        }
+        .btn-ghost:hover { border-color: var(--border-active); color: var(--text); }
+        .btn-next {
+            background: linear-gradient(135deg, var(--accent), #7d71e8);
+            color: #fff; flex: 1;
+        }
+        .btn-next:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(108,92,231,.3); }
+        .btn-generate {
+            width: 100%; padding: 17px; border-radius: 12px; margin-top: 28px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; border: none;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            font-family: inherit; transition: all .2s;
+        }
+        .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(108,92,231,.35); }
+
+        /* ── Review step summary ── */
+        .review-grid { display: grid; gap: 7px; margin-bottom: 4px; }
+        .review-row {
+            display: flex; gap: 12px; align-items: flex-start;
+            padding: 11px 14px; background: rgba(8,8,16,.45);
+            border: 1px solid rgba(108,92,231,.08); border-radius: 8px;
+        }
+        .review-key {
+            font-size: 10px; font-weight: 700; letter-spacing: .12em;
+            color: var(--muted); text-transform: uppercase;
+            min-width: 82px; padding-top: 1px; flex-shrink: 0;
+        }
+        .review-val { font-size: 13.5px; color: var(--text); line-height: 1.4; }
+
+        /* ── Output Screen ── */
+        #output { display: none; }
+        .out-card {
+            background: var(--glass); border: 1px solid var(--border);
+            border-radius: 16px; padding: 40px;
+            backdrop-filter: blur(20px);
+            animation: slideUp .45s cubic-bezier(.4,0,.2,1) both;
+        }
+        .out-header {
+            display: flex; align-items: flex-start; justify-content: space-between;
+            margin-bottom: 22px;
+        }
+        .out-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(108,92,231,.12); border: 1px solid var(--border-active);
+            border-radius: 20px; padding: 5px 13px;
+            font-size: 11px; font-weight: 700; color: var(--accent-light);
+            white-space: nowrap; margin-top: 4px;
+        }
+        .pulse {
+            width: 7px; height: 7px; border-radius: 50%; background: var(--accent-light);
+            animation: ping .9s ease-in-out infinite;
+        }
+        @keyframes ping {
+            0%,100% { opacity:1; } 50% { opacity:.3; }
+        }
+        .prompt-box {
+            background: rgba(4,4,12,.9); border: 1px solid var(--border);
+            border-radius: 12px; padding: 22px;
+            font-size: 12.5px; line-height: 1.85; color: var(--text);
+            white-space: pre-wrap;
+            font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Monaco', monospace;
+            max-height: 480px; overflow-y: auto; margin-bottom: 18px;
+        }
+        .prompt-box::-webkit-scrollbar { width: 3px; }
+        .prompt-box::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+        .out-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .btn-copy, .btn-email {
+            padding: 14px; border-radius: 10px; font-size: 13.5px; font-weight: 600;
+            cursor: pointer; font-family: inherit;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: all .2s;
+        }
+        .btn-copy {
+            background: rgba(108,92,231,.12); border: 1px solid var(--border-active);
+            color: var(--accent-light);
+        }
+        .btn-copy:hover { background: rgba(108,92,231,.22); transform: translateY(-1px); }
+        .btn-email {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border: none; color: #fff;
+        }
+        .btn-email:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(108,92,231,.3); }
+
+        .status {
+            display: none; text-align: center; padding: 11px; border-radius: 8px;
+            font-size: 13px; margin-top: 12px;
+        }
+        .status.ok  { background: rgba(0,184,148,.08); border:1px solid rgba(0,184,148,.25); color: #00b894; }
+        .status.err { background: rgba(255,107,107,.08); border:1px solid rgba(255,107,107,.25); color: #ff6b6b; }
+
+        /* ── Responsive ── */
+        @media (max-width: 580px) {
+            .step { padding: 24px; }
+            .row-2 { grid-template-columns: 1fr; }
+            .style-grid { grid-template-columns: 1fr; }
+            .out-actions { grid-template-columns: 1fr; }
+            .steps-row { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+<div class="bg-glow-2"></div>
+
+<div class="app">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <div class="logo-dot"></div>
+            VURA Digital
+            <div class="logo-dot"></div>
+        </div>
+        <h1>Configurador de Proyecto</h1>
+        <p>Tu web de conversión en 7 días. Vamos a construirla juntos.</p>
+    </div>
+
+    <!-- Progress -->
+    <div id="progress-wrap">
+        <div class="steps-row">
+            <span class="p-step active" id="ps1"><span class="p-dot"></span>Identidad</span>
+            <span class="p-step"        id="ps2"><span class="p-dot"></span>Servicios</span>
+            <span class="p-step"        id="ps3"><span class="p-dot"></span>Estilo</span>
+            <span class="p-step"        id="ps4"><span class="p-dot"></span>Competencia</span>
+            <span class="p-step"        id="ps5"><span class="p-dot"></span>Generar</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" id="bar" style="width:20%"></div></div>
+    </div>
+
+    <!-- ── STEP 1: Identidad ── -->
+    <div class="step active" id="s1">
+        <div class="step-label">Módulo 01 / Identidad</div>
+        <h2 class="step-title">¿Quién eres?</h2>
+        <p class="step-desc">Define la identidad de tu negocio. Este es el núcleo desde el que construiremos todo.</p>
+
+        <div class="row-2">
+            <div class="field">
+                <label>Nombre del Negocio</label>
+                <input id="f_nombre" type="text" placeholder="Ej: Clínica Dental Pérez">
+            </div>
+            <div class="field">
+                <label>Sector / Industria</label>
+                <input id="f_sector" type="text" placeholder="Ej: Salud, Legal, Restauración">
+            </div>
+        </div>
+        <div class="field">
+            <label>Tu Ventaja Competitiva — en 1 frase</label>
+            <textarea id="f_valor" placeholder="Ej: Somos el único estudio legal en Madrid que garantiza resolución en 48h o devolvemos los honorarios."></textarea>
+        </div>
+
+        <div class="btn-row">
+            <div></div>
+            <button class="btn btn-next" onclick="go(1,2)">Siguiente → Servicios</button>
+        </div>
+    </div>
+
+    <!-- ── STEP 2: Servicios ── -->
+    <div class="step" id="s2">
+        <div class="step-label">Módulo 02 / Portafolio</div>
+        <h2 class="step-title">¿Qué vendes?</h2>
+        <p class="step-desc">Los 3 servicios que generan el 80% de tu facturación. Usa el nombre exacto que empleas con tus clientes.</p>
+
+        <div class="field">
+            <label>Servicios Principales</label>
+            <div class="svc-row"><div class="svc-num">01</div><input class="field input" id="f_s1" type="text" placeholder="Tu servicio estrella" style="width:100%;background:rgba(8,8,16,.65);border:1px solid var(--border);border-radius:10px;padding:13px 16px;font-size:14.5px;color:var(--text);outline:none;font-family:inherit;transition:border-color .2s,box-shadow .2s;"></div>
+            <div class="svc-row"><div class="svc-num">02</div><input class="field input" id="f_s2" type="text" placeholder="Segundo servicio clave" style="width:100%;background:rgba(8,8,16,.65);border:1px solid var(--border);border-radius:10px;padding:13px 16px;font-size:14.5px;color:var(--text);outline:none;font-family:inherit;transition:border-color .2s,box-shadow .2s;"></div>
+            <div class="svc-row"><div class="svc-num">03</div><input class="field input" id="f_s3" type="text" placeholder="Tercer servicio diferencial" style="width:100%;background:rgba(8,8,16,.65);border:1px solid var(--border);border-radius:10px;padding:13px 16px;font-size:14.5px;color:var(--text);outline:none;font-family:inherit;transition:border-color .2s,box-shadow .2s;"></div>
+        </div>
+
+        <div class="btn-row">
+            <button class="btn btn-ghost" onclick="go(2,1)">← Atrás</button>
+            <button class="btn btn-next"  onclick="go(2,3)">Siguiente → Estilo Visual</button>
+        </div>
+    </div>
+
+    <!-- ── STEP 3: Estilo ── -->
+    <div class="step" id="s3">
+        <div class="step-label">Módulo 03 / Diseño</div>
+        <h2 class="step-title">¿Cómo quieres ser percibido?</h2>
+        <p class="step-desc">El diseño habla antes que las palabras. Elige la dirección estética de tu marca.</p>
+
+        <div class="style-grid">
+            <div class="style-card" data-style="Oscura / Elegante" onclick="pickStyle(this)">
+                <div class="style-swatch sw-dark"></div>
+                <div class="style-name">Oscura / Elegante</div>
+                <div class="style-tag">Tech · Lujo · Premium</div>
+            </div>
+            <div class="style-card" data-style="Clara / Minimalista" onclick="pickStyle(this)">
+                <div class="style-swatch sw-light"></div>
+                <div class="style-name">Clara / Minimalista</div>
+                <div class="style-tag">Salud · Consultoría · Confianza</div>
+            </div>
+            <div class="style-card" data-style="Vibrante / Agresiva" onclick="pickStyle(this)">
+                <div class="style-swatch sw-vibrant"></div>
+                <div class="style-name">Vibrante / Agresiva</div>
+                <div class="style-tag">Fitness · Retail · Impacto</div>
+            </div>
+        </div>
+
+        <div class="btn-row">
+            <button class="btn btn-ghost" onclick="go(3,2)">← Atrás</button>
+            <button class="btn btn-next"  onclick="go(3,4)">Siguiente → Competencia</button>
+        </div>
+    </div>
+
+    <!-- ── STEP 4: Competencia ── -->
+    <div class="step" id="s4">
+        <div class="step-label">Módulo 04 / Inteligencia</div>
+        <h2 class="step-title">¿A quién vamos a destruir?</h2>
+        <p class="step-desc">Las URLs de tus 2 competidores principales. Analizaremos sus webs para que la tuya los deje en ridículo.</p>
+
+        <div class="field">
+            <label>Competidores Objetivo</label>
+            <div class="comp-wrap">
+                <span class="comp-icon">🎯</span>
+                <input id="f_c1" type="url" placeholder="https://www.competidor1.com">
+            </div>
+            <div class="comp-wrap">
+                <span class="comp-icon">🎯</span>
+                <input id="f_c2" type="url" placeholder="https://www.competidor2.com">
+            </div>
+        </div>
+
+        <div class="btn-row">
+            <button class="btn btn-ghost" onclick="go(4,3)">← Atrás</button>
+            <button class="btn btn-next"  onclick="go(4,5)">Siguiente → Revisar</button>
+        </div>
+    </div>
+
+    <!-- ── STEP 5: Review & Generate ── -->
+    <div class="step" id="s5">
+        <div class="step-label">Módulo 05 / Lanzamiento</div>
+        <h2 class="step-title">Todo listo.</h2>
+        <p class="step-desc">Revisa el resumen y pulsa el botón. Generaremos el briefing técnico completo para construir tu web en tiempo récord.</p>
+
+        <div class="review-grid" id="review"></div>
+
+        <button class="btn-generate" onclick="generate()">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            Generar Briefing Técnico
+        </button>
+
+        <div class="btn-row" style="margin-top:14px;">
+            <button class="btn btn-ghost" onclick="go(5,4)" style="font-size:13px;padding:10px 18px;">← Modificar respuestas</button>
+        </div>
+    </div>
+
+    <!-- ── OUTPUT SCREEN ── -->
+    <div id="output">
+        <div class="out-card">
+            <div class="out-header">
+                <div>
+                    <div class="step-label">Briefing Generado</div>
+                    <h2 class="step-title" style="font-size:20px;">Prompt Operativo del Cliente</h2>
+                </div>
+                <div class="out-badge"><div class="pulse"></div>Listo para el CTO</div>
+            </div>
+
+            <div class="prompt-box" id="prompt-output"></div>
+
+            <div class="out-actions">
+                <button class="btn-copy" id="btn-copy" onclick="copyPrompt()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    Copiar para el CTO
+                </button>
+                <button class="btn-email" id="btn-email" onclick="sendEmail()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,12 2,6"></polyline>
+                    </svg>
+                    Enviar a VURA
+                </button>
+            </div>
+            <div class="status" id="status"></div>
+
+            <div style="text-align:center;margin-top:22px;">
+                <button class="btn btn-ghost" onclick="reset()" style="font-size:12.5px;padding:9px 18px;">Nuevo cliente →</button>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /app -->
+
+<script>
+// ─── CONFIGURACIÓN ────────────────────────────────────────────────────────────
+// Reemplaza con tus credenciales de EmailJS (dashboard.emailjs.com)
+const EJS_PUBLIC_KEY  = 'n-SpRg6RMLARzrEfn';
+const EJS_SERVICE_ID  = 'service_tchmeeg';
+const EJS_TEMPLATE_ID = 'template_giu9vml';
+// ─────────────────────────────────────────────────────────────────────────────
+
+emailjs.init(EJS_PUBLIC_KEY);
+
+let cur = 1;
+let estilo = '';
+let promptFinal = '';
+
+const pcts = [20, 40, 60, 80, 100];
+
+function updateBar(step) {
+    document.getElementById('bar').style.width = pcts[step - 1] + '%';
+    for (let i = 1; i <= 5; i++) {
+        const el = document.getElementById('ps' + i);
+        el.classList.remove('active', 'done');
+        if (i < step) el.classList.add('done');
+        if (i === step) el.classList.add('active');
+    }
+}
+
+function go(from, to) {
+    if (to > from && !validate(from)) return;
+    document.getElementById('s' + from).classList.remove('active');
+    cur = to;
+    if (to === 5) buildReview();
+    const next = document.getElementById('s' + to);
+    next.classList.remove('active');
+    void next.offsetWidth; // reflow for animation
+    next.classList.add('active');
+    updateBar(to);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validate(step) {
+    const req = (id) => document.getElementById(id)?.value?.trim();
+    if (step === 1) {
+        if (!req('f_nombre') || !req('f_sector') || !req('f_valor')) {
+            flash('Completa todos los campos antes de continuar.'); return false;
+        }
+    }
+    if (step === 2) {
+        if (!req('f_s1') || !req('f_s2') || !req('f_s3')) {
+            flash('Introduce los 3 servicios principales.'); return false;
+        }
+    }
+    if (step === 3) {
+        if (!estilo) { flash('Selecciona un estilo visual.'); return false; }
+    }
+    return true;
+}
+
+function flash(msg) {
+    alert(msg);
+}
+
+function pickStyle(card) {
+    document.querySelectorAll('.style-card').forEach(c => c.classList.remove('sel'));
+    card.classList.add('sel');
+    estilo = card.dataset.style;
+}
+
+function data() {
+    return {
+        nombre:  v('f_nombre'),
+        sector:  v('f_sector'),
+        valor:   v('f_valor'),
+        s1:      v('f_s1'),
+        s2:      v('f_s2'),
+        s3:      v('f_s3'),
+        estilo,
+        c1:      v('f_c1') || 'No especificado',
+        c2:      v('f_c2') || 'No especificado',
+    };
+}
+
+function v(id) { return (document.getElementById(id)?.value || '').trim(); }
+
+function buildReview() {
+    const d = data();
+    const rows = [
+        ['Negocio',    d.nombre],
+        ['Sector',     d.sector],
+        ['Diferencial',d.valor],
+        ['Servicios',  `${d.s1} · ${d.s2} · ${d.s3}`],
+        ['Estilo',     d.estilo],
+        ['Competencia',`${d.c1} · ${d.c2}`],
+    ];
+    document.getElementById('review').innerHTML = rows.map(([k, val]) =>
+        `<div class="review-row"><span class="review-key">${k}</span><span class="review-val">${val}</span></div>`
+    ).join('');
+}
+
+function styleInstructions(e) {
+    return {
+        'Oscura / Elegante':   `\n  → Paleta: dark navy/black (#080810, #0f0f1a), acentos en púrpura (#6c5ce7) o azul eléctrico\n  → Tipografía: sans-serif premium (Inter, Outfit, DM Sans)\n  → Efectos: glassmorphism, gradientes sutiles, animaciones fluidas\n  → Sensación objetivo: tecnología de lujo, premium, exclusivo`,
+        'Clara / Minimalista': `\n  → Paleta: fondos blancos/grises suaves (#f8f9fa), acentos en azul cielo o slate\n  → Tipografía: sans-serif limpia (Inter, Geist, Plus Jakarta Sans)\n  → Efectos: espacio negativo generoso, sombras soft, animaciones discretas\n  → Sensación objetivo: confianza, profesionalidad, claridad`,
+        'Vibrante / Agresiva': `\n  → Paleta: gradientes saturados de alto impacto (naranjas, rojos, amarillos)\n  → Tipografía: bold/condensed (Oswald, Barlow Condensed, Anton)\n  → Efectos: animaciones de alta energía, contrastes fuertes, elementos oversized\n  → Sensación objetivo: dinamismo, urgencia, poder`,
+    }[e] || '';
+}
+
+function buildPrompt(d) {
+    const fecha = new Date().toLocaleDateString('es-ES', { day:'2-digit', month:'long', year:'numeric' });
+    return `\
+═══════════════════════════════════════════════════════
+BRIEFING OPERATIVO — VURA DIGITAL
+PROYECTO: ${d.nombre.toUpperCase()}
+FECHA: ${fecha}
+═══════════════════════════════════════════════════════
+
+▌ IDENTIDAD DEL CLIENTE
+  → Negocio : ${d.nombre}
+  → Sector  : ${d.sector}
+  → Diferencial Clave: "${d.valor}"
+
+▌ ARQUITECTURA DE SERVICIOS
+  ① ${d.s1}
+  ② ${d.s2}
+  ③ ${d.s3}
+
+▌ DIRECTIVA DE DISEÑO
+  → Estilo Seleccionado: ${d.estilo}${styleInstructions(d.estilo)}
+
+▌ INTELIGENCIA COMPETITIVA
+  → Target 1: ${d.c1}
+  → Target 2: ${d.c2}
+
+═══════════════════════════════════════════════════════
+INSTRUCCIÓN MAESTRA PARA EL CONSTRUCTOR
+═══════════════════════════════════════════════════════
+
+Construye una web de conversión máxima para "${d.nombre}", negocio del sector ${d.sector}.
+
+Su ventaja competitiva es única: "${d.valor}"
+
+SERVICIOS A DESTACAR (en orden de prioridad):
+  1. ${d.s1}
+  2. ${d.s2}
+  3. ${d.s3}
+
+ANÁLISIS COMPETITIVO PREVIO OBLIGATORIO:
+  Visita, analiza y supera en diseño, velocidad y conversión a:
+  → ${d.c1}
+  → ${d.c2}
+
+═══════════════════════════════════════════════════════
+REQUISITOS TÉCNICOS INNEGOCIABLES
+═══════════════════════════════════════════════════════
+
+RENDIMIENTO:
+  ✓ Tiempo de carga < 1.2 segundos (objetivo innegociable)
+  ✓ Mobile-first, 100% responsive
+  ✓ Core Web Vitals en verde
+
+STACK OBLIGATORIO:
+  ✓ HTML5 + CSS3 + Vanilla JavaScript
+  ✓ GSAP (ScrollTrigger) para animaciones de scroll
+  ✓ Lenis para smooth scroll
+  ✓ Sin frameworks pesados (no React, no Vue, no Angular)
+
+ESTRUCTURA DE SECCIONES (en este orden):
+  ✓ HERO — H1 con la propuesta de valor, CTA above the fold
+  ✓ SERVICIOS — ${d.s1} · ${d.s2} · ${d.s3} con iconografía premium
+  ✓ PROCESO — Cómo trabajamos en 3-4 pasos claros
+  ✓ PRUEBA SOCIAL — Testimonios y/o logos de clientes
+  ✓ GARANTÍA — "90 días, Riesgo Cero. Resultados o devolución del 100%."
+  ✓ CONTACTO — Formulario conectado a SheetDB + EmailJS
+  ✓ FOOTER — Datos legales, redes, dirección
+
+INTEGRACIONES CRÍTICAS:
+  ✓ Captación de leads → SheetDB API
+    Endpoint: https://sheetdb.io/api/v1/jtupg6j7hh3vy
+  ✓ Notificaciones → EmailJS (configuración existente del proyecto)
+  ✓ NUNCA romper la función fetch() que envía datos a SheetDB
+
+═══════════════════════════════════════════════════════
+FIN DEL BRIEFING  |  VURA Digital © ${new Date().getFullYear()}
+═══════════════════════════════════════════════════════`;
+}
+
+function generate() {
+    const d = data();
+    promptFinal = buildPrompt(d);
+
+    document.getElementById('s5').classList.remove('active');
+    document.getElementById('progress-wrap').style.display = 'none';
+
+    const out = document.getElementById('output');
+    document.getElementById('prompt-output').textContent = promptFinal;
+    out.style.display = 'block';
+    out.style.opacity = '0';
+    out.style.transform = 'translateY(16px)';
+    requestAnimationFrame(() => {
+        out.style.transition = 'all .45s cubic-bezier(.4,0,.2,1)';
+        out.style.opacity = '1';
+        out.style.transform = 'translateY(0)';
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function copyPrompt() {
+    navigator.clipboard.writeText(promptFinal).then(() => {
+        const btn = document.getElementById('btn-copy');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '✓ ¡Copiado!';
+        btn.style.cssText += ';background:rgba(0,184,148,.12);border-color:rgba(0,184,148,.35);color:#00b894';
+        setTimeout(() => { btn.innerHTML = orig; btn.removeAttribute('style'); btn.className = 'btn-copy'; }, 2200);
+    });
+}
+
+function sendEmail() {
+    const d = data();
+    const btn = document.getElementById('btn-email');
+    const statusEl = document.getElementById('status');
+
+    btn.disabled = true;
+    btn.innerHTML = 'Enviando…';
+
+    emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {
+        to_email:  'info@vuradigital.es',
+        from_name: d.nombre,
+        subject:   `[NUEVO CLIENTE] Briefing de ${d.nombre} — ${d.sector}`,
+        negocio:   d.nombre,
+        sector:    d.sector,
+        message:   promptFinal,
+    })
+    .then(() => {
+        statusEl.className = 'status ok';
+        statusEl.textContent = '✓ Briefing enviado a info@vuradigital.es — El equipo ya está en ello.';
+        statusEl.style.display = 'block';
+        btn.innerHTML = '✓ Enviado';
+    })
+    .catch(err => {
+        statusEl.className = 'status err';
+        statusEl.textContent = 'Error al enviar. Usa "Copiar para el CTO" y envíalo manualmente.';
+        statusEl.style.display = 'block';
+        btn.disabled = false;
+        btn.innerHTML = '↺ Reintentar';
+        console.error('EmailJS:', err);
+    });
+}
+
+function reset() {
+    ['f_nombre','f_sector','f_valor','f_s1','f_s2','f_s3','f_c1','f_c2']
+        .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    estilo = '';
+    document.querySelectorAll('.style-card').forEach(c => c.classList.remove('sel'));
+    document.getElementById('output').style.display = 'none';
+    document.getElementById('progress-wrap').style.display = 'block';
+    document.getElementById('status').style.display = 'none';
+    cur = 1;
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('s1').classList.add('active');
+    updateBar(1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
