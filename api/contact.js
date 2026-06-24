@@ -5,6 +5,7 @@
 //   EMAILJS_SERVICE_ID   service_tchmeeg
 //   EMAILJS_TEMPLATE_ID  template_giu9vml
 //   EMAILJS_PUBLIC_KEY   n-SpRg6RMLARzrEfn
+//   EMAILJS_PRIVATE_KEY  (Account > General > Private Key) — requerido para llamadas server-side
 
 const ALLOWED_ORIGIN = 'https://www.vuradigital.es';
 const EMAIL_RE = /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/;
@@ -57,6 +58,7 @@ module.exports = async function handler(req, res) {
         service_id:      process.env.EMAILJS_SERVICE_ID,
         template_id:     process.env.EMAILJS_TEMPLATE_ID,
         user_id:         process.env.EMAILJS_PUBLIC_KEY,
+        accessToken:     process.env.EMAILJS_PRIVATE_KEY,
         template_params: {
           user_name:  cleanName,
           user_email: cleanEmail,
